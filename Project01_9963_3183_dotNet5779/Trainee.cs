@@ -40,13 +40,13 @@ namespace BE
         }
         public string showAdress(Address a)
         {
-            return a.streetName + " " + a.houseNumber + " " + a.city;
+            return a.streetName + " " + a.houseNumber + " " + a.city+"\n";
         }
         
         public override string ToString()
         {
-            return "ID:" + this.Id + "\n" +"Name: "+this.Name+" "+this.FamilyName+"\n"+"Address: "+"Phone number: "+this.PhoneNumber+"\n"+showAdress(this.MyAddress)+"\n"+"Gender: "
-                +this.MyGender+"\n"+"Birth date: "+this.BrithDate+"\n"+"Gear: "+this.MyGear+"\n"+"School: "+this.School+"\n"+"Teacher: "+this.TeacherName+"Number of lessons: "+this.NumberOfLessons+"\n"+"Car: "+this.Car;
+            return "ID:" + this.Id + "\n" +"Name: "+this.Name+" "+this.FamilyName+"\n"+"Address: "+showAdress(MyAddress)+"Phone number: "+this.PhoneNumber+"\n"+"Gender: "
+                +this.MyGender+"\n"+"Birth date: "+this.BrithDate+"\n"+"Gear: "+this.MyGear+"\n"+"School: "+this.School+"\n"+"Teacher: "+this.TeacherName+"\n"+"Number of lessons: "+this.NumberOfLessons+"\n"+"Car: "+this.Car;
         }
 
     }

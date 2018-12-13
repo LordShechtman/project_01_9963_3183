@@ -106,19 +106,20 @@ namespace DAL
         /// 
        public void AddTest(Test t)
         {
-            //------------get 8 dighits test number---------------------------
-            int x = Configuration.testNum, dightcount = 0;
-            string code = "";
+            /*  //------------get 8 dighits test number---------------------------
+              int x = Configuration.testNum, dightcount = 0;
+              string code = "";
 
-            while (x > 0)
-            {
-                dightcount++;
-                x /= 10;
-            }
-            for (int i = 0; i <= 8 - dightcount; i++)
-                code += "0";
-            code += Configuration.testNum;
-            t.TestNumber = code;
+              while (x > 0)
+              {
+                  dightcount++;
+                  x /= 10;
+              }
+              for (int i = 0; i <= 8 - dightcount; i++)
+                  code += "0";
+              code += Configuration.testNum;*/
+            t.TestNumber = string.Format("00000000", Configuration.testNum);
+            
             //------------------------------------------------------------------------------------------------
             DS.DataSource.tests.Add(t);
         }

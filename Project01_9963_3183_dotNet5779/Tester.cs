@@ -18,7 +18,7 @@ namespace BE
         /*4*/
         public DateTime BirthDate { get; set; }
         /*5*/
-       public gender MyGender { get; set; }
+        public gender MyGender { get; set; }
         /*6*/
         public string PhoneNumber { get; set; }
         /*7*/
@@ -31,7 +31,7 @@ namespace BE
         public carType ExpiranceCar { get; set; }
         /*12*/
 
-        private bool[,] WorkHours = new bool[5,6];//check when tester works
+       public bool[,] WorkHours { get;set;}//check when tester works
         /*13*/
        public int MaxDistance { get; set; }
         
@@ -48,6 +48,7 @@ namespace BE
             MaxTestsPerWeek = maxTest;
             ExpiranceCar = type;
             MaxDistance = max_distance;
+            WorkHours = new bool[5, 6];
             for (int i=0;i<5;i++)
             {
                 for (int j = 0; j < 6; j++)
@@ -87,7 +88,7 @@ namespace BE
                 for(j=0;j<6;j++)
                 {
                     if (mat[i, j] == true)
-                        str += ((j + 9)/10)+ ((j + 9) % 10) + ":00" +" ";
+                        str += (((j )%10)+ ((j )/ 10))+9 + ":00" +" ";
                 }
                 str += "\n";
             }

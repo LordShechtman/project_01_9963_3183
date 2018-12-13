@@ -19,7 +19,7 @@ using BE;
     //--------------------------------
     /// TEST Function
     /// 
-    void AddTest(string tester_id, string trainee_id, Address address);
+    void AddTest( string trainee_id, Address address, DateTime date);
     void UpdateTest(Test t);
     /// Fuctions that counts the number of test for  certin Trainee
     int numberOfTests(Trainee T);

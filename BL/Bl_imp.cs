@@ -14,9 +14,14 @@ namespace BL
         
          public  DAL.Dal_imp dal=new DAL.Dal_imp();
           DAL.Factory_dal factory = new DAL.Factory_dal();
-          
+          int distance(Address address1,Address address2)
+        {
+            Random r = new Random();
+            ///Meanwhile we wait for permission from Google Maps we will return random distance;
+            return r.Next(0, 151);
+        }
         //TODO: use this deleagte
-        delegate bool myFunc(List<object> lst, string conditon);
+        delegate bool myFunc(List<object> lst, myFunc conditon);
         
         public void ifNonLetters(string str,string name)
         {
@@ -58,7 +63,7 @@ namespace BL
             return passed;
         }
 
-        void IBL.AddTest(string tester_id, string trainee_id, Address address)
+        void IBL.AddTest( string trainee_id, Address address ,DateTime date)
         {
            List<Tester> all_my_testers = dal.GetAllTesters();
            List<Trainee> all_my_trainees = dal.GetAllTrainees();
@@ -66,45 +71,58 @@ namespace BL
             try
             {
                 Test temp;
-                if (tester_id.Length < 9 || tester_id.Length > 9)
-                    throw  new Exception("Tester id must contin  only 9 dights !!");
-                if (trainee_id.Length < 9 || trainee_id.Length > 9)
-                    throw new Exception("Tester id must contin only 9 dights!!");
-                ifNonLetters(tester_id, "Tester ID");
+                
+                   //// Find tester that can make the test in that data
+                   
+                if (trainee_id.Length != 9 )
+                    throw new Exception("Trainee ID must contin only 9 dights!!");
+                
                 ifNonLetters(trainee_id, " Trainee ID");
                 if (address.city == null)
-                    //address must contin all it fileds
+                    //address must contain all it fileds
                     throw new Exception("Address must contain city name");
                 if (address.streetName == null)
                     throw new Exception("Address must contain street name");
                 if (address.houseNumber <= 0)
                     throw new Exception("Address must contain house number");
-                // Check if tester exist 
-                bool exist=false;
-              foreach(Tester t in all_my_testers)
+                if (date.Hour > 16 || date.Hour < 9)
+                    throw new Exception("Test can only be between 9:00-16:00!!");
+                Tester valid_tester;
+                
+                List<Tester> valid_testers = all_my_testers.FindAll(item => item.WorkHours[(int)date.DayOfWeek - 1, (int)date.Hour -9] == true);
+                bool flag = false;
+                foreach (Tester t in valid_testers)
                 {
-                    if (t.Id == tester_id)
-                        exist = true;
+                    Test invalid_test = all_my_test.Find(item => item.TestDate.Day == date.Day && item.TestDate.Month == date.Month && item.TestDate.Year == date.Year && item.TesterId==t.Id);
+                    if (invalid_test == null && distance(t.MyAddress, address) < t.MaxDistance) 
+                    {
+                        valid_tester = t;
+                        flag = true;
+                        break;
+
+                    }
+                    if (flag == false)
+                        throw new Exception("There is no Tester that can make the test in:" + date.Day + "/" + date.Month + date.Year + " " + date.Hour + ":" + date.Minute); ;
                 }
-                if (exist == false)
-                    throw new Exception("Tester " + tester_id + "is not exist!!");
-                //Check if student exist(lamda)
-                 Trainee  count= all_my_trainees.Find(item => item.Id == trainee_id);
+                    //Check if student exist(lamda)
+                 Trainee trainee_exist = all_my_trainees.Find(item => item.Id == trainee_id);
                
-                if (count == null)
+                if (trainee_exist == null)
                     throw new Exception("Trainee " + trainee_id + "is not exist!!");
                 else
                 {
                     //check if Trainee made at least min lessons for test
-                    if(count.NumberOfLessons<Configuration.MIN_LESSONS_FOR_TEST)
-                        throw new Exception("Trainee " + trainee_id + "must do "+(Configuration.MIN_LESSONS_FOR_TEST-count.NumberOfLessons)+" for a test!!");
+                    if(trainee_exist.NumberOfLessons<Configuration.MIN_LESSONS_FOR_TEST)
+                        throw new Exception("Trainee " + trainee_id + "must do "+(Configuration.MIN_LESSONS_FOR_TEST- trainee_exist.NumberOfLessons)+" for a test!!");
                     else
                     {
-
+                        Test last = all_my_test.Find(x => x.TraineeId == trainee_id && (x.TestDate.Month == DateTime.Now.Month && x.TestDate.Year == DateTime.Now.Year && DateTime.Now.Day - x.TestDate.Day < 7));
+                        if (last != null)// trainee made a test less then 7 days ago
+                            throw new Exception("Trainee " + last.TraineeId + " must wait " +( 7 - (DateTime.Now.Day - last.TestDate.Day)) + "  days before test!!");
                     }
                 }
-                //TODO: FIND IF THEE TRINEE DIDN'T HAVE A TEST LESS THEN 7 DAYS AGO
-                temp = new Test(tester_id, trainee_id, DateTime.Now, address);
+                
+                temp = new Test("0000000000", trainee_id, DateTime.Now, address);
                 dal.AddTest(temp);
             }
             catch(Exception ex)
@@ -146,8 +164,12 @@ namespace BL
                     throw new Exception(" Maximum tests per week must be between 1 to 30");
                 if (max_distance < 0)
                     throw new Exception("Maximum distance can't be negative");
-
-                temp = new Tester(id, name, family_name, birth_date, my_gender, phone, t_adress, years_of_exprience, number_of_tests, exp, max_distance, work_hours);
+                int numberTestrHours = 0;
+                foreach (bool b in work_hours) { if (b == true) numberTestrHours++; }
+                if (numberTestrHours > number_of_tests)
+                    /* Tester can't work more the maximum tests per week*/
+                    throw new Exception("Tester can't work more then " + number_of_tests + "per week!!");
+                    temp = new Tester(id, name, family_name, birth_date, my_gender, phone, t_adress, years_of_exprience, number_of_tests, exp, max_distance, work_hours);
                 dal.AddTester(temp);
                 
             }
@@ -180,6 +202,7 @@ namespace BL
                     throw new Exception("Address must contain house number");
                 if (numLessons <= 0)
                     throw new Exception("Number of lessons must br bigger then 0 ");
+    
                 temp = new Trainee(id, name, familyName, birthD, g, phoneNum, address, type, my_gear, school, teacher_name, numLessons);
                 dal.AddTrainee(temp);
             }
@@ -237,12 +260,32 @@ namespace BL
 
         void IBL.UpdateTester(Tester t)
         {
-            throw new NotImplementedException();
+           
         }
 
         void IBL.UpdateTrainee(Trainee t)
         {
-            throw new NotImplementedException();
+            if (t.Id.Length != 9 )
+                // ID must contain 9 dighits only
+                throw new Exception("ID must contain only 9 digits");
+            ifNonLetters(t.Id, " Trainee ID");
+            if (t.PhoneNumber.Length != 10 )
+                throw new Exception("Phone Number must contian  only 10 digits");
+            ifNonLetters(t.Id, " Trainee phone number");
+            if (t.BrithDate.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
+                throw new Exception("Trainee cant't be younger then " + Configuration.Tester_MIN_AGE);
+            if (t.MyAddress.city == null)
+                //address must contin all it fileds
+                throw new Exception("Address must contain city name");
+            if (t.MyAddress.streetName == null)
+                throw new Exception("Address must contain street name");
+            if (t.MyAddress.houseNumber <= 0)
+                throw new Exception("Address must contain house number");
+            if (t.NumberOfLessons <= 0)
+                throw new Exception("Number of lessons must br bigger then 0 ");
+
+          
+            dal.AddTrainee(t);
         }
    
     }
