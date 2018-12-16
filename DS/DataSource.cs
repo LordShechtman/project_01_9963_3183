@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace DS
 {
-  public class DataSource :ICloneable
+  public class DataSource 
     {
         
         public static List<BE.Tester> testers;
         public static List<BE.Trainee> trainees;
         public static  List<BE.Test> tests;
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
+        
     }
 }

@@ -12,10 +12,19 @@ namespace DAL
     public class Dal_imp : Idal
 
     {
-     public  Dal_imp()
+        #region Singleton
+        public static readonly Dal_imp instance = new Dal_imp();
+        public static Dal_imp Instance
         {
-        }  
-           public void AddTester(Tester t)
+            get { return instance; }
+        }
+
+        private Dal_imp() { }
+        static Dal_imp() { }
+
+        #endregion
+
+        public void AddTester(Tester t)
         {
             //Add new tester to the testers list (After the object approval  by the BL)
             foreach (Tester tmp in DS.DataSource.testers)

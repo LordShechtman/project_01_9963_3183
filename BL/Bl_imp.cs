@@ -4,22 +4,37 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
+using DAL;
 using BE;
 namespace BL
 {
 
     public class Bl_imp : IBL
     {
-        
-         public  DAL.Dal_imp dal=new DAL.Dal_imp();
-          DAL.Factory_dal factory = new DAL.Factory_dal();
-          int distance(Address address1,Address address2)
+
+        #region Singleton
+        private static readonly Bl_imp instance = new Bl_imp();
+
+        public static Bl_imp Instance
+        {
+            get { return instance; }
+        }
+        #endregion
+        static Idal dal;
+        #region Constractor
+        private Bl_imp() { }
+        static Bl_imp()
+        {
+            dal = Factory_dal.getDal();
+        }
+        #endregion
+        int distance(Address address1, Address address2)
         {
             Random r = new Random();
             ///Meanwhile we wait for permission from Google Maps we will return random distance;
             return r.Next(0, 151);
         }
+       
         //TODO: use this deleagte
         delegate bool myFunc(List<object> lst, myFunc conditon);
         

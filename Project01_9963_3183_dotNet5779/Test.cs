@@ -26,7 +26,11 @@ namespace BE
             TraineeId = trainee_id;
             TestDate = date_test;
             TestAddress = address;
-            
+            IsPass = false;
+            TestParameters = new List<bool>();
+            TesterNotes = new List<string>();
+
+
         }
         
         public string showParmeters(List< bool> par)
@@ -52,7 +56,8 @@ namespace BE
         public string showNotes(List<string> lst)
         {
             string str = "";
-
+            if (lst.Count() == 0)
+                return null;
             int count = 0;
             foreach(string c in lst)
             {
@@ -67,7 +72,7 @@ namespace BE
         public override string ToString()
         {
 
-            return "Test number: " + this.TestNumber + "\n" + "Tester Id: " + this.TesterId + "\n" + "Trainee Id: " + this.TraineeId + "\n" + "Date " + this.TestDate + "\n" + "Test results:" + "\n" + showParmeters(this.TestParameters) + "Notes" + showNotes(this.TesterNotes) + "\n" + "Passed? " + this.IsPass;
+            return "Test number: " + this.TestNumber + "\n" + "Tester Id: " + this.TesterId + "\n" + "Trainee Id: " + this.TraineeId + "\n" + "Date " + this.TestDate + "\n" + "Test results:" + "\n" + showParmeters(this.TestParameters) + "Notes: \n" + showNotes(this.TesterNotes) + "\n" + "Passed? " + this.IsPass;
         }
 
     }

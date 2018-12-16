@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Tester
+    public class Tester:ICloneable
     {
         #region Fileds
         /*1*/
@@ -31,10 +31,10 @@ namespace BE
         public carType ExpiranceCar { get; set; }
         /*12*/
 
-       public bool[,] WorkHours { get;set;}//check when tester works
-        /*13*/
-       public int MaxDistance { get; set; }
-        
+        public bool[,] WorkHours { get; set; }//check when tester works
+                                              /*13*/
+        public int MaxDistance { get; set; }
+       
         public Tester(string id, string name, string familyName,DateTime birthD, gender g,string phoneNum,Address address, int yearsE,int maxTest,carType type, int max_distance,bool[,] mat)
         {
             Id = id;
@@ -100,8 +100,12 @@ namespace BE
         }
         public override string ToString()
         {
-            return "ID:"+Id+"\n"+ "Name:" +Name+" "+FamilyName+ "\n"+"Address: "+showAdress(MyAddress)+"\n"+"Phone:"+PhoneNumber+"Birth date:"+BirthDate+"\n"+"Gender: "+this.MyGender+"\n"+ "Years of experience: "+ YearsOfExperience+"\n"+"Car tape: "+this.ExpiranceCar+"\n"
-                +"Max tests per week:"+"\n"+"Max distance: "+this.MaxDistance+"\n"+this.MaxTestsPerWeek+"\n"+ShowTable(this.WorkHours);
+            return "ID:"+Id+"\n"+ "Name:" +Name+" "+FamilyName+ "\n"+"Address: "+showAdress(MyAddress)+"\n"+"Phone:"+PhoneNumber+" \n Birth date:"+BirthDate+"\n"+"Gender: "+this.MyGender+"\n"+ "Years of experience: "+ YearsOfExperience+"\n"+"Car tape: "+this.ExpiranceCar+"\n"
+                +"Max tests per week:"+ this.MaxTestsPerWeek + "\n"+"Max distance: "+this.MaxDistance+"\n"+ShowTable(this.WorkHours);
         }
+
+        public object Clone()
+        {
+            return new Tester(Id, Name, FamilyName, BirthDate, MyGender, PhoneNumber, MyAddress, YearsOfExperience, MaxTestsPerWeek, ExpiranceCar, MaxDistance, WorkHours );
     }
 }

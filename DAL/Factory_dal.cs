@@ -11,7 +11,7 @@ namespace DAL
         
         public static Idal getDal()
         {
-            return new Dal_imp(); 
+            return DAL.Dal_imp.instance; 
         }
 
     }
