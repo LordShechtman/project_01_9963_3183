@@ -127,32 +127,28 @@ namespace BL
                     throw new Exception("Trainee ID must contin only 9 dights!!");
                 
                 ifNonLetters(trainee_id, " Trainee ID");
-                if (address.city == null)
-                    //address must contain all it fileds
-                    throw new Exception("Address must contain city name");
-                if (address.streetName == null)
-                    throw new Exception("Address must contain street name");
-                if (address.houseNumber <= 0)
-                    throw new Exception("Address must contain house number");
+                ValidAddress(address);
                 if (date.Hour > 16 || date.Hour < 9)
                     throw new Exception("Test can only be between 9:00-16:00!!");
-                Tester valid_tester;
-                
+                string tester_id = null;
+      
                 List<Tester> valid_testers = all_my_testers.FindAll(item => item.WorkHours[(int)date.DayOfWeek - 1, (int)date.Hour -9] == true);
-                bool flag = false;
-                foreach (Tester t in valid_testers)
+                // foreach (Tester t in valid_testers) { Console.WriteLine(t.Id + " " + t.Name); }
+                foreach (Tester tester in valid_testers)
                 {
-                    Test invalid_test = all_my_test.Find(item => item.TestDate.Day == date.Day && item.TestDate.Month == date.Month && item.TestDate.Year == date.Year && item.TesterId==t.Id);
-                    if (invalid_test == null && distance(t.MyAddress, address) < t.MaxDistance) 
+                    Test invalid_test = all_my_test.Find(item => item.TestDate.Day == date.Day && item.TestDate.Month == date.Month && item.TestDate.Year == date.Year && item.TesterId == tester.Id);
+                    if (invalid_test == null && distance(tester.MyAddress, address) <= tester.MaxDistance)
                     {
-                        valid_tester = t;
-                        flag = true;
+                        
+                        tester_id = tester.Id;
+
                         break;
 
                     }
-                    if (flag == false)
-                        throw new Exception("There is no Tester that can make the test in:" + date.Day + "/" + date.Month + date.Year + " " + date.Hour + ":" + date.Minute); ;
                 }
+                    if (tester_id==null)
+                        throw new Exception("There is no Tester that can make the test in:" + date.Day + "/" + date.Month+"/" + date.Year + " " + date.Hour + ":" + date.Minute); ;
+                
                     //Check if student exist(lamda)
                  Trainee trainee_exist = all_my_trainees.Find(item => item.Id == trainee_id);
                
@@ -165,13 +161,13 @@ namespace BL
                         throw new Exception("Trainee " + trainee_id + "must do "+(Configuration.MIN_LESSONS_FOR_TEST- trainee_exist.NumberOfLessons)+" for a test!!");
                     else
                     {
-                        Test last = all_my_test.Find(x => x.TraineeId == trainee_id && (x.TestDate.Month == DateTime.Now.Month && x.TestDate.Year == DateTime.Now.Year && DateTime.Now.Day - x.TestDate.Day < 7));
+                        Test last = all_my_test.Find(x => x.TraineeId == trainee_id && (x.TestDate.Month == date.Month && x.TestDate.Year == date.Year &&Math.Abs( date.Day - x.TestDate.Day) < 7));
                         if (last != null)// trainee made a test less then 7 days ago
-                            throw new Exception("Trainee " + last.TraineeId + " must wait " +( 7 - (DateTime.Now.Day - last.TestDate.Day)) + "  days before test!!");
+                            throw new Exception("Trainee " + last.TraineeId + " must wait " +( 7 - Math.Abs(date.Day - last.TestDate.Day)) + "  days before test!!");
                     }
                 }
                 
-                temp = new Test("0000000000", trainee_id, DateTime.Now, address);
+                temp = new Test(tester_id, trainee_id, date, address);
                 dal.AddTest(temp);
             }
             catch(Exception ex)

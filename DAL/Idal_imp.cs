@@ -115,19 +115,11 @@ namespace DAL
         /// 
        public void AddTest(Test t)
         {
-            /*  //------------get 8 dighits test number---------------------------
-              int x = Configuration.testNum, dightcount = 0;
-              string code = "";
-
-              while (x > 0)
-              {
-                  dightcount++;
-                  x /= 10;
-              }
-              for (int i = 0; i <= 8 - dightcount; i++)
-                  code += "0";
-              code += Configuration.testNum;*/
-            t.TestNumber = string.Format("00000000", Configuration.testNum);
+            
+            // Genrate tests number
+            t.TestNumber = Configuration.testNum. ToString("00000000");
+            Configuration.testNum++;
+            
             
             //------------------------------------------------------------------------------------------------
             DS.DataSource.tests.Add(t);
@@ -145,7 +137,7 @@ namespace DAL
                 }
             }
             if (flag == false)
-                throw new Exception();
+                throw new Exception("test "+t.TestNumber+"is not exist!");
         }
 
         //--------------geting Functions

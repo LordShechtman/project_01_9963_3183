@@ -34,7 +34,7 @@ namespace BE
         public bool[,] WorkHours { get; set; }//check when tester works
                                               /*13*/
         public int MaxDistance { get; set; }
-
+        public Tester() { }
         public Tester(string id, string name, string familyName, DateTime birthD, gender g, string phoneNum, Address address, int yearsE, int maxTest, carType type, int max_distance, bool[,] mat)
         {
             Id = id;

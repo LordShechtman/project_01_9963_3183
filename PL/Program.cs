@@ -38,7 +38,7 @@ namespace PL
             }
                     
             Tester tester = new Tester("444444444", "Nadav", "Rabinovich", new DateTime(1970,12,23),(gender)0,"0522848424",a,30,17,(carType)3,60,mat);
-            Tester tester1 = new Tester("444444444", "Nadav", "Rabinovich", new DateTime(1970, 12, 23), (gender)0, "0522848424", a, 30, 17, (carType)3, 60, mat);
+           
             try
             {
                 bl.AddTester("444444444", "Nadav", "Rabinovich", new DateTime(1970, 12, 23), (gender)0, "0522848424", a, 30, 17, (carType)3, mat, 30);
@@ -48,7 +48,17 @@ namespace PL
             {
                 Console.WriteLine(ex.Message);
             }
-            List<Tester> t = bl.GetAllTesters();
+            bl.AddTrainee("222222222", "maoz", "sh", new DateTime(1994, 11, 3), (gender)1, "0525525223", a, (carType)3, gear.manual, "hermon", "haim", 28);
+            bl.AddTrainee("333333333", "maoz", "sh", new DateTime(1994, 11, 3), (gender)1, "0525525223", a, (carType)3, gear.manual, "hermon", "haim", 28);
+            Trainee trainee = new Trainee("222222222", "maoz", "sh", new DateTime(1994, 11, 3), (gender)1, "0525525223", a, (carType)3, gear.manual, "hermon", "haim", 28);
+            bl.AddTest("222222222", a, new DateTime(2018, 12, 19, 13, 0, 0));
+            bl.AddTest("333333333", a, new DateTime(2018, 12, 19, 13, 0, 0));
+           
+
+            foreach (Test test in bl.GetAllTests())
+            {
+                Console.WriteLine(test.ToString());
+            }
       
             
             
