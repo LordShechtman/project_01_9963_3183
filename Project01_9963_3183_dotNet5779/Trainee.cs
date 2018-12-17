@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Trainee
+    public class Trainee:ICloneable
     {
         #region Fileds
         public string Id { get; set; }
@@ -49,5 +49,9 @@ namespace BE
                 +this.MyGender+"\n"+"Birth date: "+this.BrithDate+"\n"+"Gear: "+this.MyGear+"\n"+"School: "+this.School+"\n"+"Teacher: "+this.TeacherName+"\n"+"Number of lessons: "+this.NumberOfLessons+"\n"+"Car: "+this.Car;
         }
 
+        public object Clone()
+        {
+            return new Trainee(Id, Name, FamilyName, BrithDate, MyGender, PhoneNumber, MyAddress, Car, MyGear, School, TeacherName, NumberOfLessons);
+        }
     }
 }

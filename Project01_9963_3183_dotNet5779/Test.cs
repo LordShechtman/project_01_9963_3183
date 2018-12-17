@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-   public class Test
+   public class Test :ICloneable
     {
         #region FILEDS
        public string TestNumber { get; set; }
@@ -32,7 +32,17 @@ namespace BE
 
 
         }
-        
+        public Test(string tester_id, string trainee_id, DateTime date_test, Address address,List<bool> parameters,List<string>notes)
+        {
+            //Update test
+            TesterId = tester_id;
+            TraineeId = trainee_id;
+            TestDate = date_test;
+            TestAddress = address;
+            IsPass = false;
+            TestParameters = parameters;
+            TesterNotes = notes;
+        }
         public string showParmeters(List< bool> par)
         {
             testsParameters p;
@@ -75,5 +85,9 @@ namespace BE
             return "Test number: " + this.TestNumber + "\n" + "Tester Id: " + this.TesterId + "\n" + "Trainee Id: " + this.TraineeId + "\n" + "Date " + this.TestDate + "\n" + "Test results:" + "\n" + showParmeters(this.TestParameters) + "Notes: \n" + showNotes(this.TesterNotes) + "\n" + "Passed? " + this.IsPass;
         }
 
+        public object Clone()
+        {
+           return new Test(TesterId,TraineeId,TestDate,TestAddress,TestParameters,TesterNotes);
+        }
     }
 }
