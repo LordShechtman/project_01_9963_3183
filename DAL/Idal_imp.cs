@@ -19,29 +19,42 @@ namespace DAL
             get { return instance; }
         }
 
-        private Dal_imp() { }
+        private Dal_imp() {
+            DS.DataSource.testers = new List<Tester>();
+            DS.DataSource.trainees = new List<Trainee>();
+            DS.DataSource.tests = new List<Test>();
+        }
         static Dal_imp() { }
 
         #endregion
-
+        
         public void AddTester(Tester t)
         {
             //Add new tester to the testers list (After the object approval  by the BL)
+            if (DS.DataSource.testers == null)
+            {
+                
+                DataSource.testers.Add(t);
+                return;
+            }
             foreach (Tester tmp in DS.DataSource.testers)
             {
+               
                 if (tmp.Id == t.Id)
                     throw new Exception("Tester " + t.Id + " is already exists!");
             }
             DS.DataSource.testers.Add(t);
-
+            return;
         }
        public  void DeleteTester(string id)
         {
+            Tester removed=null;
             bool flag = false;
             foreach (Tester tmp in DS.DataSource.testers)
             {
                 if (tmp.Id == id)
                 {
+                    removed = tmp;
                     DS.DataSource.testers.Remove(tmp);
                     flag = true;
                     break;
@@ -49,6 +62,7 @@ namespace DAL
             }
             if (flag == false)
                 throw new Exception("Tester "+id+ " is not Exists!");
+            Console.WriteLine("Tester:{0} {1} {2} was  successfully removed ", removed.Id, removed.Name, removed.FamilyName);
         }
        public  void UpdateTester(Tester t)
         {
@@ -71,6 +85,13 @@ namespace DAL
 
        public void AddTrainee(Trainee t)
         {
+            if (DS.DataSource.trainees == null)
+            {
+                DS.DataSource.trainees = new List<Trainee>();
+                DataSource.trainees.Add(t);
+                return;
+
+            }
             foreach (Trainee tmp in DS.DataSource.trainees)
             {
                 if (tmp.Id == t.Id)
@@ -109,13 +130,17 @@ namespace DAL
             }
             if (flag == false)
                 throw new Exception("Trainee" + t.Id + "is not exist");
+
         }
         //--------------------------------
         /// TEST Function
         /// 
        public void AddTest(Test t)
         {
-            
+            if(DS.DataSource.tests==null)
+            {
+                DS.DataSource.tests = new List<Test>();
+            }
             // Genrate tests number
             t.TestNumber = Configuration.testNum. ToString("00000000");
             Configuration.testNum++;

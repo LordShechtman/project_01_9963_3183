@@ -14,6 +14,7 @@ namespace BE
         public static int Trainee_MIN_AGE = 18;
         public static int MIN_LESSONS_FOR_TEST = 20;
         public static int DAYS_Between_TESTS = 7;
+        public static int Number_Parameters_To_Pass = 5;    
        public  DateTime currntDate = DateTime.Now;
 
         public static int testNum = 1;

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using DAL;
 using BE;
 namespace BL
@@ -15,7 +12,7 @@ namespace BL
         #region Singleton
         public static readonly Bl_imp instance = new Bl_imp();
 
-        public static Bl_imp Instance { get { return instance; } } 
+        public static Bl_imp Instance { get { return instance; } }
 
 
 
@@ -36,7 +33,7 @@ namespace BL
             ///Meanwhile we wait for permission from Google Maps we will return random distance;
             return r.Next(0, 151);
         }
-       public void ValidAddress(Address address)
+        public void ValidAddress(Address address)
         {
             //address must contin all it filed
             if (address.city == null)
@@ -48,11 +45,11 @@ namespace BL
         }
         //TODO: use this deleagte
         delegate bool myFunc(List<object> lst, myFunc conditon);
-        
-        public void ifNonLetters(string str,string name)
+
+        public void IfNonLetters(string str, string name)
         {
             //Check for ID and phone number if there are no letters in the string 
-            foreach(char ch in str)
+            foreach (char ch in str)
             {
                 if (ch < '0' || ch > '9')
                     throw new Exception(name + " must contin dighits only!!");
@@ -62,30 +59,32 @@ namespace BL
         {
             //Detrminate the reuslt of the test
             int count = test.TestParameters.Count(item => item == true);
-            return count / 6 >= 4 && test.TestParameters[5] == true && test.TestParameters[4] == true && test.TestParameters[0] == true;
+            return count  >= Configuration.Number_Parameters_To_Pass 
+                && test.TestParameters[ (int)testsParameters.wheelhandling] == true 
+                && test.TestParameters[4] == true && test.TestParameters[0] == true;
         }
         #endregion
-        #region Methods
+                #region Methods
         public int numberOfTests(Trainee T)
         {
-          /*Using lambda exprssion to find how many tets certin student made*/
-            IEnumerable<Test > lst= dal.GetAllTests();
-            IEnumerable<Test> count = lst.Where(i => i.TraineeId == T.Id).Select(i=>i);
+            /*Using lambda exprssion to find how many tets certin student made*/
+            IEnumerable<Test> lst = dal.GetAllTests();
+            IEnumerable<Test> count = lst.Where(i => i.TraineeId == T.Id).Select(i => i);
             return count.Count();
-            
+
         }
         public List<Trainee> passedToday()
         {
             //retuns a list of students who passed Today(   Date Time.now)
             List<Trainee> passed = new List<Trainee>();
             List<Trainee> lst = dal.GetAllTrainees();
-            foreach(Test T in dal.GetAllTests())
+            foreach (Test T in dal.GetAllTests())
             {
-                if (T.IsPass ==true && (T.TestDate.Day==DateTime.Now.Day && T.TestDate.Month == DateTime.Now.Month && T.TestDate.Year == DateTime.Now.Year))
+                if (T.IsPass == true && (T.TestDate.Day == DateTime.Now.Day && T.TestDate.Month == DateTime.Now.Month && T.TestDate.Year == DateTime.Now.Year))
                 {
-                    foreach(Trainee trainee in lst)
+                    foreach (Trainee trainee in lst)
                     {
-                        if(trainee.Id==T.TraineeId)
+                        if (trainee.Id == T.TraineeId)
                         {
                             passed.Add(trainee);
                             break;
@@ -99,19 +98,43 @@ namespace BL
         public bool isTraineePassed(string id)
         {
 
-            Test passed =  dal.GetAllTests(). Find(item=> item.TraineeId == id && item.IsPass == true);
+            Test passed = dal.GetAllTests().Find(item => item.TraineeId == id && item.IsPass == true);
             return passed != null;
         }
         public List<Tester> avilableTesters(int hour, days day)
         {
-           IEnumerable<Tester> able = from item in dal.GetAllTesters()
-          where item.WorkHours[(int)day, hour - 9] == true
-          select item;
-          return able.ToList();
+            IEnumerable<Tester> able = from item in dal.GetAllTesters()
+                                       where item.WorkHours[(int)day, hour - 9] == true
+                                       select item;
+            return able.ToList();
         }
-        
+        public List<Tester> liveFrom(int x, Address address)
+        {
+            IEnumerable<Tester> live_from = from item in dal.GetAllTesters()
+                                            where distance(item.MyAddress, address) == x
+                                            orderby item.Name, item.FamilyName, item.Id
+                                            select item;
 
+            ;
+
+            return live_from.ToList();
+        }
+        public List<Test> allTestBy( )
+            {
+            //TODO: EXPOLE HOW TO USE DELEGATE IN FUNCTION
+            return null;
+        }
+        public List<Test >Testbydate(DateTime date)
+        {
+
+            IEnumerable<Test> indate = from item in dal.GetAllTests()
+                                       where item.TestDate.Month == date.Month
+                                       select item;
+            indate.GroupBy(item => item.TestDate.Day);                                
+             return indate .ToList();
+        }
         #endregion
+        #region Adding Metods
         void IBL.AddTest( string trainee_id, Address address ,DateTime date)
         {
            List<Tester> all_my_testers = dal.GetAllTesters();
@@ -123,34 +146,38 @@ namespace BL
                 
                    //// Find tester that can make the test in that data
                    
-                if (trainee_id.Length != 9 )
-                    throw new Exception("Trainee ID must contin only 9 dights!!");
                 
-                ifNonLetters(trainee_id, " Trainee ID");
+                IfNonLetters(trainee_id, " Trainee ID");
                 ValidAddress(address);
                 if (date.Hour > 16 || date.Hour < 9)
                     throw new Exception("Test can only be between 9:00-16:00!!");
-                string tester_id = null;
+                if ((int)date.DayOfWeek > 5)
+                    throw new Exception("Tests can only be happened between Sunday to Thursday");
+                Tester validTester=null ;
       
-                List<Tester> valid_testers = all_my_testers.FindAll(item => item.WorkHours[(int)date.DayOfWeek - 1, (int)date.Hour -9] == true);
-                // foreach (Tester t in valid_testers) { Console.WriteLine(t.Id + " " + t.Name); }
-                foreach (Tester tester in valid_testers)
+                var  valid_testers = all_my_testers.FindAll(item => item.WorkHours[(int)date.DayOfWeek, (int)date.Hour -9] == true);
+               List<Test> thisDay = all_my_test.FindAll(x => x.TestDate == date);
+                foreach(var tester in valid_testers)
                 {
-                    Test invalid_test = all_my_test.Find(item => item.TestDate.Day == date.Day && item.TestDate.Month == date.Month && item.TestDate.Year == date.Year && item.TesterId == tester.Id);
-                    if (invalid_test == null && distance(tester.MyAddress, address) <= tester.MaxDistance)
+                    var freeTester = from x in thisDay
+                                     where x.TesterId == tester.Id
+                                     select x;
+                    
+                    if(freeTester.Any()==false)
                     {
-                        
-                        tester_id = tester.Id;
-
+                        validTester = tester;
                         break;
-
                     }
                 }
-                    if (tester_id==null)
-                        throw new Exception("There is no Tester that can make the test in:" + date.Day + "/" + date.Month+"/" + date.Year + " " + date.Hour + ":" + date.Minute); ;
-                
-                    //Check if student exist(lamda)
-                 Trainee trainee_exist = all_my_trainees.Find(item => item.Id == trainee_id);
+                if (validTester == null)
+                    throw new Exception("There is no Tester that can make the test in:"
+                      + date.Day + "/" + date.Month + "/" + date.Year + " " + date.Hour + ":00");
+
+
+
+
+                //Check if student exist(lamda)
+                Trainee trainee_exist = all_my_trainees.Find(item => item.Id == trainee_id);
                
                 if (trainee_exist == null)
                     throw new Exception("Trainee " + trainee_id + "is not exist!!");
@@ -158,7 +185,8 @@ namespace BL
                 {
                     //check if Trainee made at least min lessons for test
                     if(trainee_exist.NumberOfLessons<Configuration.MIN_LESSONS_FOR_TEST)
-                        throw new Exception("Trainee " + trainee_id + "must do "+(Configuration.MIN_LESSONS_FOR_TEST- trainee_exist.NumberOfLessons)+" for a test!!");
+                        throw new Exception("Trainee " + trainee_id + "must do "+
+                        (Configuration.MIN_LESSONS_FOR_TEST- trainee_exist.NumberOfLessons)+" for a test!!");
                     else
                     {
                         Test last = all_my_test.Find(x => x.TraineeId == trainee_id && (x.TestDate.Month == date.Month && x.TestDate.Year == date.Year &&Math.Abs( date.Day - x.TestDate.Day) < 7));
@@ -167,7 +195,7 @@ namespace BL
                     }
                 }
                 
-                temp = new Test(tester_id, trainee_id, date, address);
+                temp = new Test(validTester.Id, trainee_id, date, address);
                 dal.AddTest(temp);
             }
             catch(Exception ex)
@@ -177,8 +205,8 @@ namespace BL
         }
        public void AddTester(Tester tester)
         {
-            ifNonLetters(tester.Id, "Tester ID");
-            ifNonLetters(tester.PhoneNumber, "Tester Phone number");
+            IfNonLetters(tester.Id, "Tester ID");
+            IfNonLetters(tester.PhoneNumber, "Tester Phone number");
             ValidAddress(tester.MyAddress);
 
             dal.AddTester(tester);  
@@ -194,7 +222,7 @@ namespace BL
                 if (id.Length !=9)
                     // ID must contain 9 dighits only
                     throw new Exception("ID must contain only 9 digits");
-                ifNonLetters(id, "ID");
+                IfNonLetters(id, "ID");
                 
 
                 if (  DateTime.Now.Year - birth_date.Year < Configuration.Tester_MIN_AGE)
@@ -259,6 +287,7 @@ namespace BL
             }
             
         }
+        #endregion
 
         void IBL.DeleteTester(string id)
         {
@@ -302,13 +331,15 @@ namespace BL
 
         void IBL.UpdateTest(Test test)
         {
+   
             test.IsPass = TestResult(test);
             dal.UpdateTest(test);
         }
-
-        void IBL.UpdateTester(Tester t)
+        
+        void IBL.UpdateTester(Tester tester)
         {
-           
+            dal.UpdateTester(tester);
+            
         }
 
         void IBL.UpdateTrainee(Trainee t)
@@ -316,10 +347,10 @@ namespace BL
             if (t.Id.Length != 9 )
                 // ID must contain 9 dighits only
                 throw new Exception("ID must contain only 9 digits");
-            ifNonLetters(t.Id, " Trainee ID");
+            IfNonLetters(t.Id, " Trainee ID");
             if (t.PhoneNumber.Length != 10 )
                 throw new Exception("Phone Number must contian  only 10 digits");
-            ifNonLetters(t.Id, " Trainee phone number");
+            IfNonLetters(t.Id, " Trainee phone number");
             if (t.BrithDate.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
                 throw new Exception("Trainee cant't be younger then " + Configuration.Tester_MIN_AGE);
             if (t.MyAddress.city == null)
@@ -333,7 +364,7 @@ namespace BL
                 throw new Exception("Number of lessons must br bigger then 0 ");
 
           
-            dal.AddTrainee(t);
+            dal.UpdateTrainee(t);
         }
    
     }
