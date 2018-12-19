@@ -132,10 +132,12 @@ namespace BL
 
             return live_from.ToList();
         }
-        public List<Test> allTestBy()
+        public List<Test> allTestBy(Predicate<Test> codition)
         {
-            //TODO: EXPOLE HOW TO USE DELEGATE IN FUNCTION
-            return null;
+           
+            List<Test> lst = dal.GetAllTests().FindAll(codition);
+                               
+            return lst;
         }
         public List<Test> Testbydate(DateTime date)
         {
@@ -146,6 +148,8 @@ namespace BL
             indate.GroupBy(item => item.TestDate.Day);
             return indate.ToList();
         }
+
+        
         /// <summary>
         /// flag =bool exprssion (orderd or not)
         /// </summary>

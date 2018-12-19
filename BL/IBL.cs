@@ -32,7 +32,8 @@ using BE;
     IEnumerable<IGrouping<int, Trainee>> AllTraineesByNumberOfTests();
     IEnumerable<IGrouping<string, Trainee>> TraineeByTeacher(bool flag);
     IEnumerable<Tester> TestersByOrder();
-    List<Test> allTestBy();
+    List<Test> allTestBy(Predicate<Test> codition);
+
     List<Test> Testbydate(DateTime date);
     List<Tester> liveFrom(int x, Address address);
     
