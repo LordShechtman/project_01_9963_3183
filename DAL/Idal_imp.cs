@@ -137,10 +137,7 @@ namespace DAL
         /// 
        public void AddTest(Test t)
         {
-            if(DS.DataSource.tests==null)
-            {
-                DS.DataSource.tests = new List<Test>();
-            }
+            
             // Genrate tests number
             t.TestNumber = Configuration.testNum. ToString("00000000");
             Configuration.testNum++;

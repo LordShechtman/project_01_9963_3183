@@ -101,6 +101,13 @@ namespace BL
             }
             return passed;
         }
+        public IEnumerable<Tester> TestersByOrder()
+        {
+            IEnumerable <Tester> orderList= from item in dal.GetAllTesters()
+                                    orderby item.FamilyName, item.Name
+                                    select item;
+            return orderList;
+        }
         public bool isTraineePassed(string id)
         {
 
@@ -327,7 +334,20 @@ namespace BL
             }
             
         }
-
+       public  void AddTrainee(Trainee trainee)
+        {
+            if (trainee.Id.Length !=9)
+                // ID must contain 9 dighits only
+                throw new Exception("ID must contain only 9 digits");
+            if (trainee.PhoneNumber.Length!=10)
+                throw new Exception("Phone Number must contian  only 10 digits");
+            if (trainee.BrithDate.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
+                throw new Exception("Trainee cant't be younger then " + Configuration.Trainee_MIN_AGE);
+            ValidAddress(trainee.MyAddress);
+            if (trainee.NumberOfLessons <= 0)
+                throw new Exception("Number of lessons must br bigger then 0 ");
+            dal.AddTrainee(trainee);
+        }
         void IBL.AddTrainee(string id, string name, string familyName, DateTime birthD, gender g, string phoneNum, Address address, carType type, gear my_gear, string school, string teacher_name, int numLessons)
         {
             Trainee temp;
@@ -345,6 +365,7 @@ namespace BL
                     throw new Exception("Number of lessons must br bigger then 0 ");
     
                 temp = new Trainee(id, name, familyName, birthD, g, phoneNum, address, type, my_gear, school, teacher_name, numLessons);
+
                 dal.AddTrainee(temp);
             }
             catch (Exception ex)
