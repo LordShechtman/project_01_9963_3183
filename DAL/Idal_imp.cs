@@ -151,18 +151,17 @@ namespace DAL
         }
         public void UpdateTest(Test t)
         {
-            bool flag = false;
-            foreach (Test tmp in DS.DataSource.tests)
-            {
-                if (tmp.TestNumber == t.TestNumber)
-                {
-                    flag = true;
-                    DS.DataSource.tests.Remove(tmp);
-                    DS.DataSource.tests.Add(t);
-                }
-            }
-            if (flag == false)
-                throw new Exception("test "+t.TestNumber+"is not exist!");
+           
+            Predicate<Test> exist = (Test x) => { return x.TestDate == t.TestDate 
+                && x.TesterId == t.TesterId 
+                && x.TraineeId == t.TraineeId; };
+           Test tmp= DS.DataSource.tests.Find(exist);
+            if (tmp == null)
+                throw new Exception("the test doesn't exist!!");
+            t.TestNumber = tmp.TestNumber;
+            DS.DataSource.tests.RemoveAll(exist);
+            DataSource.tests.Add(t);
+                
         }
 
         //--------------geting Functions

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D27FF084-8871-4578-BCC9-CFFC302CC40A}</ProjectGuid>
+    <ProjectGuid>{E3DFB908-2D1B-4248-8993-FC2C57B86F11}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PL</RootNamespace>
-    <AssemblyName>PL</AssemblyName>
+    <RootNamespace>PL_correct</RootNamespace>
+    <AssemblyName>PL_correct</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TmpPL.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +57,6 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{3a9c127a-930f-436a-a7ac-60f5fb179dff}</Project>
       <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DS\DS.csproj">
-      <Project>{793f926c-53ca-40a3-89d9-231e54e51e6d}</Project>
-      <Name>DS</Name>
     </ProjectReference>
     <ProjectReference Include="..\Project01_9963_3183_dotNet5779\BE.csproj">
       <Project>{bd953b9b-9401-4921-a80a-0609bf814b9d}</Project>

@@ -8,7 +8,7 @@ using BE;
 using BL;
 namespace PL
 {
-    class Program
+    class TmpPL
     {
         
 
@@ -45,10 +45,12 @@ namespace PL
                 bl.AddTester("111111111", "Ester", "Malka", new DateTime(1970, 12, 23), (gender)0, "0522848424", a, 30, 17, (carType)3, mat, 30);
                 bl.AddTrainee("312589963", "Maoz", "Lex", new DateTime(1994,3, 11), (gender)1, "0525525223", a, (carType)4, gear.manual, "hermon", "avi", 28);
                 bl.AddTrainee("312589964", "Rafi", "Lev", new DateTime(1995, 3, 3), (gender)1, "0525525243", a, (carType)4, gear.manual, "hermon", "avi", 36);
-                foreach (var v in bl.GetAllTesters()) { Console.WriteLine(v.ToString()); }
+                bl.AddTrainee("312589946", "Tomer", "Fridman", new DateTime(1995, 3, 3), (gender)1, "0525525243", a, (carType)4, gear.manual, "ways", "avi", 36);
                 bl.AddTest("312589963", a, new DateTime(2018, 12, 18, 11, 0, 0));
                 bl.AddTest("312589964", a, new DateTime(2019, 12, 18, 9, 0, 0));
-                foreach (Test test in bl.GetAllTests()) { Console.WriteLine(test.ToString()); }
+                IEnumerable <IGrouping<string, Trainee>> answer = bl.TraineeBySchool(true);
+               IEnumerable<IGrouping<int,Trainee >> trainees= bl.AllTraineesByNumberOfTests();
+                
             }
             catch( Exception ex)
             { Console.WriteLine(ex.Message);

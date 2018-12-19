@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions; 
+using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
@@ -26,6 +26,14 @@ using BE;
     #region Methods( Using by link ,lambda and delegate exparssions)
     int numberOfTests(Trainee T);
     List<Trainee> passedToday();
+    IEnumerable<IGrouping<string, Trainee>>TraineeBySchool(bool flag);
+    IEnumerable<IGrouping<carType, Tester>> TestersByCarExpriance(bool flag);
+    IEnumerable<IGrouping<int, Trainee>> AllTraineesByNumberOfTests();
+    IEnumerable<IGrouping<string, Trainee>> TraineeByTeacher(bool flag);
+    List<Test> allTestBy();
+    List<Test> Testbydate(DateTime date);
+    List<Tester> liveFrom(int x, Address address);
+    
     #endregion
     //--------------geting Functions
     List<Tester> GetAllTesters();

@@ -59,12 +59,19 @@ namespace BL
         {
             //Detrminate the reuslt of the test
             int count = test.TestParameters.Count(item => item == true);
-            return count  >= Configuration.Number_Parameters_To_Pass 
-                && test.TestParameters[ (int)testsParameters.wheelhandling] == true 
-                && test.TestParameters[4] == true && test.TestParameters[0] == true;
+            return count >= Configuration.Number_Parameters_To_Pass
+                && test.TestParameters[(int)testsParameters.wheelhandling] == true
+                && test.TestParameters[(int)testsParameters.keepDistance] == true 
+                && test.TestParameters[(int)testsParameters.priorityrules] == true;
+        }
+        private bool InTheSameWeek(DateTime date1,DateTime date2)
+        {
+            var d1 = date1.AddDays(-1 * (int)date1.DayOfWeek);
+            var d2 = date2.AddDays(-1 * (int)date2.DayOfWeek);
+            return d1 == d2;
         }
         #endregion
-                #region Methods
+        #region Methods
         public int numberOfTests(Trainee T)
         {
             /*Using lambda exprssion to find how many tets certin student made*/
@@ -94,7 +101,6 @@ namespace BL
             }
             return passed;
         }
-
         public bool isTraineePassed(string id)
         {
 
@@ -119,19 +125,79 @@ namespace BL
 
             return live_from.ToList();
         }
-        public List<Test> allTestBy( )
-            {
+        public List<Test> allTestBy()
+        {
             //TODO: EXPOLE HOW TO USE DELEGATE IN FUNCTION
             return null;
         }
-        public List<Test >Testbydate(DateTime date)
+        public List<Test> Testbydate(DateTime date)
         {
 
             IEnumerable<Test> indate = from item in dal.GetAllTests()
                                        where item.TestDate.Month == date.Month
                                        select item;
-            indate.GroupBy(item => item.TestDate.Day);                                
-             return indate .ToList();
+            indate.GroupBy(item => item.TestDate.Day);
+            return indate.ToList();
+        }
+        /// <summary>
+        /// flag =bool exprssion (orderd or not)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IGrouping<string, Trainee>> TraineeBySchool(bool flag)
+        {
+            IEnumerable<Trainee> All_Trainees = dal.GetAllTrainees();
+            if (flag == false)
+            {
+
+                var DrvingSchool = from item in All_Trainees
+                                   group item by item.School;
+                return DrvingSchool;
+            }
+            var DrvingSchoolOrderd = from item in All_Trainees
+                                     orderby item.FamilyName, item.Name
+                                     group item by item.School;
+            return DrvingSchoolOrderd;
+        }
+        public IEnumerable<IGrouping<carType, Tester>> TestersByCarExpriance(bool flag)
+        {
+            IEnumerable<Tester> All_Testers = dal.GetAllTesters();
+            if (flag == false)
+            {
+
+                var CarExpirance = from item in All_Testers
+                                   group item by item.ExpiranceCar;
+                return CarExpirance;
+            }
+            var CarExpiranceByOrder = from item in All_Testers
+                                      orderby item.FamilyName, item.Name
+                                      group item by item.ExpiranceCar;
+            return CarExpiranceByOrder;
+
+        }
+        public IEnumerable<IGrouping<int, Trainee>> AllTraineesByNumberOfTests()
+        {
+            IEnumerable < Trainee > trainees= dal.GetAllTrainees();
+            IEnumerable<Test> tests = dal.GetAllTests();
+            var TraineesBytest = from item in trainees
+                                 group item by numberOfTests(item);
+            return TraineesBytest;
+
+
+            }
+        public  IEnumerable<IGrouping<string, Trainee>> TraineeByTeacher(bool flag)
+        {
+            IEnumerable<Trainee> All_Trainees = dal.GetAllTrainees();
+            if (flag == false)
+            {
+
+                var DrvingSchool = from item in All_Trainees
+                                   group item by item.TeacherName;
+                return DrvingSchool;
+            }
+            var DrvingSchoolOrderd = from item in All_Trainees
+                                     orderby item.FamilyName, item.Name
+                                     group item by item.TeacherName;
+            return DrvingSchoolOrderd;
         }
         #endregion
         #region Adding Metods
@@ -151,29 +217,35 @@ namespace BL
                 ValidAddress(address);
                 if (date.Hour > 16 || date.Hour < 9)
                     throw new Exception("Test can only be between 9:00-16:00!!");
-                if ((int)date.DayOfWeek > 5)
+                if ((int)date.DayOfWeek > 4)
                     throw new Exception("Tests can only be happened between Sunday to Thursday");
                 Tester validTester=null ;
-      
+                    
                 var  valid_testers = all_my_testers.FindAll(item => item.WorkHours[(int)date.DayOfWeek, (int)date.Hour -9] == true);
                List<Test> thisDay = all_my_test.FindAll(x => x.TestDate == date);
-                foreach(var tester in valid_testers)
+                List<Test> thisWeek = all_my_test.FindAll(x => InTheSameWeek(date, x.TestDate));
+                foreach (var tester in valid_testers)
                 {
                     var freeTester = from x in thisDay
                                      where x.TesterId == tester.Id
                                      select x;
-                    
-                    if(freeTester.Any()==false)
+                    var testThisWeek = from y in thisWeek
+                                       where y.TesterId == tester.Id
+                                       select y;
+
+                    if (freeTester.Any() == false 
+                        && testThisWeek.Count() <= tester.MaxTestsPerWeek 
+                        && tester.MaxDistance <= distance(tester.MyAddress, address))
                     {
                         validTester = tester;
                         break;
                     }
                 }
+                
                 if (validTester == null)
                     throw new Exception("There is no Tester that can make the test in:"
                       + date.Day + "/" + date.Month + "/" + date.Year + " " + date.Hour + ":00");
-
-
+                  
 
 
                 //Check if student exist(lamda)
@@ -266,15 +338,9 @@ namespace BL
                     throw new Exception("ID must contain only 9 digits");
                 if (phoneNum.Length < 10 || phoneNum.Length > 10)
                     throw new Exception("Phone Number must contian  only 10 digits");
-                if(birthD.Year >DateTime.Now.Year-Configuration.Trainee_MIN_AGE)
-                throw new Exception("Trainee cant't be younger then " + Configuration.Tester_MIN_AGE);
-                if (address.city == null)
-                    //address must contin all it fileds
-                    throw new Exception("Address must contain city name");
-                if (address.streetName == null)
-                    throw new Exception("Address must contain street name");
-                if (address.houseNumber <= 0)
-                    throw new Exception("Address must contain house number");
+                if (birthD.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
+                    throw new Exception("Trainee cant't be younger then " + Configuration.Trainee_MIN_AGE);
+                    ValidAddress(address);
                 if (numLessons <= 0)
                     throw new Exception("Number of lessons must br bigger then 0 ");
     
@@ -288,7 +354,7 @@ namespace BL
             
         }
         #endregion
-
+        #region Delete Methods
         void IBL.DeleteTester(string id)
         {
             try
@@ -313,7 +379,8 @@ namespace BL
             }
            
         }
-
+        #endregion
+   #region  Get List Methods
         List<Tester> IBL.GetAllTesters()
         {
             return dal.GetAllTesters();
@@ -323,12 +390,13 @@ namespace BL
         {
             return dal.GetAllTests();
         }
-
+       
         List<Trainee> IBL.GetAllTrainees()
         {
             return dal.GetAllTrainees();
         }
-
+        #endregion
+        #region Update
         void IBL.UpdateTest(Test test)
         {
    
@@ -338,6 +406,32 @@ namespace BL
         
         void IBL.UpdateTester(Tester tester)
         {
+            if (tester.Id.Length != 9)
+                // ID must contain 9 dighits only
+                throw new Exception("ID must contain only 9 digits");
+            IfNonLetters(tester.Id, "ID");
+
+
+            if (DateTime.Now.Year - tester.BirthDate.Year < Configuration.Tester_MIN_AGE)
+                //Tester age can't be younger then min age!!!
+                throw new Exception("Tester cant't be younger then " + Configuration.Tester_MIN_AGE);
+            //valid birth date
+            if (tester.PhoneNumber.Length != 10)
+                throw new Exception("Phone Number must contian  only 10 digits");
+            ValidAddress(tester.MyAddress);
+            if (tester.YearsOfExperience > (DateTime.Now.Year - tester.BirthDate.Year) - 18)
+                throw new Exception("A tester can not be experienced more then " + ((DateTime.Now.Year - tester.BirthDate.Year) - 18) + " years");
+            if (tester.MaxTestsPerWeek > 30 || tester.MaxTestsPerWeek < 1)
+                //Number of tets per week can be bigger then 30 or less then 1
+                throw new Exception(" Maximum tests per week must be between 1 to 30");
+            if (tester.MaxDistance < 0)
+                throw new Exception("Maximum distance can't be negative");
+            int numberTestrHours = 0;
+            foreach (bool b in tester.WorkHours) { if (b == true) numberTestrHours++; }
+            if (numberTestrHours > tester.MaxTestsPerWeek)
+                /* Tester can't work more the maximum tests per week*/
+                throw new Exception("Tester can't work more then " + tester.MaxTestsPerWeek + "per week!!");
+            
             dal.UpdateTester(tester);
             
         }
@@ -368,4 +462,5 @@ namespace BL
         }
    
     }
-    }
+    #endregion
+}
