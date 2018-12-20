@@ -1,0 +1,21 @@
+﻿<Window x:Class="PLWPF.TesterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="TesterWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="MainLabel" Content="Testers" HorizontalAlignment="Left" Height="37" Margin="10,10,0,0" VerticalAlignment="Top" Width="412" FontSize="16" FontWeight="Bold"/>
+        <GroupBox x:Name="TesterGroupBox" Header="Plese make your choice" HorizontalAlignment="Left" Height="100" Margin="0,52,0,0" VerticalAlignment="Top" Width="140"/>
+        <GroupBox Margin="0,0,0,-36">
+            <StackPanel Margin="0,78,0,-78">
+                <RadioButton Content="Add Tester">
+                </RadioButton>
+                <RadioButton Content="Delete Tester" HorizontalAlignment="Right" Width="780"></RadioButton>
+                <RadioButton Content="Update Tester" HorizontalAlignment="Right" Width="780"></RadioButton>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
