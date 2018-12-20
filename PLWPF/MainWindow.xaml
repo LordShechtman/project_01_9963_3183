@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="206*"/>
+            <ColumnDefinition Width="341*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="247*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="251*"/>
+            <RowDefinition Height="169*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="TesterButton" Content="Testr" Grid.Column="5" HorizontalAlignment="Left" Height="56" Margin="43.2,41.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4"/>
+        <Button x:Name="TrineeButton" Content="Testr" Grid.Column="1" HorizontalAlignment="Left" Height="56" Margin="86.4,44.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4"/>
+
     </Grid>
 </Window>
