@@ -16,7 +16,7 @@ namespace BE
         public static int DAYS_Between_TESTS = 7;
         public static int Number_Parameters_To_Pass = 5;    
        public  DateTime currntDate = DateTime.Now;
-
-        public static int testNum = 1;
+       
+       public static int testNum = 1;
     }
 }

@@ -24,7 +24,10 @@ using BE;
     void AddTest( string trainee_id, Address address, DateTime date);
     void UpdateTest(Test t);
     #endregion
-    #region Methods( Using by link ,lambda and delegate exparssions)
+    #region Methods( Using by link ,lambda and so)
+    
+     double PassStatistic();
+    IEnumerable<IGrouping<int, Tester>> TotalTestsByTester();
     int numberOfTests(Trainee T);
     List<Trainee> passedToday();
     IEnumerable<IGrouping<string, Trainee>>TraineeBySchool(bool flag);

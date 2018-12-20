@@ -48,7 +48,7 @@ namespace BE
             MaxTestsPerWeek = maxTest;
             ExpiranceCar = type;
             MaxDistance = max_distance;
-            WorkHours = new bool[5, 6];
+            WorkHours = new bool[5, 7];
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 6; j++)

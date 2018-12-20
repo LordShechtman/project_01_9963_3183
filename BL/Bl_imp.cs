@@ -45,7 +45,18 @@ namespace BL
         }
         //TODO: use this deleagte
         delegate bool myFunc(List<object> lst, myFunc conditon);
+        public bool IsSameCarType(string tester_id,string trainee_id)
+        {
+            //Returns if the the tester and the trainee use the same car Tape (for test)
+            Tester tester = dal.GetAllTesters().Find(x => x.Id == tester_id);
+            Trainee trainee = dal.GetAllTrainees().Find(y => y.Id == trainee_id);
+            if (tester == null)
+                throw new Exception("Tester"+ tester_id+ " not exist" );
+            if (tester == null)
+                throw new Exception("Trainee" + trainee_id + " not exist");
+            return tester.ExpiranceCar == trainee.Car;
 
+        }
         public void IfNonLetters(string str, string name)
         {
             //Check for ID and phone number if there are no letters in the string 
@@ -72,14 +83,35 @@ namespace BL
         }
         #endregion
         #region Methods
+        /// <summary>
+        /// Returns the Statistic of passing a test
+        /// </summary>
+        /// <returns></returns>
+        public double PassStatistic()
+        {
+            int Pass_number =  dal.GetAllTests().Count(y => y.IsPass == true);
+            
+            return (double) Pass_number/ dal.GetAllTests().Count();       
+        }
         public int numberOfTests(Trainee T)
         {
-            /*Using lambda exprssion to find how many tets certin student made*/
+            /*Using lambda exprssion to find how many tests certin student made*/
             IEnumerable<Test> lst = dal.GetAllTests();
             IEnumerable<Test> count = lst.Where(i => i.TraineeId == T.Id).Select(i => i);
             return count.Count();
 
         }
+        public IEnumerable<IGrouping<int,Tester>> TotalTestsByTester()
+        {
+            //Returns all Testersgroup by the test they have made
+            IEnumerable<IGrouping<int, Tester>> num = from x in dal.GetAllTesters()
+                      let toatalTests = allTestBy(y => y.TesterId == x.Id).Count()
+                      group x by toatalTests;
+
+
+                return num;
+        }
+        
         public List<Trainee> passedToday()
         {
             //retuns a list of students who passed Today(   Date Time.now)
@@ -135,10 +167,12 @@ namespace BL
         public List<Test> allTestBy(Predicate<Test> codition)
         {
            
-            List<Test> lst = dal.GetAllTests().FindAll(codition);
+            return  dal.GetAllTests().FindAll(codition);
+            
                                
-            return lst;
+           
         }
+
         public List<Test> Testbydate(DateTime date)
         {
 
@@ -217,8 +251,7 @@ namespace BL
            List<Tester> all_my_testers = dal.GetAllTesters();
            List<Trainee> all_my_trainees = dal.GetAllTrainees();
             List<Test> all_my_test = dal.GetAllTests();
-            try
-            {
+            
                 Test temp;
                 
                    //// Find tester that can make the test in that data
@@ -246,7 +279,8 @@ namespace BL
 
                     if (freeTester.Any() == false 
                         && testThisWeek.Count() <= tester.MaxTestsPerWeek 
-                        && tester.MaxDistance <= distance(tester.MyAddress, address))
+                        && tester.MaxDistance <= distance(tester.MyAddress, address) 
+                        && IsSameCarType(tester.Id,trainee_id)==true)
                     {
                         validTester = tester;
                         break;
@@ -257,6 +291,7 @@ namespace BL
                     throw new Exception("There is no Tester that can make the test in:"
                       + date.Day + "/" + date.Month + "/" + date.Year + " " + date.Hour + ":00");
                   
+                    
 
 
                 //Check if student exist(lamda)
@@ -269,22 +304,19 @@ namespace BL
                     //check if Trainee made at least min lessons for test
                     if(trainee_exist.NumberOfLessons<Configuration.MIN_LESSONS_FOR_TEST)
                         throw new Exception("Trainee " + trainee_id + "must do "+
-                        (Configuration.MIN_LESSONS_FOR_TEST- trainee_exist.NumberOfLessons)+" for a test!!");
+                        (Configuration.MIN_LESSONS_FOR_TEST- trainee_exist.NumberOfLessons)+"  lessons for a test!!");
                     else
                     {
-                        Test last = all_my_test.Find(x => x.TraineeId == trainee_id && (x.TestDate.Month == date.Month && x.TestDate.Year == date.Year &&Math.Abs( date.Day - x.TestDate.Day) < 7));
+                        Test last = all_my_test.Find(x => x.TraineeId == trainee_id && ((date - x.TestDate).Days < 7));
                         if (last != null)// trainee made a test less then 7 days ago
-                            throw new Exception("Trainee " + last.TraineeId + " must wait " +( 7 - Math.Abs(date.Day - last.TestDate.Day)) + "  days before test!!");
+                            throw new Exception("Trainee " + last.TraineeId + " must wait " +(7-(date - last.TestDate).Days) + "  days before test!!");
                     }
                 }
                 
                 temp = new Test(validTester.Id, trainee_id, date, address);
                 dal.AddTest(temp);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+           
+            
         }
        public void AddTester(Tester tester)
         {
@@ -298,8 +330,7 @@ namespace BL
         void IBL.AddTester(string id, string name, string family_name, DateTime birth_date, gender my_gender, string phone, Address t_adress, int years_of_exprience, int number_of_tests, carType exp, bool[,] work_hours, int max_distance)
         {
            
-            try
-            {
+            
 
                 Tester temp;
                 if (id.Length !=9)
@@ -330,12 +361,9 @@ namespace BL
                     temp = new Tester(id, name, family_name, birth_date, my_gender, phone, t_adress, years_of_exprience, number_of_tests, exp, max_distance, work_hours);
                 dal.AddTester(temp);
                 
-            }
             
-            catch( FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            
+            
             
         }
        public  void AddTrainee(Trainee trainee)
@@ -355,8 +383,7 @@ namespace BL
         void IBL.AddTrainee(string id, string name, string familyName, DateTime birthD, gender g, string phoneNum, Address address, carType type, gear my_gear, string school, string teacher_name, int numLessons)
         {
             Trainee temp;
-            try
-            {
+           
                 if (id.Length < 9 || id.Length > 9)
                     // ID must contain 9 dighits only
                     throw new Exception("ID must contain only 9 digits");
@@ -371,11 +398,8 @@ namespace BL
                 temp = new Trainee(id, name, familyName, birthD, g, phoneNum, address, type, my_gear, school, teacher_name, numLessons);
 
                 dal.AddTrainee(temp);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            
+            
             
         }
         #endregion

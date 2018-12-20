@@ -9,7 +9,8 @@ namespace BE
    public class Test :ICloneable
     {
         #region FILEDS
-       public string TestNumber { get; set; }
+       private readonly string[] TestParmtersNames = { "Keep Distance", "Reverse Parking", "Looking in the Mirors ", "Signals", "Wheel handling", "Priority Rules" };
+        public string TestNumber { get; set; }
         public string TesterId { get; set; }
         public string TraineeId { get; set; }
         public DateTime TestDate { get; set; }
@@ -50,7 +51,7 @@ namespace BE
             string str = "";
             foreach (bool b in par)
             {
-                str += p + ":";
+                str += TestParmtersNames[(int)p]+ ":";
                 p++;
                 if (b == true)
                     str += "yes";
@@ -82,7 +83,7 @@ namespace BE
         public override string ToString()
         {
 
-            return "Test number: " + this.TestNumber + "\n" + "Tester Id: " + this.TesterId + "\n" + "Trainee Id: " + this.TraineeId + "\n" + "Date " + this.TestDate + "\n" + "Test results:" + "\n" + showParmeters(this.TestParameters) + "Notes: \n" + showNotes(this.TesterNotes) + "\n" + "Passed? " + this.IsPass;
+            return "Test number: " + this.TestNumber + "\n" + "Tester Id: " + this.TesterId + "\n" + "Trainee Id: " + this.TraineeId + "\n" + "Date " + this.TestDate.ToString() + "\n" + "Test results:" + "\n" + showParmeters(this.TestParameters) + "Notes: \n" + showNotes(this.TesterNotes) + "\n" + "Passed? " + this.IsPass;
         }
 
         public object Clone()

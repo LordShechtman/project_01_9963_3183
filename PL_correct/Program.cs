@@ -28,7 +28,7 @@ namespace PL_correct
         {
             for (int i = 0; i < 5; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < 7; j++)
                 {
                     if ((j + 2) % 2 == 0)
                         mat[i, j] = true;
@@ -41,7 +41,7 @@ namespace PL_correct
         {
             try
             {
-                bool[,] mat = new bool[5, 6];
+                bool[,] mat = new bool[5, 7];
                 setMet(mat);
                 IBL bl = Factory_BL.getBL();
                 bl.AddTester("111111111", "Nadv", "Rabinovich", new DateTime(1970, 3, 11), gender.male, "0528434091", setAddress("Hifa", "The Pool", 4), 20, 20, carType.privateCar, mat, 50);
@@ -49,10 +49,16 @@ namespace PL_correct
                 bl.AddTrainee("312589963", "Rafi", "Lev", new DateTime(1990, 3, 11), gender.male, "0525525224", setAddress("Hifa", "Kalil", 52), carType.privateCar, gear.manual, "Hermon", "Yossi", 30);
                 bl.AddTrainee(new Trainee("312589964", "Noam", "Getz", new DateTime(1994, 6, 14), gender.male, "0525525224", setAddress("Hifa", "Kalil", 56), carType.privateCar, gear.manual, "Hermon", "Yossi", 28));
                 bl.AddTrainee("312589961", "Tal", "Madmon", new DateTime(1990, 3, 11), gender.male, "0525525223", setAddress("Hifa", "Hglil", 93), carType.privateCar, gear.manual, "Ways", "Efi", 30);
-                bl.AddTest("312589963", setAddress("Hifa", "Hglil", 93), new DateTime(2018, 12, 30, 13, 0, 0));
-                bl.AddTest("312589963", setAddress("Hifa", "Hglil", 93), new DateTime(2018, 12, 30, 15, 0, 0));
-                
+                bl.AddTest("312589963", setAddress("Hifa", "Hglil", 93), new DateTime(2018, 12, 31, 13, 0, 0));
+                bl.AddTest("312589963", setAddress("Hifa", "Hglil", 93), new DateTime(2019, 1, 9, 13, 0, 0));
+                 
+                Console.WriteLine("Testers:"); foreach (var v in bl.GetAllTesters()) { Console.WriteLine("{0} {1} {2} {3}",v.Id,v.Name,v.FamilyName,v.ExpiranceCar); }
+                Console.WriteLine("Trniees"); foreach (var v in bl.GetAllTrainees()) { Console.WriteLine("{0} {1} {2} {3}", v.Id, v.Name, v.FamilyName, v.Car+" "+v.MyGear); }
+                Console.WriteLine("Tests:"); foreach (var v in bl.GetAllTests()) { Console.WriteLine(v.ToString()); }
+               foreach(var y in bl.allTestBy(x => x.TestDate.DayOfWeek == DayOfWeek.Monday))
+                Console.WriteLine(y.ToString());
             }
+
             catch( Exception ex)
             {
                 
