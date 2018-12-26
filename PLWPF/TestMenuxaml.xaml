@@ -1,0 +1,14 @@
+﻿<Window x:Class="PLWPF.TestMenuxaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="TestMenuxaml" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="AddTestBoutton" Content="AddTest" HorizontalAlignment="Left" Height="74" Margin="57,251,0,0" VerticalAlignment="Top" Width="230" Click="AddTestBoutton_Click"/>
+        <Button x:Name="UpdateTestBoutton" Content="Update Test" HorizontalAlignment="Left" Margin="421,251,0,0" VerticalAlignment="Top" Width="267" Height="74"/>
+
+    </Grid>
+</Window>

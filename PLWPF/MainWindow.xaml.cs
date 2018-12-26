@@ -26,6 +26,26 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Factory_BL.getBL();
+
+        }
+
+        private void TesterButton_Click(object sender, RoutedEventArgs e)
+        {
+            TesterWindow testerWindow = new TesterWindow();
+            testerWindow.ShowDialog();
+
+        }
+
+        private void TrineeButton_Click(object sender, RoutedEventArgs e)
+        {
+            TrinneWindow trinneWindow = new TrinneWindow();
+            trinneWindow.ShowDialog();
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            TestMenuxaml testMenu = new TestMenuxaml();
+            testMenu.ShowDialog();
         }
     }
 }

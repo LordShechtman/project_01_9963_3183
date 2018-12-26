@@ -19,9 +19,9 @@
             <RowDefinition Height="251*"/>
             <RowDefinition Height="169*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="TesterButton" Content="Testers" Grid.Column="5" HorizontalAlignment="Left" Height="56" Margin="43,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4"/>
-        <Button x:Name="TrineeButton" Content="Trinees" Grid.Column="1" HorizontalAlignment="Left" Height="56" Margin="86,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4"/>
-        <Button x:Name="TestButton" Content="Tests" HorizontalAlignment="Left" Height="56" Margin="36,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4"/>
+        <Button x:Name="TesterButton" Content="Testers" Grid.Column="5" HorizontalAlignment="Left" Height="56" Margin="43,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4" Click="TesterButton_Click"/>
+        <Button x:Name="TrineeButton" Content="Trinees" Grid.Column="1" HorizontalAlignment="Left" Height="56" Margin="86,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4" Click="TrineeButton_Click"/>
+        <Button x:Name="TestButton" Content="Tests" HorizontalAlignment="Left" Height="56" Margin="36,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4" Click="TestButton_Click"/>
 
     </Grid>
 </Window>

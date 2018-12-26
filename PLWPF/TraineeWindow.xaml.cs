@@ -15,23 +15,21 @@ using System.Windows.Shapes;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for TesterWindow.xaml
+    /// Interaction logic for TrinneWindow.xaml
     /// </summary>
-    public partial class TesterWindow : Window
+    public partial class TrinneWindow : Window
     {
-        public TesterWindow()
+        public TrinneWindow()
         {
             InitializeComponent();
-            expiranceCarComboBox.ItemsSource = Enum.GetValues(typeof(BE.carType));
-            
-            myGenderComboBox.ItemsSource= Enum.GetValues(typeof(BE.gender));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
-           
+            System.Windows.Data.CollectionViewSource traineeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("traineeViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // traineeViewSource.Source = [generic data source]
         }
     }
 }
