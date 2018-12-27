@@ -22,6 +22,9 @@ namespace PLWPF
         public TrinneWindow()
         {
             InitializeComponent();
+            brithDateDatePicker.DisplayDateEnd = DateTime.Now.AddYears(BE.Configuration.Trainee_MIN_AGE* -1);
+            
+           
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -30,6 +33,24 @@ namespace PLWPF
             System.Windows.Data.CollectionViewSource traineeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("traineeViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // traineeViewSource.Source = [generic data source]
+        }
+
+        private void idTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+               || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
+
+        private void phoneNumberTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+               || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
+
+        private void numberOfLessonsTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+               || (e.Key >= Key.D0 && e.Key <= Key.D9));
         }
     }
 }
