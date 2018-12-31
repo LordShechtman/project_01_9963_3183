@@ -18,7 +18,7 @@ namespace BE
         /*4*/
         public DateTime BirthDate { get; set; }
         /*5*/
-        public gender MyGender { get; set; }
+        public MyEnum.gender MyGender { get; set; }
         /*6*/
         public string PhoneNumber { get; set; }
         /*7*/
@@ -28,14 +28,14 @@ namespace BE
         /*9*/
         public int MaxTestsPerWeek { get; set; }
         /*11*/
-        public carType ExpiranceCar { get; set; }
+        public MyEnum.carType ExpiranceCar { get; set; }
         /*12*/
 
         public bool[,] WorkHours { get; set; }//check when tester works
                                               /*13*/
         public int MaxDistance { get; set; }
         public Tester() { }
-        public Tester(string id, string name, string familyName, DateTime birthD, gender g, string phoneNum, Address address, int yearsE, int maxTest, carType type, int max_distance, bool[,] mat)
+        public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, int max_distance, bool[,] mat)
         {
             Id = id;
             Name = name;

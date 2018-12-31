@@ -41,9 +41,9 @@ namespace PLWPF
             FillPhoneNumberPrefix();
             birthDateDatePicker.DisplayDateEnd = DateTime.Now.AddYears(BE.Configuration.Tester_MIN_AGE*-1);
             birthDateDatePicker.DisplayDateStart= DateTime.Now.AddYears(BE.Configuration.Maximum_Tester_age * -1);
-            expiranceCarComboBox.DataContext = Enum.GetNames(typeof(BE.carType)).ToList();
+            expiranceCarComboBox.DataContext = Enum.GetNames(typeof(BE.MyEnum.carType)).ToList();
             
-            myGenderComboBox.ItemsSource= Enum.GetValues(typeof(BE.gender));
+            myGenderComboBox.ItemsSource= Enum.GetValues(typeof(BE.MyEnum.gender));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -152,6 +152,7 @@ namespace PLWPF
                         throw new Exception("Plese enter your name!!");
                     if ( familyNameTextBox.Text== "")
                         throw new Exception("Plese enter your family name!!");
+
 
                    // bL.AddTester();
                 }   

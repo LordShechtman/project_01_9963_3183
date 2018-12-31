@@ -46,7 +46,7 @@ namespace BE
         }
         public string showParmeters(List< bool> par)
         {
-            testsParameters p;
+            MyEnum.testsParameters p;
             p = 0;
             string str = "";
             foreach (bool b in par)

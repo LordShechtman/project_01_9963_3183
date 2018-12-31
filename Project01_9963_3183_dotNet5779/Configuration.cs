@@ -18,5 +18,6 @@ namespace BE
        public  DateTime currntDate = DateTime.Now;
        public static int Maximum_Tester_age=67;
        public static int testNum = 1;
+        public static  string[] phoneNumberPrefixes = { "050-","051-", "052-", "054-","055-","058-","057-" ,"02-","03-","08-","04-","09-"};
     }
 }

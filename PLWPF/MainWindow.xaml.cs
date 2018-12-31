@@ -47,5 +47,7 @@ namespace PLWPF
             TestMenuxaml testMenu = new TestMenuxaml();
             testMenu.ShowDialog();
         }
+
+        
     }
 }

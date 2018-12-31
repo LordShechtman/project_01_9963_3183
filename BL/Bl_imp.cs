@@ -44,7 +44,7 @@ namespace BL
                 throw new Exception("Address must contain house number");
         }
         //TODO: use this deleagte
-        delegate bool myFunc(List<object> lst, myFunc conditon);
+        
         public bool IsSameCarType(string tester_id,string trainee_id)
         {
             //Returns if the the tester and the trainee use the same car Tape (for test)
@@ -71,9 +71,9 @@ namespace BL
             //Detrminate the reuslt of the test
             int count = test.TestParameters.Count(item => item == true);
             return count >= Configuration.Number_Parameters_To_Pass
-                && test.TestParameters[(int)testsParameters.wheelhandling] == true
-                && test.TestParameters[(int)testsParameters.keepDistance] == true 
-                && test.TestParameters[(int)testsParameters.priorityrules] == true;
+                && test.TestParameters[(int)MyEnum.testsParameters.wheelhandling] == true
+                && test.TestParameters[(int)MyEnum.testsParameters.keepDistance] == true 
+                && test.TestParameters[(int)MyEnum.testsParameters.priorityrules] == true;
         }
         private bool InTheSameWeek(DateTime date1,DateTime date2)
         {
@@ -146,7 +146,7 @@ namespace BL
             Test passed = dal.GetAllTests().Find(item => item.TraineeId == id && item.IsPass == true);
             return passed != null;
         }
-        public List<Tester> avilableTesters(int hour, days day)
+        public List<Tester> avilableTesters(int hour, MyEnum.days day)
         {
             IEnumerable<Tester> able = from item in dal.GetAllTesters()
                                        where item.WorkHours[(int)day, hour - 9] == true
@@ -203,7 +203,7 @@ namespace BL
                                      group item by item.School;
             return DrvingSchoolOrderd;
         }
-        public IEnumerable<IGrouping<carType, Tester>> TestersByCarExpriance(bool flag)
+        public IEnumerable<IGrouping<MyEnum.carType, Tester>> TestersByCarExpriance(bool flag)
         {
             IEnumerable<Tester> All_Testers = dal.GetAllTesters();
             if (flag == false)
@@ -244,6 +244,7 @@ namespace BL
                                      group item by item.TeacherName;
             return DrvingSchoolOrderd;
         }
+       //public void ValidId(string my_id)
         #endregion
         #region Adding Metods
         void IBL.AddTest( string trainee_id, Address address ,DateTime date)
@@ -327,7 +328,7 @@ namespace BL
             dal.AddTester(tester);  
             
         }
-        void IBL.AddTester(string id, string name, string family_name, DateTime birth_date, gender my_gender, string phone, Address t_adress, int years_of_exprience, int number_of_tests, carType exp, bool[,] work_hours, int max_distance)
+        void IBL.AddTester(string id, string name, string family_name, DateTime birth_date, MyEnum.gender my_gender, string phone, Address t_adress, int years_of_exprience, int number_of_tests, MyEnum.carType exp, bool[,] work_hours, int max_distance)
         {
            
             
@@ -343,8 +344,7 @@ namespace BL
                     //Tester age can't be younger then min age!!!
                     throw new Exception("Tester cant't be younger then "+Configuration.Tester_MIN_AGE);
                 //valid birth date
-                if (phone.Length !=10)
-                    throw new Exception("Phone Number must contian  only 10 digits" );
+                
                 ValidAddress(t_adress);
                 if (years_of_exprience > (DateTime.Now.Year-birth_date.Year ) - 18)
                     throw new Exception("A tester can not be experienced more then " +((DateTime.Now.Year-birth_date.Year ) - 18) +" years");
@@ -371,24 +371,22 @@ namespace BL
             if (trainee.Id.Length !=9)
                 // ID must contain 9 dighits only
                 throw new Exception("ID must contain only 9 digits");
-            if (trainee.PhoneNumber.Length!=10)
-                throw new Exception("Phone Number must contian  only 10 digits");
+           
             if (trainee.BrithDate.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
                 throw new Exception("Trainee cant't be younger then " + Configuration.Trainee_MIN_AGE);
             ValidAddress(trainee.MyAddress);
             if (trainee.NumberOfLessons <= 0)
-                throw new Exception("Number of lessons must br bigger then 0 ");
+                throw new Exception("Number of lessons must be bigger then 0 ");
             dal.AddTrainee(trainee);
         }
-        void IBL.AddTrainee(string id, string name, string familyName, DateTime birthD, gender g, string phoneNum, Address address, carType type, gear my_gear, string school, string teacher_name, int numLessons)
+        void IBL.AddTrainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear, string school, string teacher_name, int numLessons)
         {
             Trainee temp;
            
                 if (id.Length < 9 || id.Length > 9)
                     // ID must contain 9 dighits only
                     throw new Exception("ID must contain only 9 digits");
-                if (phoneNum.Length < 10 || phoneNum.Length > 10)
-                    throw new Exception("Phone Number must contian  only 10 digits");
+               
                 if (birthD.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
                     throw new Exception("Trainee cant't be younger then " + Configuration.Trainee_MIN_AGE);
                     ValidAddress(address);
@@ -418,14 +416,10 @@ namespace BL
 
         void IBL.DeleteTrainee(string id)
         {
-            try
-            {
+            
                 dal.DeleteTrainee(id);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Data);
-            }
+            
+           
            
         }
         #endregion
@@ -465,8 +459,6 @@ namespace BL
                 //Tester age can't be younger then min age!!!
                 throw new Exception("Tester cant't be younger then " + Configuration.Tester_MIN_AGE);
             //valid birth date
-            if (tester.PhoneNumber.Length != 10)
-                throw new Exception("Phone Number must contian  only 10 digits");
             ValidAddress(tester.MyAddress);
             if (tester.YearsOfExperience > (DateTime.Now.Year - tester.BirthDate.Year) - 18)
                 throw new Exception("A tester can not be experienced more then " + ((DateTime.Now.Year - tester.BirthDate.Year) - 18) + " years");
@@ -491,9 +483,6 @@ namespace BL
                 // ID must contain 9 dighits only
                 throw new Exception("ID must contain only 9 digits");
             IfNonLetters(t.Id, " Trainee ID");
-            if (t.PhoneNumber.Length != 10 )
-                throw new Exception("Phone Number must contian  only 10 digits");
-            IfNonLetters(t.Id, " Trainee phone number");
             if (t.BrithDate.Year > DateTime.Now.Year - Configuration.Trainee_MIN_AGE)
                 throw new Exception("Trainee cant't be younger then " + Configuration.Tester_MIN_AGE);
             if (t.MyAddress.city == null)

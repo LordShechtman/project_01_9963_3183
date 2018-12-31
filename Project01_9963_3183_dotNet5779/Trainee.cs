@@ -12,18 +12,18 @@ namespace BE
         public string Id { get; set; }
         public string Name { get; set; }
         public string FamilyName { get; set; }
-        public gender MyGender { get; set; }
+        public MyEnum.gender MyGender { get; set; }
         public Address MyAddress { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime BrithDate { get; set; }
-        public carType Car { get; set; }
-        public gear MyGear { get; set; }
+        public MyEnum.carType Car { get; set; }
+        public MyEnum.gear MyGear { get; set; }
         public string School { get; set;}
         public string TeacherName { get; set; }
         public int NumberOfLessons { get; set; }
         #endregion
         //C-TOR
-        public Trainee(string id, string name, string familyName, DateTime birthD, gender g, string phoneNum, Address address,carType type,gear my_gear,string school,string teacher_name,int numLessons)
+        public Trainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear,string school,string teacher_name,int numLessons)
         {
             Id = id;
             Name = name;
