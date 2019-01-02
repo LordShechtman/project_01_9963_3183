@@ -21,10 +21,13 @@ namespace PLWPF
     public partial class TrinneWindow : Window
     {
         public IBL My_bl;
+        int ListIndex = 0;
         public TrinneWindow()
         {
             InitializeComponent();
             My_bl = BL.Factory_BL.getBL();
+            NextButton.Visibility = Visibility.Collapsed;
+            PreButton.Visibility = Visibility.Collapsed;
             grid1.DataContext = My_bl.GetAllTrainees(); ;
             brithDateDatePicker.DisplayDateEnd = DateTime.Now.AddYears(BE.Configuration.Trainee_MIN_AGE* -1);
             myGenderTextBox.DataContext = Enum.GetNames(typeof(BE.MyEnum.gender)).ToList();
@@ -89,7 +92,7 @@ namespace PLWPF
                     if(PhoneNumberPrirtyComboBox.Text=="")
                         throw new Exception("please enter your phone number Perfix!!");
                     if (phoneNumberTextBox.Text.Length < 7)
-                        throw new Exception("The phone number you enterd is too short!!");
+                        throw new Exception("The phone number you entered is too short!!");
                     if (carTextBox.Text=="")
                         throw new Exception("please enter your car type lisence request!!");
                     if(numberOfLessonsTextBox.Text=="")
@@ -169,7 +172,10 @@ namespace PLWPF
         #region Radio Buttons event
         private void AddRbutton_Checked(object sender, RoutedEventArgs e)
         {
+            SearchGrid.Visibility = Visibility.Hidden;
             idTextBox.IsEnabled = true;
+            NextButton.Visibility = Visibility.Collapsed;
+            PreButton.Visibility = Visibility.Collapsed;
             DeleteRButton.IsChecked = false;
             UpdateRButton.IsChecked = false;
             nameTextBox.IsEnabled = true;
@@ -182,10 +188,46 @@ namespace PLWPF
             numberOfLessonsTextBox.IsEnabled = true;
             schoolTextBox.IsEnabled = true;
             teacherNameTextBox.IsEnabled = true;
+            idTextBox.Text = null;
+            nameTextBox.Text = null;
+            familyNameTextBox.Text = null;
+            brithDateDatePicker.Text = null;
+            phoneNumberTextBox.Text = null;
+            PhoneNumberPrirtyComboBox.Text = null;
+            CityTB.Text = null;
+
+            StreetNameTB.Text = null;
+            HouseNumberTB.Text = null;
+            myGearTextBox.Text = null;
+            myGenderTextBox.Text = null;
+            schoolTextBox.Text = null;
+            teacherNameTextBox.Text = null;
+            numberOfLessonsTextBox.Text = null;
+            carTextBox.Text = null;
+
+
+
 
         }
         private void DeleteRButton_Checked(object sender, RoutedEventArgs e)
         {
+            if (My_bl.GetAllTrainees().Any())
+            {
+                SearchGrid.Visibility = Visibility.Visible;
+                ListIndex = 0;
+                grid1.DataContext = My_bl.GetAllTrainees()[0];
+                StreetNameTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.streetName;
+                HouseNumberTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.houseNumber.ToString();
+                myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
+                myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
+                carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
+                CityTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.city;
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                phoneNumberTextBox.Text= phoneNumberTextBox.Text.
+                    Remove(0, My_bl.GetAllTrainees()[ListIndex].getPhonePrefix().Count());
+            }
+            NextButton.Visibility = Visibility.Visible;
+            PreButton.Visibility = Visibility.Visible;
             idTextBox.IsEnabled = true;
             AddRbutton.IsChecked = false;
             UpdateRButton.IsChecked = false;
@@ -203,6 +245,23 @@ namespace PLWPF
 
         private void UpdateRButton_Checked(object sender, RoutedEventArgs e)
         {
+            NextButton.Visibility = Visibility.Visible;
+            PreButton.Visibility = Visibility.Visible;
+            
+            if (My_bl.GetAllTrainees().Any())
+            {
+                ListIndex = 0;
+                grid1.DataContext = My_bl.GetAllTrainees()[0];
+                StreetNameTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.streetName;
+                HouseNumberTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.houseNumber.ToString();
+                CityTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.city;
+                myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
+                myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
+                carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                phoneNumberTextBox.Text = phoneNumberTextBox.Text.
+                    Remove(0, My_bl.GetAllTrainees()[ListIndex].getPhonePrefix().Count());
+            }
             AddRbutton.IsChecked = false;
             DeleteRButton.IsChecked = false;
             idTextBox.IsEnabled = false;
@@ -217,7 +276,44 @@ namespace PLWPF
             schoolTextBox.IsEnabled = true;
             teacherNameTextBox.IsEnabled = true;
         }
+
         #endregion
 
+        private void PreButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListIndex > 0)
+            {
+                ListIndex--;
+                grid1.DataContext = My_bl.GetAllTrainees()[ListIndex];
+                StreetNameTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.streetName;
+                HouseNumberTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.houseNumber.ToString();
+                CityTB.Text= My_bl.GetAllTrainees()[ListIndex].MyAddress.city;
+                myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
+                myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
+                carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                phoneNumberTextBox.Text = phoneNumberTextBox.Text.
+                    Remove(0, My_bl.GetAllTrainees()[ListIndex].getPhonePrefix().Count());
+
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListIndex < My_bl.GetAllTrainees().Count() - 1 && My_bl.GetAllTrainees().Any())
+            {
+                ListIndex++;
+                grid1.DataContext = My_bl.GetAllTrainees()[ListIndex];
+                StreetNameTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.streetName;
+                HouseNumberTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.houseNumber.ToString();
+                CityTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.city;
+                myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
+                myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
+                carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                phoneNumberTextBox.Text = phoneNumberTextBox.Text.
+                    Remove(0, My_bl.GetAllTrainees()[ListIndex].getPhonePrefix().Count());
+            }
+        }
     }
 }

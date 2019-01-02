@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" FontFamily="Tw Cen MT Condensed Extra Bold">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="229*"/>
@@ -19,9 +19,10 @@
             <RowDefinition Height="251*"/>
             <RowDefinition Height="169*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="TesterButton" Content="Testers" Grid.Column="5" HorizontalAlignment="Left" Height="56" Margin="43,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4" Click="TesterButton_Click"/>
-        <Button x:Name="TrineeButton" Content="Trinees" Grid.Column="1" HorizontalAlignment="Left" Height="56" Margin="86,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4" Click="TrineeButton_Click"/>
-        <Button x:Name="TestButton" Content="Tests" HorizontalAlignment="Left" Height="56" Margin="36,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141" Background="#FFBCCDD4" Click="TestButton_Click"/>
+        <Button x:Name="TesterButton" Content="Testers" Grid.Column="5" HorizontalAlignment="Left" Height="89" Margin="42.8,41.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Background="#FFBCCDD4" Click="TesterButton_Click" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="36"/>
+        <Button x:Name="TrineeButton" Content="Trinees" Grid.Column="1" HorizontalAlignment="Left" Height="89" Margin="59.4,41.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="219" Background="#FFBCCDD4" Click="TrineeButton_Click" FontSize="36"/>
+        <Button x:Name="TestButton" Content="Tests" HorizontalAlignment="Left" Height="89" Margin="36,41.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="175" Background="#FFBCCDD4" Click="TestButton_Click" FontSize="36"/>
+        <Button x:Name="ShowTestersButton" Content="Show Testers " Grid.Column="1" HorizontalAlignment="Left" Margin="317.4,191,0,0" VerticalAlignment="Top" Width="217" Height="60" FontSize="24" Grid.ColumnSpan="5"/>
 
     </Grid>
 </Window>

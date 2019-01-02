@@ -29,5 +29,11 @@ namespace PLWPF
             AddTestWindow addTestWindow = new AddTestWindow();
             addTestWindow.ShowDialog();
         }
+
+        private void UpdateTestBoutton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateTest updateTest = new UpdateTest();
+            updateTest.ShowDialog();
+        }
     }
 }

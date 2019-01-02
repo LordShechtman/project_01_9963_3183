@@ -38,6 +38,21 @@ namespace BE
             TeacherName = teacher_name;
             NumberOfLessons = numLessons;
         }
+        public string getPhonePrefix()
+        {
+            string Prefix="";
+            foreach(char ch in PhoneNumber )
+            {
+                if (ch == '-')
+                {
+                    Prefix += ch;
+                    break;
+                }
+                   
+                Prefix+=ch;
+            }
+            return Prefix;
+        }
         public string showAdress(Address a)
         {
             return a.streetName + " " + a.houseNumber + " " + a.city+"\n";

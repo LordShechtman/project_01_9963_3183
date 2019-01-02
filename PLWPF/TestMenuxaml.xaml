@@ -8,7 +8,7 @@
         Title="TestMenuxaml" Height="450" Width="800">
     <Grid>
         <Button x:Name="AddTestBoutton" Content="AddTest" HorizontalAlignment="Left" Height="74" Margin="57,251,0,0" VerticalAlignment="Top" Width="230" Click="AddTestBoutton_Click"/>
-        <Button x:Name="UpdateTestBoutton" Content="Update Test" HorizontalAlignment="Left" Margin="421,251,0,0" VerticalAlignment="Top" Width="267" Height="74"/>
+        <Button x:Name="UpdateTestBoutton" Content="Update Test" HorizontalAlignment="Left" Margin="421,251,0,0" VerticalAlignment="Top" Width="267" Height="74" Click="UpdateTestBoutton_Click"/>
 
     </Grid>
 </Window>
