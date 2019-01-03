@@ -19,9 +19,14 @@ namespace PLWPF
     /// </summary>
     public partial class AddTestWindow : Window
     {
+        public IBL MyBL;
         public AddTestWindow()
         {
             InitializeComponent();
+            MyBL = BL.Factory_BL.getBL();
+            testDateDatePicker.DisplayDateEnd = DateTime.Now.AddDays(31);
+            testDateDatePicker.DisplayDateStart = DateTime.Now;
+
 
         }
 
@@ -35,13 +40,43 @@ namespace PLWPF
 
         private void HouseNumberTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-         
-           e.Handled =((char)e.Key<'0' && (char)e.Key>'9');
+
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
+
+        private void traineeIdTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+              || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
+
+        private void CityTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private void HouseNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-          
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BE.Address my_address;
+                my_address.city = CityTextBox.Text;
+                my_address.streetName = StreetNameTextBox.Text;
+                my_address.houseNumber = int.Parse(HouseNumberTextBox.Text);
+                if (traineeIdTextBox.Text.Length < 8)
+                    throw new Exception("The ID you have entered is too short");
+                MyBL.AddTest(traineeIdTextBox.Text,my_address,testDateDatePicker.DisplayDate);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR");
+            }
         }
     }
 }
