@@ -74,17 +74,17 @@
         <Grid x:Name="SearchGrid" Margin="588,18,72.6,310">
             <TextBox x:Name="SearchTextBox" MaxLength="9" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyDown="SearchTextBox_KeyDown"/>
             <Label x:Name="SearchLabel" Content="Enter  tester ID" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button x:Name="SearchButton" Content="search" Margin="24,59,21,0" VerticalAlignment="Top"/>
+            <Button x:Name="SearchButton" Content="search" Margin="24,59,21,0" VerticalAlignment="Top" Click="SearchButton_Click"/>
         </Grid>
-        <Button x:Name="NextButton" Content="Next>" HorizontalAlignment="Left" Margin="361,378,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="PreButton" Content="&lt;Back" HorizontalAlignment="Left" Margin="281,378,0,0" VerticalAlignment="Top" Width="75"/>
-        <Grid x:Name="AddressGrid" Margin="0,247,596.6,90">
-            <TextBox x:Name="StreetNameTB" HorizontalAlignment="Left" Height="23" Margin="77,4,0,0" TextWrapping="Wrap" Text="Street" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="HoustNumTB" HorizontalAlignment="Left" Height="23" Margin="77,32,0,0" TextWrapping="Wrap" Text="num" MaxLength="3" VerticalAlignment="Top" Width="38"/>
-            <TextBox x:Name="CityTB" HorizontalAlignment="Left" Height="23" Margin="77,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="NextButton" Content="Next>" HorizontalAlignment="Left" Margin="361,378,0,0" VerticalAlignment="Top" Width="75" Click="NextButton_Click"/>
+        <Button x:Name="PreButton" Content="&lt;Back" HorizontalAlignment="Left" Margin="281,378,0,0" VerticalAlignment="Top" Width="75" Click="PreButton_Click"/>
+        <Grid x:Name="AddressGrid" Margin="0,247,589.6,82">
+            <TextBox x:Name="StreetNameTB" HorizontalAlignment="Left" Height="23" Margin="77,4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
+            <TextBox x:Name="HoustNumTB" HorizontalAlignment="Left" Height="23" Margin="77,32,0,0" TextWrapping="Wrap" Text="" MaxLength="3" VerticalAlignment="Top" Width="38" KeyDown="HoustNumTB_KeyDown"/>
+            <TextBox x:Name="CityTB" HorizontalAlignment="Left" Height="23" Margin="77,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
             <Label x:Name="addreSTLB" Content="Street name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="addreHNLB" Content="number" HorizontalAlignment="Left" Margin="19,29,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="addreCTLB" Content="number" HorizontalAlignment="Left" Margin="19,56,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="addreCTLB" Content="City" HorizontalAlignment="Left" Margin="19,56,0,0" VerticalAlignment="Top" Height="27"/>
         </Grid>
         <Label Content="Address" HorizontalAlignment="Left" Margin="16,216,0,0" VerticalAlignment="Top" Width="55" FontWeight="Bold"/>
         <Label x:Name="PasswordLB" Content="Password" HorizontalAlignment="Left" Margin="251,338,0,0" VerticalAlignment="Top"/>

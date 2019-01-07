@@ -175,7 +175,34 @@ namespace PLWPF
             
             myGenderComboBox.ItemsSource= Enum.GetValues(typeof(BE.MyEnum.gender));
         }
+        public string getPhoneprefix()
+        {
+            string prefix = "";
+            foreach(char ch in bL.GetAllTesters()[ListIndex].PhoneNumber)
+            {
+                prefix += ch;
+                if (ch == '-')
+                    break;
+            }
+            return prefix;
+        }
+        public void getPhonesuffix()
+        {
+            string suffix=bL.GetAllTesters()[ListIndex].PhoneNumber;
+            if (suffix[3] == '-')
+            {
+                for (int i = 4; i < suffix.Length; i++)
+                    phoneNumberTextBox.Text += suffix[i];
+            }
+            else
+            {
+                for (int i = 3; i < suffix.Length; i++)
+                    phoneNumberTextBox.Text += suffix[i];
+            }
 
+            
+        }
+        //TODO:USE PRFIX AND SUFFIX
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -185,16 +212,8 @@ namespace PLWPF
 
         private void AddRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            FinishButton.Content = "Save";
-            grid1.IsEnabled = true;
-            WorkHoursUC.IsEnabled = true;
-            AddressGrid.IsEnabled = true;
-            phoneNumerCombobox.IsEnabled = true;
-            clearFileds();
-            SearchGrid.Visibility = Visibility.Hidden;
-            NextButton.Visibility = Visibility.Hidden;
-            PreButton.Visibility = Visibility.Hidden;
-
+           
+            
 
 
         }
@@ -202,8 +221,15 @@ namespace PLWPF
         private void DeleteBoutton_Checked(object sender, RoutedEventArgs e)
         {
             ListIndex = 0;
-            if(bL.GetAllTesters().Any())
-            grid1.DataContext = bL.GetAllTesters()[0];
+            if (bL.GetAllTesters().Any())
+            {
+                grid1.DataContext = bL.GetAllTesters()[0];
+                ShowMatrixbyIndex();
+                CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
+                HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
+                StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+
+            }
             SearchGrid.Visibility = Visibility.Visible;
             NextButton.Visibility = Visibility.Visible;
             PreButton.Visibility = Visibility.Visible;
@@ -222,13 +248,29 @@ namespace PLWPF
             maxDistanceTextBox.IsEnabled = false;
             maxTestsPerWeekTextBox.IsEnabled = false;
             yearsOfExperienceTextBox.IsEnabled = false;
+            FinishButton.Content = "Delete";
         }
         private void UpdateButton_Checked(object sender, RoutedEventArgs e)
         {
+            grid1.IsEnabled = true;
+            WorkHoursUC.IsEnabled = true;
+            AddressGrid.IsEnabled = true;
             SearchGrid.Visibility = Visibility.Visible;
+            NextButton.Visibility = Visibility.Visible;
+            PreButton.Visibility = Visibility.Visible;
+            if (bL.GetAllTesters().Any())
+            {
+                grid1.DataContext = bL.GetAllTesters()[0];
+                ShowMatrixbyIndex();
+                CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
+                HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
+                StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+
+            }
             DeleteBoutton.IsChecked = false;
             AddBoutton.IsChecked = false;
             FinishButton.Content = "Update \n Changes";
+            idTextBox.IsEnabled = false;
             nameTextBox.IsEnabled = true;
             familyNameTextBox.IsEnabled = true;
             phoneNumberTextBox.IsEnabled = true;
@@ -240,23 +282,21 @@ namespace PLWPF
             maxTestsPerWeekTextBox.IsEnabled = true;
             yearsOfExperienceTextBox.IsEnabled = true;
         }
-
+        
         private void AddBoutton_Checked(object sender, RoutedEventArgs e)
         {
-            FinishButton.Content = "Delete";
             DeleteBoutton.IsChecked = false;
-            SearchGrid.Visibility = Visibility.Hidden;
             UpdateButton.IsChecked = false;
-            nameTextBox.IsEnabled = true;
-            familyNameTextBox.IsEnabled = true;
+            grid1.IsEnabled = true;
+            WorkHoursUC.IsEnabled = true;
+            AddressGrid.IsEnabled = true;
             phoneNumerCombobox.IsEnabled = true;
-            phoneNumberTextBox.IsEnabled = true;
-            birthDateDatePicker.IsEnabled = true;
-            myGenderComboBox.IsEnabled = true;
-            expiranceCarComboBox.IsEnabled = true;
-            maxDistanceTextBox.IsEnabled = true;
-            maxTestsPerWeekTextBox.IsEnabled = true;
-            yearsOfExperienceTextBox.IsEnabled = true;
+            grid1.DataContext = null;
+            clearFileds();
+            SearchGrid.Visibility = Visibility.Hidden;
+            NextButton.Visibility = Visibility.Hidden;
+            PreButton.Visibility = Visibility.Hidden;
+            FinishButton.Content = "Save";
         }
 
         #region Numeric input
@@ -289,8 +329,12 @@ namespace PLWPF
             e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
                || (e.Key >= Key.D0 && e.Key <= Key.D9));
         }
+        private void HoustNumTB_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+             || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
 
-       
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
@@ -399,5 +443,52 @@ namespace PLWPF
                 || (e.Key >= Key.D0 && e.Key <= Key.D9));
         }
         #endregion
+
+        #region Search Bouttons Click events
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(ListIndex<bL.GetAllTesters().Count-1)
+            {
+                ListIndex++;
+                grid1.DataContext = bL.GetAllTesters()[ListIndex];
+                CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
+                HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
+               StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+                ShowMatrixbyIndex();
+            }
+        }
+
+        private void PreButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListIndex >0)
+            {
+                ListIndex--;
+                grid1.DataContext = bL.GetAllTesters()[ListIndex];
+                CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
+                HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
+                StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+                ShowMatrixbyIndex();
+            }
+
+        }
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Tester isFound=bL.GetAllTesters().Find(x=>x.Id==SearchTextBox.Text);
+            int FindIndex = bL.GetAllTesters().IndexOf(isFound);
+            if (FindIndex!=-1)
+            {
+                ListIndex = FindIndex;
+                grid1.DataContext = bL.GetAllTesters()[0];
+                ShowMatrixbyIndex();
+                CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
+                HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
+                StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+            }
+        }
+
+        #endregion
+
+        
     }
+
 }

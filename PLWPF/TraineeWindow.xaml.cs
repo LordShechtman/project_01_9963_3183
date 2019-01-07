@@ -195,7 +195,7 @@ namespace PLWPF
             }
 
         }
-        #region Radio Buttons event
+        #region Radio Buttonschecked event
         private void AddRbutton_Checked(object sender, RoutedEventArgs e)
         {
             ListIndex = 0;
