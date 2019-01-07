@@ -9,22 +9,29 @@
     <Grid>
         <ComboBox x:Name="TesterIDCombobox"  HorizontalAlignment="Left" Margin="20,86,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="please Enter your ID " HorizontalAlignment="Left" Margin="20,46,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="SingleNoteTB" HorizontalAlignment="Left" Height="76" Margin="579,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
-        <Button Content="Add Note" HorizontalAlignment="Left" Margin="579,218,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="SingleNoteTB" HorizontalAlignment="Left" Height="76" Margin="579,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184"/>
+        <Button Content="Add Note" HorizontalAlignment="Left" Margin="579,218,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Grid x:Name="AddNoteGrid" HorizontalAlignment="Left" Height="131" Margin="574,106,0,0" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="EnterNoteslabel" Content="Enter a note" HorizontalAlignment="Left" Margin="579,106,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="SaveButton" Content="SAVE" HorizontalAlignment="Left" Margin="275,351,0,0" VerticalAlignment="Top" Width="151" Height="59" FontFamily="Segoe UI Black" Foreground="#FF2281C3"/>
-        <local:TestParmeterUC HorizontalAlignment="Left" Height="95" Margin="330,91,0,0" VerticalAlignment="Top" Width="212"/>
-        <local:TestParmeterUC HorizontalAlignment="Left" Height="95" Margin="330,117,0,0" VerticalAlignment="Top" Width="212"/>
-        <local:TestParmeterUC HorizontalAlignment="Left" Height="95" Margin="330,150,0,0" VerticalAlignment="Top" Width="212"/>
-        <local:TestParmeterUC HorizontalAlignment="Left" Height="95" Margin="330,217,0,0" VerticalAlignment="Top" Width="212"/>
-        <local:TestParmeterUC HorizontalAlignment="Left" Height="95" Margin="330,186,0,0" VerticalAlignment="Top" Width="212"/>
-        <local:TestParmeterUC HorizontalAlignment="Left" Height="95" Margin="330,245,0,0" VerticalAlignment="Top" Width="212"/>
+        <Button x:Name="SaveButton" Content="SAVE" HorizontalAlignment="Left" Margin="271,286,0,0" VerticalAlignment="Top" Width="151" Height="59" FontFamily="Segoe UI Black" Foreground="#FF2281C3" Click="SaveButton_Click"/>
+        <local:TestParmeterUC x:Name="KeepDistanceUC" HorizontalAlignment="Left" Height="95" Margin="330,91,0,0" VerticalAlignment="Top" Width="212"/>
+        <local:TestParmeterUC x:Name="ReverseParkUC" HorizontalAlignment="Left" Height="95" Margin="330,117,0,0" VerticalAlignment="Top" Width="212"/>
+        <local:TestParmeterUC x:Name="MirorsUC" HorizontalAlignment="Left" Height="95" Margin="330,150,0,0" VerticalAlignment="Top" Width="212"/>
+        <local:TestParmeterUC x:Name="WheelHandleUC" HorizontalAlignment="Left" Height="95" Margin="330,217,0,0" VerticalAlignment="Top" Width="212"/>
+        <local:TestParmeterUC x:Name="SignalsUC" HorizontalAlignment="Left" Height="95" Margin="330,186,0,0" VerticalAlignment="Top" Width="212"/>
+        <local:TestParmeterUC x:Name="PriortyRulesUC" HorizontalAlignment="Left" Height="95" Margin="330,245,0,0" VerticalAlignment="Top" Width="212"/>
         <Label x:Name="KDLabel" Content="Keep Distance" HorizontalAlignment="Left" Margin="207,85,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RPLabel" Content="Reverse Parking" HorizontalAlignment="Left" Margin="207,111,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RPLabel_Copy" Content="Looking in the Mirors" HorizontalAlignment="Left" Margin="207,144,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RPLabel_Copy1" Content="Signals" HorizontalAlignment="Left" Margin="207,180,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RPLabel_Copy2" Content="Wheel handling" HorizontalAlignment="Left" Margin="207,215,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RPLabel_Copy3" Content="Priority Rules" HorizontalAlignment="Left" Margin="207,241,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MyNotesTB" HorizontalAlignment="Left" Height="149" Margin="10,184,0,0" TextWrapping="Wrap" Text="Notes:" VerticalAlignment="Top" Width="168"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="20,128,0,0" VerticalAlignment="Top" Width="106" Height="18"/>
+        <Button x:Name="OkButton" Content="OK" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top" Width="75" Click="OkButton_Click"/>
+        <Label x:Name="passwordLB" Content="Password" HorizontalAlignment="Left" Margin="20,106,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="StudentIDTB" HorizontalAlignment="Left" Height="23" Margin="287,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Trainee ID" HorizontalAlignment="Left" Margin="219,46,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="studentDetails" Content="Trainee details" HorizontalAlignment="Left" Margin="425,46,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

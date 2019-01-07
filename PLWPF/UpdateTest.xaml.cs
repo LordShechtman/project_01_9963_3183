@@ -20,16 +20,76 @@ namespace PLWPF
     /// </summary>
     public partial class UpdateTest : Window
     {
+        public int ListIndex = 0;
+
         IBL My_bl;
+       public List<string> myTestNotes = new List<string>();
+       public List<bool> allMyParameters = new List<bool>();
         public UpdateTest()
         {
             InitializeComponent();
             My_bl = Factory_BL.getBL();
             foreach (var v in My_bl.GetAllTesters())
                 TesterIDCombobox.Items.Add(v.Id + " " + v.Name + " " + v.FamilyName);
-           
+            for(int i = 0; i < 6; i++) { allMyParameters.Add(false); }
+            PasswordBox.IsEnabled = false;
+            OkButton.IsEnabled = false;
+            
         }
 
-        
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if ((KeepDistanceUC.PassedCB.IsChecked == false && KeepDistanceUC.FailCB.IsChecked == false)
+                   || (ReverseParkUC.PassedCB.IsChecked == false && ReverseParkUC.FailCB.IsChecked == false) ||
+                   (MirorsUC.PassedCB.IsChecked==false && MirorsUC.FailCB.IsChecked == false) ||
+                   (SignalsUC.PassedCB.IsChecked==false && SignalsUC.FailCB.IsChecked==false) ||
+                  ( WheelHandleUC.PassedCB.IsChecked==false && WheelHandleUC.FailCB.IsChecked == false) ||
+                        ( PriortyRulesUC.PassedCB.IsChecked == false && PriortyRulesUC.FailCB.IsChecked == false))
+                    throw new Exception("One or more test parmeters was not marked ");
+                if (WheelHandleUC.PassedCB.IsChecked == true)
+                    allMyParameters.Insert((int)MyEnum.testsParameters.wheelhandling, true);
+                
+                if (ReverseParkUC.PassedCB.IsChecked == true)
+                    allMyParameters.Insert((int)MyEnum.testsParameters.reverseParking, true);
+                if (PriortyRulesUC.PassedCB.IsChecked == true)
+                    allMyParameters.Insert((int)MyEnum.testsParameters.priorityrules, true);
+                if (MirorsUC.PassedCB.IsChecked == true)
+                    allMyParameters.Insert((int)MyEnum.testsParameters.mirors, true);
+                if (SignalsUC.PassedCB.IsChecked == true)
+                    allMyParameters.Insert((int)MyEnum.testsParameters.signals, true);
+                if (KeepDistanceUC.PassedCB.IsChecked == true)
+                    allMyParameters.Insert((int)MyEnum.testsParameters.keepDistance, true);
+               
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR");
+            }
+        }
+
+        private void TesterIDCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PasswordBox.IsEnabled = true;
+            OkButton.IsEnabled = true;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MyNotesTB.Text +="\n" + SingleNoteTB.Text;
+            MessageBox.Show("Note added");
+            myTestNotes.Add(SingleNoteTB.Text);
+            SingleNoteTB.Text = null;
+
+
+        }
     }
 }
