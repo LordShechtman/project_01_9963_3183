@@ -11,5 +11,9 @@
         <Label Content="please Enter your ID " HorizontalAlignment="Left" Margin="20,46,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="passedCheckbox1" Content="Passed" HorizontalAlignment="Left" Margin="317,86,0,0" VerticalAlignment="Top"/>
         <Grid HorizontalAlignment="Left" Height="410" Margin="206,10,0,0" VerticalAlignment="Top" Width="368"/>
+        <TextBox x:Name="SingleNoteTB" HorizontalAlignment="Left" Height="76" Margin="579,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
+        <Button Content="Add Note" HorizontalAlignment="Left" Margin="579,218,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid x:Name="AddNoteGrid" HorizontalAlignment="Left" Height="131" Margin="574,106,0,0" VerticalAlignment="Top" Width="189"/>
+        <Label x:Name="EnterNoteslabel" Content="Enter a note" HorizontalAlignment="Left" Margin="579,106,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

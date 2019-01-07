@@ -99,7 +99,7 @@ namespace PLWPF
             {
                 BE.Address Myaddress;
                 Predicate<Trainee> isfound=(Trainee x)=>{ return x.Id == idTextBox.Text; };
-                if (AddRbutton.IsChecked == true)
+                if (AddRbutton.IsChecked == true )
                 {
                     if (idTextBox.Text.Length < 8)
                         throw new Exception("Id Must contin at least 8 dighits!!");
@@ -136,7 +136,7 @@ namespace PLWPF
                         ,(MyEnum.gear)Enum.Parse(typeof(MyEnum.gear) ,myGearTextBox.Text), schoolTextBox.Text,
                         teacherNameTextBox.Text,int.Parse(numberOfLessonsTextBox.Text));
                     if (My_bl.GetAllTrainees().Find(isfound) != null)
-                        MessageBox.Show("The Trainee " + idTextBox.Text + "Was added to the data base");
+                        MessageBox.Show("The Trainee " + idTextBox.Text + "\n added to the data base");
                     
                     
                 }
@@ -145,7 +145,7 @@ namespace PLWPF
 
                     My_bl.DeleteTrainee(idTextBox.Text);
                     if (My_bl.GetAllTrainees().Find(isfound) == null)
-                        MessageBox.Show("The Trainee" + idTextBox.Text + "Was removed from the data base");
+                        MessageBox.Show("The Trainee " + idTextBox.Text + " Was removed from the data base");
                 }
                 if(UpdateRButton.IsChecked==true)
                 {
@@ -198,6 +198,9 @@ namespace PLWPF
         #region Radio Buttons event
         private void AddRbutton_Checked(object sender, RoutedEventArgs e)
         {
+            ListIndex = 0;
+            grid1.DataContext = null;
+            FinshButton.Content = "Save";
             SearchGrid.Visibility = Visibility.Hidden;
             idTextBox.IsEnabled = true;
             NextButton.Visibility = Visibility.Collapsed;
@@ -209,27 +212,12 @@ namespace PLWPF
             brithDateDatePicker.IsEnabled = true;
             carTextBox.IsEnabled = true;
             phoneNumberTextBox.IsEnabled = true;
-            myGearTextBox.IsEnabled = true;
+            PhoneNumberPrirtyComboBox.IsEnabled = true;
             myGearTextBox.IsEnabled = true;
             numberOfLessonsTextBox.IsEnabled = true;
             schoolTextBox.IsEnabled = true;
             teacherNameTextBox.IsEnabled = true;
-            idTextBox.Text = null;
-            nameTextBox.Text = null;
-            familyNameTextBox.Text = null;
-            brithDateDatePicker.Text = null;
-            phoneNumberTextBox.Text = null;
-            PhoneNumberPrirtyComboBox.Text = null;
-            CityTB.Text = null;
-
-            StreetNameTB.Text = null;
-            HouseNumberTB.Text = null;
-            myGearTextBox.Text = null;
-            myGenderTextBox.Text = null;
-            schoolTextBox.Text = null;
-            teacherNameTextBox.Text = null;
-            numberOfLessonsTextBox.Text = null;
-            carTextBox.Text = null;
+            clearFileds();
 
 
 
@@ -237,6 +225,7 @@ namespace PLWPF
         }
         private void DeleteRButton_Checked(object sender, RoutedEventArgs e)
         {
+            FinshButton.Content = "Delete";
             AddRbutton.IsChecked = false;
             UpdateRButton.IsChecked = false;
             SearchGrid.Visibility = Visibility.Visible;
@@ -264,12 +253,12 @@ namespace PLWPF
                 }
                 else
                 {
-                    for (int i = 4; i < suffix.Length; i++)
+                    for (int i = 3; i < suffix.Length; i++)
                         phoneNumberTextBox.Text += suffix[i];
                 }
               
 
-                idTextBox.IsEnabled = true;
+                idTextBox.IsEnabled = false;
                 AddRbutton.IsChecked = false;
                 UpdateRButton.IsChecked = false;
                 nameTextBox.IsEnabled = false;
@@ -277,6 +266,7 @@ namespace PLWPF
                 brithDateDatePicker.IsEnabled = false;
                 carTextBox.IsEnabled = false;
                 phoneNumberTextBox.IsEnabled = false;
+                PhoneNumberPrirtyComboBox.IsEnabled = false;
                 myGearTextBox.IsEnabled = false;
                 myGearTextBox.IsEnabled = false;
                 numberOfLessonsTextBox.IsEnabled = false;
@@ -287,6 +277,7 @@ namespace PLWPF
 
         private void UpdateRButton_Checked(object sender, RoutedEventArgs e)
         {
+            FinshButton.Content = "Save \n changes";
             AddRbutton.IsChecked = false;
             DeleteRButton.IsChecked = false;
             NextButton.Visibility = Visibility.Visible;
@@ -295,7 +286,8 @@ namespace PLWPF
             if (My_bl.GetAllTrainees().Any())
             {
                 ListIndex = 0;
-                grid1.DataContext = My_bl.GetAllTrainees()[0];
+                
+                grid1.DataContext = My_bl.GetAllTrainees()[ListIndex];
                 StreetNameTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.streetName;
                 HouseNumberTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.houseNumber.ToString();
                 CityTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.city;
@@ -312,7 +304,7 @@ namespace PLWPF
                 }
                 else
                 {
-                    for (int i = 4; i < suffix.Length; i++)
+                    for (int i = 3; i < suffix.Length; i++)
                         phoneNumberTextBox.Text += suffix[i];
                 }
 
@@ -356,7 +348,7 @@ namespace PLWPF
                 }
                 else
                 {
-                    for (int i = 4; i < suffix.Length; i++)
+                    for (int i = 3; i < suffix.Length; i++)
                         phoneNumberTextBox.Text += suffix[i];
                 }
 
@@ -385,7 +377,7 @@ namespace PLWPF
                 }
                 else
                 {
-                    for (int i = 4; i < suffix.Length; i++)
+                    for (int i = 3; i < suffix.Length; i++)
                         phoneNumberTextBox.Text += suffix[i];
                 }
             }
@@ -429,7 +421,7 @@ namespace PLWPF
                 }
                 else
                 {
-                    for (int i = 4; i < suffix.Length; i++)
+                    for (int i = 3; i < suffix.Length; i++)
                         phoneNumberTextBox.Text += suffix[i];
                 }
 

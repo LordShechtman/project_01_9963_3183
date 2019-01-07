@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for WorkHoursUserControl.xaml
+    /// Interaction logic for TesterWorkHoursUserControl.xaml
     /// </summary>
-    public partial class WorkHoursUserControl : UserControl
+    public partial class TesterWorkHoursUserControl : UserControl
     {
-        public WorkHoursUserControl()
+        public TesterWorkHoursUserControl()
         {
             InitializeComponent();
-            
         }
     }
 }

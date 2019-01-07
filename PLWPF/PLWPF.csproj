@@ -61,6 +61,9 @@
     <Compile Include="TesterWindow.xaml.cs">
       <DependentUpon>TesterWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TesterWorkHoursUserControl.xaml.cs">
+      <DependentUpon>TesterWorkHoursUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestMenuxaml.xaml.cs">
       <DependentUpon>TestMenuxaml.xaml</DependentUpon>
     </Compile>
@@ -69,9 +72,6 @@
     </Compile>
     <Compile Include="UpdateTest.xaml.cs">
       <DependentUpon>UpdateTest.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WorkHoursUserControl.xaml.cs">
-      <DependentUpon>WorkHoursUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="AddTestWindow.xaml">
       <SubType>Designer</SubType>
@@ -93,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TesterWorkHoursUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestMenuxaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,10 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateTest.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WorkHoursUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

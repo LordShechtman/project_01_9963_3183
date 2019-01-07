@@ -21,10 +21,149 @@ namespace PLWPF
     public partial class TesterWindow : Window
     {
         IBL bL;
-        
+        int ListIndex = 0;
         public bool[,] MyworkHours;
+        /// <summary>
+        /// Set the boolen matrix of Tester weekly work hours
+        /// We use this method in the project!!
+        /// </summary>
+        public void setHoursMatrix()
+        {
+            
+            MyworkHours = new bool[5, 6];
+            //Sunday
+            MyworkHours[0, 0] =(bool) WorkHoursUC.cb_sun_9.IsChecked;
+            MyworkHours[0,1]= (bool)WorkHoursUC.cb_sun_10.IsChecked;
+            MyworkHours[0, 2] = (bool)WorkHoursUC.cb_sun_11.IsChecked;
+            MyworkHours[0, 3] = (bool)WorkHoursUC.cb_sun_12.IsChecked;
+            MyworkHours[0, 4] = (bool)WorkHoursUC.cb_sun_13.IsChecked;
+            MyworkHours[0, 5] = (bool)WorkHoursUC.cb_sun_14.IsChecked;
+            //Monday
+            MyworkHours[1, 0] = (bool)WorkHoursUC.cb_mon_9.IsChecked;
+            MyworkHours[1, 1] = (bool)WorkHoursUC.cb_mon_10.IsChecked;
+            MyworkHours[1, 2] = (bool)WorkHoursUC.cb_mon_11.IsChecked;
+            MyworkHours[1, 3] = (bool)WorkHoursUC.cb_mon_12.IsChecked;
+            MyworkHours[1, 4] = (bool)WorkHoursUC.cb_mon_13.IsChecked;
+            MyworkHours[1, 5] = (bool)WorkHoursUC.cb_mon_14.IsChecked;
+            //TUE
+            MyworkHours[2, 0] = (bool)WorkHoursUC.cb_tue_9.IsChecked;
+            MyworkHours[2, 1] = (bool)WorkHoursUC.cb_tue_10.IsChecked;
+            MyworkHours[2, 2] = (bool)WorkHoursUC.cb_tue_11.IsChecked;
+            MyworkHours[2, 3] = (bool)WorkHoursUC.cb_tue_12.IsChecked;
+            MyworkHours[2, 4] = (bool)WorkHoursUC.cb_tue_13.IsChecked;
+            MyworkHours[2, 5] = (bool)WorkHoursUC.cb_tue_14.IsChecked;
+            //Wed
+            MyworkHours[3, 0] = (bool)WorkHoursUC.cb_wed_9.IsChecked;
+            MyworkHours[3, 1] = (bool)WorkHoursUC.cb_wed_10.IsChecked;
+            MyworkHours[3, 2] = (bool)WorkHoursUC.cb_wed_11.IsChecked;
+            MyworkHours[3, 3] = (bool)WorkHoursUC.cb_wed_12.IsChecked;
+            MyworkHours[3, 4] = (bool)WorkHoursUC.cb_wed_13.IsChecked;
+            MyworkHours[3, 5] = (bool)WorkHoursUC.cb_wed_14.IsChecked;
+            //Thu
+            MyworkHours[4, 0] = (bool)WorkHoursUC.cb_thu_9.IsChecked;
+            MyworkHours[4, 1] = (bool)WorkHoursUC.cb_thu_10.IsChecked;
+            MyworkHours[4, 2] = (bool)WorkHoursUC.cb_thu_11.IsChecked;
+            MyworkHours[4, 3] = (bool)WorkHoursUC.cb_thu_12.IsChecked;
+            MyworkHours[4, 4] = (bool)WorkHoursUC.cb_thu_13.IsChecked;
+            MyworkHours[4, 5] = (bool)WorkHoursUC.cb_thu_14.IsChecked;
+
+
+
+        }
+        public void ShowMatrixbyIndex()
+        {
+            //SUN
+            MyworkHours = new bool[5, 7];
+            MyworkHours = bL.GetAllTesters()[ListIndex].WorkHours;
+             WorkHoursUC.cb_sun_9.IsChecked = MyworkHours[0, 0];
+             WorkHoursUC.cb_sun_10.IsChecked = MyworkHours[0, 1];
+             WorkHoursUC.cb_sun_11.IsChecked= MyworkHours[0, 2];
+            WorkHoursUC.cb_sun_12.IsChecked= MyworkHours[0, 3];
+            WorkHoursUC.cb_sun_13.IsChecked= MyworkHours[0, 4];
+            WorkHoursUC.cb_sun_14.IsChecked = MyworkHours[0, 5];
+            //Monday
+            WorkHoursUC.cb_mon_9.IsChecked = MyworkHours[1, 0];
+            WorkHoursUC.cb_mon_10.IsChecked = MyworkHours[1, 1];
+            WorkHoursUC.cb_mon_11.IsChecked= MyworkHours[1, 2];
+            WorkHoursUC.cb_mon_12.IsChecked= MyworkHours[1, 3];
+            WorkHoursUC.cb_mon_13.IsChecked = MyworkHours[1, 4];
+            WorkHoursUC.cb_mon_14.IsChecked= MyworkHours[1, 5];
+            //TUE
+            MyworkHours[2, 0] = (bool)WorkHoursUC.cb_tue_9.IsChecked;
+            MyworkHours[2, 1] = (bool)WorkHoursUC.cb_tue_10.IsChecked;
+            MyworkHours[2, 2] = (bool)WorkHoursUC.cb_tue_11.IsChecked;
+            MyworkHours[2, 3] = (bool)WorkHoursUC.cb_tue_12.IsChecked;
+            MyworkHours[2, 4] = (bool)WorkHoursUC.cb_tue_13.IsChecked;
+            MyworkHours[2, 5] = (bool)WorkHoursUC.cb_tue_14.IsChecked;
+            //Wed
+            MyworkHours[3, 0] = (bool)WorkHoursUC.cb_wed_9.IsChecked;
+            MyworkHours[3, 1] = (bool)WorkHoursUC.cb_wed_10.IsChecked;
+            MyworkHours[3, 2] = (bool)WorkHoursUC.cb_wed_11.IsChecked;
+            MyworkHours[3, 3] = (bool)WorkHoursUC.cb_wed_12.IsChecked;
+            MyworkHours[3, 4] = (bool)WorkHoursUC.cb_wed_13.IsChecked;
+            MyworkHours[3, 5] = (bool)WorkHoursUC.cb_wed_14.IsChecked;
+            //Thu
+            MyworkHours[4, 0] = (bool)WorkHoursUC.cb_thu_9.IsChecked;
+            MyworkHours[4, 1] = (bool)WorkHoursUC.cb_thu_10.IsChecked;
+            MyworkHours[4, 2] = (bool)WorkHoursUC.cb_thu_11.IsChecked;
+            MyworkHours[4, 3] = (bool)WorkHoursUC.cb_thu_12.IsChecked;
+            MyworkHours[4, 4] = (bool)WorkHoursUC.cb_thu_13.IsChecked;
+            MyworkHours[4, 5] = (bool)WorkHoursUC.cb_thu_14.IsChecked;
+        }
+       public void  clearFileds()
+        {
+            ListIndex = 0;
+            grid1.DataContext = null;
+            idTextBox.Text = null;
+            nameTextBox.Text = null;
+            familyNameTextBox.Text = null;
+            myGenderComboBox.Text = null;
+            maxDistanceTextBox.Text = null;
+            birthDateDatePicker.Text = null;
+            expiranceCarComboBox.Text = null;
+            maxTestsPerWeekTextBox.Text = null;
+            yearsOfExperienceTextBox.Text = null;
+            phoneNumberTextBox.Text = null;
+            phoneNumerCombobox.Text = null;
+            WorkHoursUC.cb_sun_9.IsChecked = false;
+           WorkHoursUC.cb_sun_10.IsChecked = false;
+            WorkHoursUC.cb_sun_11.IsChecked = false;
+            WorkHoursUC.cb_sun_12.IsChecked = false;
+           WorkHoursUC.cb_sun_13.IsChecked = false;
+            WorkHoursUC.cb_sun_14.IsChecked=false;
+            //Monday
+            WorkHoursUC.cb_mon_9.IsChecked=false;
+            WorkHoursUC.cb_mon_10.IsChecked=false;
+            WorkHoursUC.cb_mon_11.IsChecked=false;
+           WorkHoursUC.cb_mon_12.IsChecked=false;
+           WorkHoursUC.cb_mon_13.IsChecked=false;
+          WorkHoursUC.cb_mon_14.IsChecked=false;
+            //TUE
+          WorkHoursUC.cb_tue_9.IsChecked=false;
+           WorkHoursUC.cb_tue_10.IsChecked = false;
+          WorkHoursUC.cb_tue_11.IsChecked = false;
+          WorkHoursUC.cb_tue_12.IsChecked = false;
+            WorkHoursUC.cb_tue_13.IsChecked = false;
+           WorkHoursUC.cb_tue_14.IsChecked = false;
+            //Wed
+           WorkHoursUC.cb_wed_9.IsChecked=false;
+           WorkHoursUC.cb_wed_10.IsChecked = false;
+           WorkHoursUC.cb_wed_11.IsChecked = false;
+           WorkHoursUC.cb_wed_12.IsChecked=false;
+           WorkHoursUC.cb_wed_13.IsChecked = false;
+           WorkHoursUC.cb_wed_14.IsChecked = false;
+            //The
+            WorkHoursUC.cb_thu_9.IsChecked = false;
+            WorkHoursUC.cb_thu_10.IsChecked = false;
+            WorkHoursUC.cb_thu_11.IsChecked = false;
+           WorkHoursUC.cb_thu_12.IsChecked = false;
+            WorkHoursUC.cb_thu_13.IsChecked = false;
+           WorkHoursUC.cb_thu_14.IsChecked = false;
+
+        }
         public TesterWindow()
         {
+          
             InitializeComponent();
             bL = Factory_BL.getBL();
             AddBoutton.IsChecked = true;
@@ -46,16 +185,32 @@ namespace PLWPF
 
         private void AddRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            idTextBox.IsEnabled = true;
-            nameTextBox.IsEnabled = true;
-            familyNameTextBox.IsEnabled = true;
+            FinishButton.Content = "Save";
+            grid1.IsEnabled = true;
+            WorkHoursUC.IsEnabled = true;
+            AddressGrid.IsEnabled = true;
+            phoneNumerCombobox.IsEnabled = true;
+            clearFileds();
+            SearchGrid.Visibility = Visibility.Hidden;
+            NextButton.Visibility = Visibility.Hidden;
+            PreButton.Visibility = Visibility.Hidden;
+
+
 
         }
 
         private void DeleteBoutton_Checked(object sender, RoutedEventArgs e)
         {
+            ListIndex = 0;
             if(bL.GetAllTesters().Any())
             grid1.DataContext = bL.GetAllTesters()[0];
+            SearchGrid.Visibility = Visibility.Visible;
+            NextButton.Visibility = Visibility.Visible;
+            PreButton.Visibility = Visibility.Visible;
+            grid1.IsEnabled = false;
+            WorkHoursUC.IsEnabled = false;
+            AddressGrid.IsEnabled = false;
+            phoneNumerCombobox.IsEnabled = true;
             AddBoutton.IsChecked = false;
             nameTextBox.IsEnabled = false;
             familyNameTextBox.IsEnabled = false;
@@ -68,12 +223,29 @@ namespace PLWPF
             maxTestsPerWeekTextBox.IsEnabled = false;
             yearsOfExperienceTextBox.IsEnabled = false;
         }
+        private void UpdateButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SearchGrid.Visibility = Visibility.Visible;
+            DeleteBoutton.IsChecked = false;
+            AddBoutton.IsChecked = false;
+            FinishButton.Content = "Update \n Changes";
+            nameTextBox.IsEnabled = true;
+            familyNameTextBox.IsEnabled = true;
+            phoneNumberTextBox.IsEnabled = true;
+            phoneNumerCombobox.IsEnabled = true;
+            birthDateDatePicker.IsEnabled = true;
+            myGenderComboBox.IsEnabled = true;
+            expiranceCarComboBox.IsEnabled = true;
+            maxDistanceTextBox.IsEnabled = true;
+            maxTestsPerWeekTextBox.IsEnabled = true;
+            yearsOfExperienceTextBox.IsEnabled = true;
+        }
 
         private void AddBoutton_Checked(object sender, RoutedEventArgs e)
         {
-            
+            FinishButton.Content = "Delete";
             DeleteBoutton.IsChecked = false;
-
+            SearchGrid.Visibility = Visibility.Hidden;
             UpdateButton.IsChecked = false;
             nameTextBox.IsEnabled = true;
             familyNameTextBox.IsEnabled = true;
@@ -87,6 +259,7 @@ namespace PLWPF
             yearsOfExperienceTextBox.IsEnabled = true;
         }
 
+        #region Numeric input
         private void idTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
@@ -117,21 +290,7 @@ namespace PLWPF
                || (e.Key >= Key.D0 && e.Key <= Key.D9));
         }
 
-        private void UpdateButton_Checked(object sender, RoutedEventArgs e)
-        {
-            DeleteBoutton.IsChecked = false;
-           AddBoutton.IsChecked = false;
-            nameTextBox.IsEnabled = true;
-            familyNameTextBox.IsEnabled = true;
-            phoneNumberTextBox.IsEnabled = true;
-            phoneNumerCombobox.IsEnabled = true;
-            birthDateDatePicker.IsEnabled = true;
-            myGenderComboBox.IsEnabled = true;
-            expiranceCarComboBox.IsEnabled = true;
-            maxDistanceTextBox.IsEnabled = true;
-            maxTestsPerWeekTextBox.IsEnabled = true;
-            yearsOfExperienceTextBox.IsEnabled = true;
-        }
+       
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
@@ -144,45 +303,85 @@ namespace PLWPF
                         throw new Exception("Id Must contin at least 8 dighits!!");
                     if (birthDateDatePicker.Text == "")
                         throw new Exception("Plese choose birth date!!");
-                    if(nameTextBox.Text=="")
+                    if (nameTextBox.Text == "")
                         throw new Exception("Plese enter your name!!");
-                    if ( familyNameTextBox.Text== "")
+                    if (familyNameTextBox.Text == "")
                         throw new Exception("Plese enter your family name!!");
                     if (birthDateDatePicker.Text == "")
                         throw new Exception("please choose birth date!!");
-                    if (phoneNumberTextBox.Text == "" && phoneNumerCombobox.Text== "")
+                    if (phoneNumberTextBox.Text == "" && phoneNumerCombobox.Text == "")
                         throw new Exception("please enter your phone number");
-                    if(expiranceCarComboBox.Text=="")
+                    if (expiranceCarComboBox.Text == "")
                         throw new Exception("please enter your car type you expert on");
-                    if(maxDistanceTextBox.Text=="")
+                    if (maxDistanceTextBox.Text == "")
                         throw new Exception("please enter the maximum distance form \n your house  for test");
-                    if (yearsOfExperienceTextBox.Text=="")
+                    if (yearsOfExperienceTextBox.Text == "")
                         throw new Exception("אנא הכנס את מספר שנות הנסיון שלך");
-                    if(maxTestsPerWeekTextBox.Text=="")
+                    if (maxTestsPerWeekTextBox.Text == "")
                         throw new Exception("please enter how many tests you can do in a week");
-                    m_address.city = myAddressTextBox.Text;
-                    m_address.houseNumber = 3;
-                    m_address.streetName = "moshe";
+                    setHoursMatrix();
+                    m_address.city = CityTB.Text;
+                    m_address.streetName = StreetNameTB.Text;
+                    m_address.houseNumber = int.Parse(HoustNumTB.Text);
                     bL.AddTester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
                         birthDateDatePicker.DisplayDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
-                        ),phoneNumerCombobox.Text+phoneNumberTextBox.Text,m_address
-                        ,int.Parse(yearsOfExperienceTextBox.Text)
-                       ,int.Parse(maxTestsPerWeekTextBox.Text)
-                       ,(MyEnum.carType)Enum.Parse(typeof(MyEnum.carType),expiranceCarComboBox.Text),MyworkHours,
+                        ), phoneNumerCombobox.Text + phoneNumberTextBox.Text, m_address
+                        , int.Parse(yearsOfExperienceTextBox.Text)
+                       , int.Parse(maxTestsPerWeekTextBox.Text)
+                       , (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), expiranceCarComboBox.Text), MyworkHours,
                         int.Parse(maxDistanceTextBox.Text));
+                    MessageBox.Show("THe tester " + idTextBox.Text + " added to the data base");
 
-                    
-                }   
-                if(DeleteBoutton.IsChecked==true)
+                }
+                if (DeleteBoutton.IsChecked == true)
                 {
                     if (idTextBox.Text.Length < 8)
                         throw new Exception("ID must contain at least 8 dights ");
                     bL.DeleteTester(idTextBox.Text);
-
+                    MessageBox.Show("THe tester " + idTextBox.Text + " Removed from the data base");
                 }
-
+                if (UpdateButton.IsChecked == true)
+                {
+                   
+                   
+                        if (idTextBox.Text.Length < 8)
+                            throw new Exception("Id Must contin at least 8 dighits!!");
+                        if (birthDateDatePicker.Text == "")
+                            throw new Exception("Plese choose birth date!!");
+                        if (nameTextBox.Text == "")
+                            throw new Exception("Plese enter your name!!");
+                        if (familyNameTextBox.Text == "")
+                            throw new Exception("Plese enter your family name!!");
+                        if (birthDateDatePicker.Text == "")
+                            throw new Exception("please choose birth date!!");
+                        if (phoneNumberTextBox.Text == "" && phoneNumerCombobox.Text == "")
+                            throw new Exception("please enter your phone number");
+                        if (expiranceCarComboBox.Text == "")
+                            throw new Exception("please enter your car type you expert on");
+                        if (maxDistanceTextBox.Text == "")
+                            throw new Exception("please enter the maximum distance form \n your house  for test");
+                        if (yearsOfExperienceTextBox.Text == "")
+                            throw new Exception("אנא הכנס את מספר שנות הנסיון שלך");
+                        if (maxTestsPerWeekTextBox.Text == "")
+                            throw new Exception("please enter how many tests you can do in a week");
+                        setHoursMatrix();
+                        m_address.city = CityTB.Text;
+                    m_address.streetName = StreetNameTB.Text;
+                        m_address.houseNumber =int.Parse( HoustNumTB.Text);
+                       
+                        bL.UpdateTester(new Tester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
+                            birthDateDatePicker.DisplayDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
+                            ), phoneNumerCombobox.Text + phoneNumberTextBox.Text, m_address
+                            , int.Parse(yearsOfExperienceTextBox.Text)
+                           , int.Parse(maxTestsPerWeekTextBox.Text)
+                           , (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), expiranceCarComboBox.Text),
+                            int.Parse(maxDistanceTextBox.Text), MyworkHours));
+                    MessageBox.Show("Update succeeded");
+                }
+                    clearFileds();
+                
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -193,5 +392,12 @@ namespace PLWPF
         {
 
         }
+
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
+        #endregion
     }
 }

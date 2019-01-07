@@ -87,7 +87,7 @@ namespace DAL
 
        public void AddTrainee(Trainee t)
         {
-            if (DS.DataSource.trainees == null)
+            if (DS.DataSource.trainees.Any()==false)
             {
                 DS.DataSource.trainees = new List<Trainee>();
                 DataSource.trainees.Add(t);

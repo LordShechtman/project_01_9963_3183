@@ -30,7 +30,7 @@ namespace BE
         /*11*/
         public MyEnum.carType ExpiranceCar { get; set; }
         /*12*/
-
+        public String Password { get; set; }
         public bool[,] WorkHours { get; set; }//check when tester works
                                               /*13*/
         public int MaxDistance { get; set; }

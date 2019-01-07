@@ -14,7 +14,7 @@
         <GroupBox  x:Name="TesterGroupBox" Header="Plese make your choice" HorizontalAlignment="Left" Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Width="142">
             <RadioButton x:Name="AddBoutton" Content="Add" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Checked="AddBoutton_Checked"/>
         </GroupBox>
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="252,71,0,0" VerticalAlignment="Top">
+        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="204,21,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -50,8 +50,6 @@
             <TextBox x:Name="maxDistanceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="9" Text="{Binding MaxDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="maxDistanceTextBox_KeyDown"/>
             <Label Content="Max Tests Per Week:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <TextBox x:Name="maxTestsPerWeekTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding MaxTestsPerWeek, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="maxTestsPerWeekTextBox_KeyDown"/>
-            <Label Content="My Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-            <TextBox x:Name="myAddressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding MyAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="My Gender:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
             <ComboBox x:Name="myGenderComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding }" Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120">
                 <ComboBox.ItemsPanel>
@@ -68,8 +66,28 @@
             <TextBox x:Name="yearsOfExperienceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="10" Text="{Binding YearsOfExperience, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="yearsOfExperienceTextBox_KeyDown"/>
         </Grid>
         <RadioButton x:Name="DeleteBoutton" Content="Delete" HorizontalAlignment="Left" Margin="16,62,0,0" VerticalAlignment="Top" Checked="DeleteBoutton_Checked"/>
-        <ComboBox x:Name="phoneNumerCombobox" HorizontalAlignment="Left" Margin="369,202,0,0" VerticalAlignment="Top" Width="51" SelectionChanged="phoneNumerCombobox_SelectionChanged"/>
-        <Button x:Name="FinishButton" Content="Finsh" HorizontalAlignment="Left" Height="43" Margin="612,367,0,0" VerticalAlignment="Top" Width="109" Click="FinishButton_Click"/>
+        <ComboBox x:Name="phoneNumerCombobox" HorizontalAlignment="Left" Margin="325,153,0,0" VerticalAlignment="Top" Width="51" SelectionChanged="phoneNumerCombobox_SelectionChanged"/>
+        <Button x:Name="FinishButton" Content="Finsh" HorizontalAlignment="Left" Height="43" Margin="10,132,0,0" VerticalAlignment="Top" Width="109" Click="FinishButton_Click"/>
         <RadioButton x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="16,81,0,0" VerticalAlignment="Top" Checked="UpdateButton_Checked"/>
+        <local:TesterWorkHoursUserControl x:Name="WorkHoursUC" HorizontalAlignment="Left" Height="129" Margin="487,202,0,0" VerticalAlignment="Top" Width="295"/>
+        <Label x:Name="WeeklyHoureLabel" Content="WeeklyWork hours" HorizontalAlignment="Left" Margin="474,171,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Grid x:Name="SearchGrid" Margin="588,18,72.6,310">
+            <TextBox x:Name="SearchTextBox" MaxLength="9" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyDown="SearchTextBox_KeyDown"/>
+            <Label x:Name="SearchLabel" Content="Enter  tester ID" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="SearchButton" Content="search" Margin="24,59,21,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Button x:Name="NextButton" Content="Next>" HorizontalAlignment="Left" Margin="361,378,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="PreButton" Content="&lt;Back" HorizontalAlignment="Left" Margin="281,378,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid x:Name="AddressGrid" Margin="0,247,596.6,90">
+            <TextBox x:Name="StreetNameTB" HorizontalAlignment="Left" Height="23" Margin="77,4,0,0" TextWrapping="Wrap" Text="Street" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="HoustNumTB" HorizontalAlignment="Left" Height="23" Margin="77,32,0,0" TextWrapping="Wrap" Text="num" MaxLength="3" VerticalAlignment="Top" Width="38"/>
+            <TextBox x:Name="CityTB" HorizontalAlignment="Left" Height="23" Margin="77,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="addreSTLB" Content="Street name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="addreHNLB" Content="number" HorizontalAlignment="Left" Margin="19,29,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="addreCTLB" Content="number" HorizontalAlignment="Left" Margin="19,56,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="16,216,0,0" VerticalAlignment="Top" Width="55" FontWeight="Bold"/>
+        <Label x:Name="PasswordLB" Content="Password" HorizontalAlignment="Left" Margin="251,338,0,0" VerticalAlignment="Top"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="325,343,0,0" VerticalAlignment="Top" Width="111"/>
     </Grid>
 </Window>

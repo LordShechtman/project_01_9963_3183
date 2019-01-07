@@ -24,9 +24,21 @@ namespace PLWPF
         {
             InitializeComponent();
             MyBL = BL.Factory_BL.getBL();
+            if (MyBL.GetAllTrainees().Any())
+            {
+                foreach (var v in MyBL.GetAllTrainees())
+                    traineeIdCB.Items.Add(v.Id);
+            }
+            YourPasswordBox.Visibility = Visibility.Hidden;
             testDateDatePicker.DisplayDateEnd = DateTime.Now.AddDays(31);
             testDateDatePicker.DisplayDateStart = DateTime.Now;
-
+            testDateDatePicker.IsEnabled = false;
+            CityTextBox.IsEnabled = false;
+            HourCB.IsEnabled = false;
+            for(int i=9;i<15;i++)
+            {
+                HourCB.Items.Add(i);
+            }
 
         }
 
@@ -69,14 +81,47 @@ namespace PLWPF
                 my_address.city = CityTextBox.Text;
                 my_address.streetName = StreetNameTextBox.Text;
                 my_address.houseNumber = int.Parse(HouseNumberTextBox.Text);
-                if (traineeIdTextBox.Text.Length < 8)
-                    throw new Exception("The ID you have entered is too short");
-                MyBL.AddTest(traineeIdTextBox.Text,my_address,testDateDatePicker.DisplayDate);
+                if (traineeIdCB.Text=="")
+                    throw new Exception("Please select trainee ID");
+                if(testDateDatePicker.Text=="")
+                    throw new Exception("Please select Date for the test");
+                MyBL.AddTest(traineeIdCB.Text, my_address,testDateDatePicker.DisplayDate);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR");
             }
+        }
+
+        private void traineeIdCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            YourPasswordBox.Visibility = Visibility.Visible;
+            SingUpWindow.Visibility = Visibility.Hidden;
+            var UserName = MyBL.GetAllTrainees().Find(x => x.Id == traineeIdCB.SelectedItem.ToString());
+            Singup.Content = UserName.Name + " " + UserName.FamilyName;
+
+
+        }
+
+        private void SingUpWindow_Click(object sender, RoutedEventArgs e)
+        {
+            TrinneWindow trinneWindow = new TrinneWindow();
+            trinneWindow.ShowDialog();
+        }
+
+        private void CheckPasswordB_Click(object sender, RoutedEventArgs e)
+        {
+            BE.Trainee trinne = MyBL.GetAllTrainees().Find(x => x.Id == traineeIdCB.Text);
+            if(trinne.Password==YourPasswordBox.Password)
+            {
+                testDateDatePicker.IsEnabled = true;
+                CityTextBox.IsEnabled = true;
+                HourCB.IsEnabled = true;
+                YourPasswordBox.Visibility = Visibility.Hidden;
+                CheckPasswordB.Visibility = Visibility.Hidden;
+            }
+
         }
     }
 }

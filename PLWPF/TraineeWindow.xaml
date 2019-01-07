@@ -75,11 +75,16 @@
             <TextBox x:Name="HouseNumberTB"  Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="107,66,0,-50" Grid.Row="0" Text="number" VerticalAlignment="Center" Width="48" KeyDown="HouseNumberTB_KeyDown" Grid.ColumnSpan="2"/>
             <TextBox x:Name="CityTB" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="107,104,0,-88" Grid.Row="0" Text="city" VerticalAlignment="Center" Width="79" Grid.ColumnSpan="2"/>
             <Label x:Name="AddressLabel" Content="Address" HorizontalAlignment="Left" Margin="74,10,0,0" VerticalAlignment="Top" Width="60" FontWeight="Bold" Grid.Column="1"/>
+            <Label Content="City" Grid.Column="1" HorizontalAlignment="Left" Margin="55,117,0,-76.6" VerticalAlignment="Top"/>
+            <Label Content="Number" Grid.Column="1" HorizontalAlignment="Left" Margin="48,76,0,-34" VerticalAlignment="Top"/>
+            <Label Content="Street" Grid.Column="1" HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Grid x:Name="SearchGrid" HorizontalAlignment="Left" Height="24" Margin="235,37,0,0" VerticalAlignment="Top" Width="232">
             <TextBox x:Name="SearchIdTB" MaxLength="9" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Enter  Trainee id" VerticalAlignment="Top" Width="120" BorderBrush="#FF7C95E0" Margin="5,-1,0,0" KeyDown="SearchIdTB_KeyDown"/>
             <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="125,0,0,2" Width="75" Background="#FFEAE8E8" FontSize="14" Click="SearchButton_Click"/>
         </Grid>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="607,70,0,0" VerticalAlignment="Top" Width="85" Height="20"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="548,66,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
