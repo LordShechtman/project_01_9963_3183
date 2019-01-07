@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=Project01_9963_3183_dotNet5779" x:Class="PLWPF.AddTestWindow"
         mc:Ignorable="d"
-        Title="AddTestWindow" Height="350" Width="600" Loaded="Window_Loaded">
+        Title="AddTestWindow" Height="350" Width="600" Loaded="Window_Loaded" Activated="Window_Activated">
     <Window.Resources>
         <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
     </Window.Resources>

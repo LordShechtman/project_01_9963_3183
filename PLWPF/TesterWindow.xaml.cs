@@ -217,7 +217,7 @@ namespace PLWPF
 
 
         }
-
+        #region buttons Checked
         private void DeleteBoutton_Checked(object sender, RoutedEventArgs e)
         {
             ListIndex = 0;
@@ -298,6 +298,7 @@ namespace PLWPF
             PreButton.Visibility = Visibility.Hidden;
             FinishButton.Content = "Save";
         }
+        #endregion
 
         #region Numeric input
         private void idTextBox_KeyDown(object sender, KeyEventArgs e)

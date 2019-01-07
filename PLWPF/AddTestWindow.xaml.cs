@@ -85,7 +85,10 @@ namespace PLWPF
                     throw new Exception("Please select trainee ID");
                 if(testDateDatePicker.Text=="")
                     throw new Exception("Please select Date for the test");
-                MyBL.AddTest(traineeIdCB.Text, my_address,testDateDatePicker.DisplayDate);
+                DateTime testDay = new DateTime(testDateDatePicker.DisplayDate.Year,
+                   testDateDatePicker.DisplayDate.Month, testDateDatePicker.DisplayDate.Day,
+                   int.Parse(HourCB.Text), 0, 0);
+                MyBL.AddTest(traineeIdCB.Text, my_address,testDay);
             }
             catch(Exception ex)
             {
@@ -122,6 +125,15 @@ namespace PLWPF
                 CheckPasswordB.Visibility = Visibility.Hidden;
             }
 
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            if (MyBL.GetAllTrainees().Any())
+            {
+                foreach (var v in MyBL.GetAllTrainees())
+                    traineeIdCB.Items.Add(v.Id);
+            }
         }
     }
 }
