@@ -178,19 +178,8 @@ namespace PLWPF
         }
         public void getPhoneprefix()
         {
-            phoneNumerCombobox.Text =" ";
-            string prefix = bL.GetAllTesters()[ListIndex].PhoneNumber ;
-            if (prefix[3] == '-')
-            {
-                phoneNumberTextBox.Text = null;
-                for (int i = 0; i <3; i++)
-                    phoneNumerCombobox.Text += prefix[i];
-            }
-            else
-            {
-                for (int i = 0; i < 2; i++)
-                    phoneNumerCombobox.Text += prefix[i];
-            }
+            phoneNumerCombobox.Text = bL.GetAllTesters()[ListIndex].PhonePrefix;
+            
 
             }
             public void getPhonesuffix()
@@ -219,13 +208,7 @@ namespace PLWPF
            
         }
 
-        private void AddRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-           
-            
-
-
-        }
+        
         #region buttons Checked
         private void DeleteBoutton_Checked(object sender, RoutedEventArgs e)
         {
