@@ -141,7 +141,7 @@ namespace PLWPF
                     Myaddress.houseNumber = int.Parse(HouseNumberTB.Text);
                     Myaddress.streetName = StreetNameTB.Text;
                     My_bl.AddTrainee(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text
-                        , brithDateDatePicker.DisplayDate,
+                        , (DateTime)brithDateDatePicker.SelectedDate,
                         (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderTextBox.Text), 
                         (PhoneNumberPrirtyComboBox.Text + phoneNumberTextBox.Text)
                         ,Myaddress,(MyEnum.carType)Enum.Parse (typeof(MyEnum.carType),carTextBox.Text)
@@ -195,7 +195,7 @@ namespace PLWPF
                     Myaddress.houseNumber = int.Parse(HouseNumberTB.Text);
                     Myaddress.streetName = StreetNameTB.Text;
                     My_bl.UpdateTrainee(new Trainee (idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text
-                        , brithDateDatePicker.DisplayDate,
+                        , (DateTime)brithDateDatePicker.SelectedDate,
                         (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderTextBox.Text),
                         (PhoneNumberPrirtyComboBox.Text + phoneNumberTextBox.Text)
                         , Myaddress, (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), carTextBox.Text)
@@ -207,7 +207,9 @@ namespace PLWPF
                     MessageBox.Show("Update succeeded");
                 }
                 clearFileds();
-
+                AddRbutton.IsChecked = true;
+                UpdateRButton.IsChecked = false;
+                DeleteRButton.IsChecked = false;
             }
             catch (Exception ex)
             {
@@ -263,7 +265,7 @@ namespace PLWPF
                 myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
                 carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
                 CityTB.Text = My_bl.GetAllTrainees()[ListIndex].MyAddress.city;
-                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].PhonePrefix;
                 phoneNumberTextBox.Text = null;
                 string suffix = My_bl.GetAllTrainees()[ListIndex].PhoneNumber;
                 if (suffix[3] == '-')
@@ -314,7 +316,7 @@ namespace PLWPF
                 myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
                 myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
                 carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
-                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].PhonePrefix;
                 phoneNumberTextBox.Text = null;
                 string suffix = My_bl.GetAllTrainees()[ListIndex].PhoneNumber;
                 if (suffix[3] == '-')
@@ -358,7 +360,7 @@ namespace PLWPF
                 myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
                 myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
                 carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
-                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].PhonePrefix;
                 phoneNumberTextBox.Text = null;
                 string suffix = My_bl.GetAllTrainees()[ListIndex].PhoneNumber;
                 if (suffix[3] == '-')
@@ -387,7 +389,7 @@ namespace PLWPF
                 myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
                 myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
                 carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
-                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].PhonePrefix;
                 phoneNumberTextBox.Text = null;
                 string suffix = My_bl.GetAllTrainees()[ListIndex].PhoneNumber;
                 if (suffix[3] == '-')
@@ -431,7 +433,7 @@ namespace PLWPF
                 myGearTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGear.ToString();
                 myGenderTextBox.Text = My_bl.GetAllTrainees()[ListIndex].MyGender.ToString();
                 carTextBox.Text = My_bl.GetAllTrainees()[ListIndex].Car.ToString();
-                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].getPhonePrefix();
+                PhoneNumberPrirtyComboBox.Text = My_bl.GetAllTrainees()[ListIndex].PhonePrefix;
                 phoneNumberTextBox.Text = null;
                 string suffix = My_bl.GetAllTrainees()[ListIndex].PhoneNumber;
                 if (suffix[3] == '-')

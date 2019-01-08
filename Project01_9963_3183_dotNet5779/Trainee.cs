@@ -44,21 +44,26 @@ namespace BE
             TeacherName = teacher_name;
             NumberOfLessons = numLessons;
         }
-        public string getPhonePrefix()
+        public string PhonePrefix
         {
-            //SEE SUMMRY ABOVE
-            string Prefix="";
-            foreach(char ch in PhoneNumber )
+            get
             {
-                if (ch == '-')
+
+
+                //SEE SUMMRY ABOVE
+                string Prefix = "";
+                foreach (char ch in PhoneNumber)
                 {
+                    if (ch == '-')
+                    {
+                        Prefix += ch;
+                        break;
+                    }
+
                     Prefix += ch;
-                    break;
                 }
-                   
-                Prefix+=ch;
+                return Prefix;
             }
-            return Prefix;
         }
         public string showAdress(Address a)
         {

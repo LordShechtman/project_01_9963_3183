@@ -73,8 +73,9 @@ namespace DAL
             {
                 if (tmp.Id == t.Id)
                 {
-                    DS.DataSource.testers.Remove(tmp);
-                    DS.DataSource.testers.Add(t);
+                   
+                    DS.DataSource.testers.Insert(DataSource.testers.IndexOf(tmp), t);
+                   
                     flag = true;
                     break;
                 }

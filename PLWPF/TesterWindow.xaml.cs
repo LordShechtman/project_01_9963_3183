@@ -176,23 +176,30 @@ namespace PLWPF
             
             myGenderComboBox.ItemsSource= Enum.GetValues(typeof(BE.MyEnum.gender));
         }
-        public string getPhoneprefix()
+        public void getPhoneprefix()
         {
-            string prefix = " ";
-            foreach(char ch in bL.GetAllTesters()[ListIndex].PhoneNumber)
+            phoneNumerCombobox.Text =" ";
+            string prefix = bL.GetAllTesters()[ListIndex].PhoneNumber ;
+            if (prefix[3] == '-')
             {
-                prefix += ch;
-                if (ch == '-')
-                    break;
+                phoneNumberTextBox.Text = null;
+                for (int i = 0; i <3; i++)
+                    phoneNumerCombobox.Text += prefix[i];
             }
-            return prefix;
-        }
-        public void getPhonesuffix()
+            else
+            {
+                for (int i = 0; i < 2; i++)
+                    phoneNumerCombobox.Text += prefix[i];
+            }
+
+            }
+            public void getPhonesuffix()
         {
             string suffix=bL.GetAllTesters()[ListIndex].PhoneNumber;
   
             if (suffix[3] == '-')
             {
+                phoneNumberTextBox.Text = null;
                 for (int i = 4; i < suffix.Length; i++)
                     phoneNumberTextBox.Text += suffix[i];
             }
@@ -204,7 +211,7 @@ namespace PLWPF
 
             
         }
-        //TODO:USE PRFIX AND SUFFIX
+       
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -230,7 +237,7 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
-                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhoneprefix();
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text= bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
@@ -273,7 +280,7 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
-                phoneNumerCombobox.Text = getPhoneprefix();
+                 getPhoneprefix();
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
@@ -388,7 +395,7 @@ namespace PLWPF
                     m_address.streetName = StreetNameTB.Text;
                     m_address.houseNumber = int.Parse(HoustNumTB.Text);
                     bL.AddTester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
-                        birthDateDatePicker.DisplayDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
+                        (DateTime)birthDateDatePicker.SelectedDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
                         ), phoneNumerCombobox.Text + phoneNumberTextBox.Text, m_address
                         , int.Parse(yearsOfExperienceTextBox.Text)
                        , int.Parse(maxTestsPerWeekTextBox.Text)
@@ -437,7 +444,7 @@ namespace PLWPF
                         m_address.houseNumber =int.Parse( HoustNumTB.Text);
                        
                         bL.UpdateTester(new Tester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
-                            birthDateDatePicker.DisplayDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
+                           (DateTime)birthDateDatePicker.SelectedDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
                             ), phoneNumerCombobox.Text + phoneNumberTextBox.Text, m_address
                             , int.Parse(yearsOfExperienceTextBox.Text)
                            , int.Parse(maxTestsPerWeekTextBox.Text)
@@ -448,7 +455,9 @@ namespace PLWPF
                         bL.SetTesterpassword(idTextBox.Text, myPasswordBox.Password);
                 }
                     clearFileds();
-                
+                AddBoutton.IsChecked = true;
+                DeleteBoutton.IsChecked = false;
+                UpdateButton.IsChecked = false;
             }
             catch (Exception ex)
             {
@@ -476,7 +485,7 @@ namespace PLWPF
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
                 ShowMatrixbyIndex();
-                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhoneprefix();
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
@@ -493,7 +502,7 @@ namespace PLWPF
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
                 ShowMatrixbyIndex();
-                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhoneprefix();
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
@@ -512,7 +521,7 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
-                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhoneprefix();
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
