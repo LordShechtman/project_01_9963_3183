@@ -8,6 +8,8 @@ namespace BE
 {
     public struct Address
     //address type
+    //Use in the date base for Tester,Student and so
+    
     {
         public string streetName;
         public int houseNumber;

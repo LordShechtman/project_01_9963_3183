@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace BE
 {
+    /// <summary>
+    /// Present Trainee Object in our project
+    /// WE bulid getPhonePrefix Method for "TraineeWindow" in the PL layer
+    /// Main key:ID
+    /// </summary>
     public class Trainee:ICloneable
     {
         #region Fileds
@@ -41,6 +46,7 @@ namespace BE
         }
         public string getPhonePrefix()
         {
+            //SEE SUMMRY ABOVE
             string Prefix="";
             foreach(char ch in PhoneNumber )
             {

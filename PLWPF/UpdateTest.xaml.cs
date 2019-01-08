@@ -79,7 +79,24 @@ namespace PLWPF
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                BE.Tester tester = My_bl.GetAllTesters().Find(x=>x.Id==TesterIDCombobox.Text);
+                if (tester.Password == PasswordBox.Password)
+                {
+                    List<Test> myTests = My_bl.GetAllTests().FindAll(x => x.TesterId == TesterIDCombobox.Text);
+                    StudentIDTB.Text = myTests[0].TraineeId;
+                    Trainee trainee = My_bl.GetAllTrainees().Find(x => x.Id == StudentIDTB.Text);
+                    studentDetails.Content = trainee.Name + " " + trainee.FamilyName;
+                }
+                else
+                    throw new Exception("Worng password!!");
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR");
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

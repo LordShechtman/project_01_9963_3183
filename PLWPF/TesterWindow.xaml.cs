@@ -89,30 +89,31 @@ namespace PLWPF
             WorkHoursUC.cb_mon_13.IsChecked = MyworkHours[1, 4];
             WorkHoursUC.cb_mon_14.IsChecked= MyworkHours[1, 5];
             //TUE
-            MyworkHours[2, 0] = (bool)WorkHoursUC.cb_tue_9.IsChecked;
-            MyworkHours[2, 1] = (bool)WorkHoursUC.cb_tue_10.IsChecked;
-            MyworkHours[2, 2] = (bool)WorkHoursUC.cb_tue_11.IsChecked;
-            MyworkHours[2, 3] = (bool)WorkHoursUC.cb_tue_12.IsChecked;
-            MyworkHours[2, 4] = (bool)WorkHoursUC.cb_tue_13.IsChecked;
-            MyworkHours[2, 5] = (bool)WorkHoursUC.cb_tue_14.IsChecked;
+              WorkHoursUC.cb_tue_9.IsChecked = MyworkHours[2, 0];
+              WorkHoursUC.cb_tue_10.IsChecked=MyworkHours[2, 1];
+              WorkHoursUC.cb_tue_11.IsChecked=MyworkHours[2, 2];
+              WorkHoursUC.cb_tue_12.IsChecked=MyworkHours[2, 3];
+              WorkHoursUC.cb_tue_13.IsChecked=MyworkHours[2, 4];
+              WorkHoursUC.cb_tue_14.IsChecked=MyworkHours[2, 5];
             //Wed
-            MyworkHours[3, 0] = (bool)WorkHoursUC.cb_wed_9.IsChecked;
-            MyworkHours[3, 1] = (bool)WorkHoursUC.cb_wed_10.IsChecked;
-            MyworkHours[3, 2] = (bool)WorkHoursUC.cb_wed_11.IsChecked;
-            MyworkHours[3, 3] = (bool)WorkHoursUC.cb_wed_12.IsChecked;
-            MyworkHours[3, 4] = (bool)WorkHoursUC.cb_wed_13.IsChecked;
-            MyworkHours[3, 5] = (bool)WorkHoursUC.cb_wed_14.IsChecked;
+            WorkHoursUC.cb_wed_9.IsChecked = MyworkHours[3, 0];
+            WorkHoursUC.cb_wed_10.IsChecked = MyworkHours[3, 1];
+            WorkHoursUC.cb_wed_11.IsChecked = MyworkHours[3, 2];
+            WorkHoursUC.cb_wed_12.IsChecked = MyworkHours[3, 3];
+            WorkHoursUC.cb_wed_13.IsChecked = MyworkHours[3, 4];
+            WorkHoursUC.cb_wed_14.IsChecked = MyworkHours[3, 5];
             //Thu
-            MyworkHours[4, 0] = (bool)WorkHoursUC.cb_thu_9.IsChecked;
-            MyworkHours[4, 1] = (bool)WorkHoursUC.cb_thu_10.IsChecked;
-            MyworkHours[4, 2] = (bool)WorkHoursUC.cb_thu_11.IsChecked;
-            MyworkHours[4, 3] = (bool)WorkHoursUC.cb_thu_12.IsChecked;
-            MyworkHours[4, 4] = (bool)WorkHoursUC.cb_thu_13.IsChecked;
-            MyworkHours[4, 5] = (bool)WorkHoursUC.cb_thu_14.IsChecked;
+            WorkHoursUC.cb_thu_9.IsChecked = MyworkHours[4, 0];
+            WorkHoursUC.cb_thu_10.IsChecked = MyworkHours[4, 1];
+            WorkHoursUC.cb_thu_11.IsChecked = MyworkHours[4, 2];
+            WorkHoursUC.cb_thu_12.IsChecked = MyworkHours[4, 3];
+            WorkHoursUC.cb_thu_13.IsChecked = MyworkHours[4, 4];
+            WorkHoursUC.cb_thu_14.IsChecked = MyworkHours[4, 5];
         }
        public void  clearFileds()
         {
             ListIndex = 0;
+            myPasswordBox.Password = null;
             grid1.DataContext = null;
             idTextBox.Text = null;
             nameTextBox.Text = null;
@@ -177,7 +178,7 @@ namespace PLWPF
         }
         public string getPhoneprefix()
         {
-            string prefix = "";
+            string prefix = " ";
             foreach(char ch in bL.GetAllTesters()[ListIndex].PhoneNumber)
             {
                 prefix += ch;
@@ -189,6 +190,7 @@ namespace PLWPF
         public void getPhonesuffix()
         {
             string suffix=bL.GetAllTesters()[ListIndex].PhoneNumber;
+  
             if (suffix[3] == '-')
             {
                 for (int i = 4; i < suffix.Length; i++)
@@ -228,11 +230,16 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhonesuffix();
+                myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
+                expiranceCarComboBox.Text= bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
 
             }
             SearchGrid.Visibility = Visibility.Visible;
             NextButton.Visibility = Visibility.Visible;
             PreButton.Visibility = Visibility.Visible;
+            myPasswordBox.IsEnabled = false;
             grid1.IsEnabled = false;
             WorkHoursUC.IsEnabled = false;
             AddressGrid.IsEnabled = false;
@@ -258,6 +265,7 @@ namespace PLWPF
             SearchGrid.Visibility = Visibility.Visible;
             NextButton.Visibility = Visibility.Visible;
             PreButton.Visibility = Visibility.Visible;
+            myPasswordBox.IsEnabled = true;
             if (bL.GetAllTesters().Any())
             {
                 grid1.DataContext = bL.GetAllTesters()[0];
@@ -265,6 +273,11 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhonesuffix();
+                myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
+                expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
+
 
             }
             DeleteBoutton.IsChecked = false;
@@ -292,6 +305,7 @@ namespace PLWPF
             AddressGrid.IsEnabled = true;
             phoneNumerCombobox.IsEnabled = true;
             grid1.DataContext = null;
+            myPasswordBox.IsEnabled = true;
             clearFileds();
             SearchGrid.Visibility = Visibility.Hidden;
             NextButton.Visibility = Visibility.Hidden;
@@ -335,7 +349,12 @@ namespace PLWPF
             e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
              || (e.Key >= Key.D0 && e.Key <= Key.D9));
         }
-
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                || (e.Key >= Key.D0 && e.Key <= Key.D9));
+        }
+        #endregion
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
@@ -376,7 +395,10 @@ namespace PLWPF
                        , (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), expiranceCarComboBox.Text), MyworkHours,
                         int.Parse(maxDistanceTextBox.Text));
                     MessageBox.Show("THe tester " + idTextBox.Text + " added to the data base");
-
+                    if(myPasswordBox.Password!=null)
+                    bL.SetTesterpassword(idTextBox.Text, myPasswordBox.Password);
+                    else
+                        bL.SetTesterpassword(idTextBox.Text, "1234");
                 }
                 if (DeleteBoutton.IsChecked == true)
                 {
@@ -422,6 +444,8 @@ namespace PLWPF
                            , (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), expiranceCarComboBox.Text),
                             int.Parse(maxDistanceTextBox.Text), MyworkHours));
                     MessageBox.Show("Update succeeded");
+                    if (myPasswordBox.Password != null)
+                        bL.SetTesterpassword(idTextBox.Text, myPasswordBox.Password);
                 }
                     clearFileds();
                 
@@ -432,18 +456,14 @@ namespace PLWPF
             }
 
         }
+        
 
         private void phoneNumerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                || (e.Key >= Key.D0 && e.Key <= Key.D9));
-        }
-        #endregion
+        
 
         #region Search Bouttons Click events
         private void NextButton_Click(object sender, RoutedEventArgs e)
@@ -456,6 +476,10 @@ namespace PLWPF
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
                 ShowMatrixbyIndex();
+                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhonesuffix();
+                myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
+                expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
             }
         }
 
@@ -469,6 +493,10 @@ namespace PLWPF
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
                 ShowMatrixbyIndex();
+                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhonesuffix();
+                myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
+                expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
             }
 
         }
@@ -484,6 +512,10 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
+                phoneNumerCombobox.Text = getPhoneprefix();
+                getPhonesuffix();
+                myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
+                expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
             }
         }
 

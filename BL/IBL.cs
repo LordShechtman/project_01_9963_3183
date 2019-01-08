@@ -26,6 +26,7 @@ using BE;
     #endregion
     #region Methods( Using by link ,lambda and so)
      double PassStatistic();
+   
     IEnumerable<IGrouping<int, Tester>> TotalTestsByTester();
     int numberOfTests(Trainee T);
     List<Trainee> passedToday();
@@ -44,7 +45,10 @@ using BE;
     List<Tester> GetAllTesters();
     List<Trainee> GetAllTrainees();
     List<Test> GetAllTests();
-   
+    /*New: I added password filed for the system*/
+    void SetTesterpassword(string id, string password);
+    void SetTraineePassword(string id, string password);
+
 }
 namespace BL
 { 

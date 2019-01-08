@@ -4,7 +4,8 @@ namespace BE
 {
     public class MyEnum
     {
-        //This file include all the enums 
+        //This file include all the enums for ou project
+        
         public enum carType { privateCar = 1, motroCycle, trunk, havyTrunk };
         public enum gear { manual = 0, automat };
         public enum gender { female = 0, male };

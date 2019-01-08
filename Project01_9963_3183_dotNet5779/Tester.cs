@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace BE
 {
+    /// <summary>
+    /// Present a Tester object in our project
+    /// Main key: ID
+    /// WE use the char "-" in phone number to differ between the preffix (two or three dights)
+    /// in the phone number!!
+    /// </summary>
     public class Tester : ICloneable
     {
         #region Fileds

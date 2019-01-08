@@ -8,8 +8,13 @@ namespace BE
 {
    public class Test :ICloneable
     {
+        /// <summary>
+        /// Present a test object
+        /// the main key is : Tester ID Trainee Id and Test Date(only one per day)
+        /// Test Serial number is given by the DAL layer when he added to rhe data base
+        /// </summary>
         #region FILEDS
-       private readonly string[] TestParmtersNames = { "Keep Distance", "Reverse Parking", "Looking in the Mirors ", "Signals", "Wheel handling", "Priority Rules" };
+        private readonly string[] TestParmtersNames = { "Keep Distance", "Reverse Parking", "Looking in the Mirors ", "Signals", "Wheel handling", "Priority Rules" };
         public string TestNumber { get; set; }
         public string TesterId { get; set; }
         public string TraineeId { get; set; }

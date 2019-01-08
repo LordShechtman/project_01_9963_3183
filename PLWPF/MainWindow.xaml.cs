@@ -57,7 +57,14 @@ namespace PLWPF
             string[] names = { "Avi", "Yossi", "Tomer", "Rafi", "Noam", "Youval", "Tal", "Adi", "Ester", "Nadav", "Moshe" };
             string[] f_names = { "Hlevi", "Rabinovich", "Fox", "Madmon", "Shey", "Dibon", "Apt", "Gidon", "Potter" };
             string[] streets = { "Hsafam", "Herbert Samuel", "Galil", "Ben Gurion", "Herzel", "Valenberg" };
-        
+            bool[,] work_all_time = new bool[5, 6];
+            for(int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    work_all_time[i, j] = true;
+                }
+            }
     string[] cities = { "Hifa", "Tel Aviv", "Malalot", "Ramat Hashron", "Jerusalem", "Ashdod" };
             Address temp_address;
             for (int i = 1; i < 10; i++)
@@ -70,6 +77,12 @@ namespace PLWPF
                     , new DateTime(1998, 01, 21), (MyEnum.gender)r.Next(0, 2), i.ToString("054-2345701"), temp_address,
                     (MyEnum.carType)r.Next(1, 5), (MyEnum.gear)r.Next(0, 2), "Hermon", names[r.Next(0, 11)]
                     , r.Next(10, 80));
+                temp_address.city = cities[r.Next(0, 6)];
+                temp_address.houseNumber = r.Next(1, 120);
+                temp_address.streetName = streets[r.Next(0, 6)];
+                bl.AddTester(i.ToString("112581900"), names[r.Next(0, 11)], f_names[r.Next(0, 9)],
+                    new DateTime(1975, 01, 21), (MyEnum.gender)r.Next(0, 2), i.ToString("053-2345701")
+                    ,temp_address,10,30, (MyEnum.carType)r.Next(1, 5),work_all_time,70);
                 foreach (var item in bl.GetAllTrainees())
                 {
                     item.Password = "1234";

@@ -20,6 +20,12 @@ namespace PLWPF
     /// </summary>
     public partial class TrinneWindow : Window
     {
+        /// <summary>
+        /// This windows manage add/delete and update of students in the Data base
+        /// The user uses radio buttons to make his wanted choice
+        /// The user also can look in the the date base to find studnet by his\her ID
+        /// 
+        /// </summary>
         public void clearFileds()
         {
             idTextBox.Text = null;
@@ -37,6 +43,7 @@ namespace PLWPF
             teacherNameTextBox.Text = null;
             numberOfLessonsTextBox.Text = null;
             carTextBox.Text = null;
+            passwordBox.Password = null;
         }
         public IBL My_bl;
         int ListIndex = 0;
@@ -65,6 +72,8 @@ namespace PLWPF
             // traineeViewSource.Source = [generic data source]
         }
         #region Numaric input
+        /*To avoid input problems we Blocked the option from the user to type letters and chars
+         where we need "int" type*/
         private void idTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
@@ -95,12 +104,15 @@ namespace PLWPF
         #endregion
         private void FinshButton_Click(object sender, RoutedEventArgs e)
         {
+            /* Finsh button finsh an action (add/delete/update) after the user click it
+             the selected radio button will decide which case in "on"*/
             try
             {
                 BE.Address Myaddress;
                 Predicate<Trainee> isfound=(Trainee x)=>{ return x.Id == idTextBox.Text; };
                 if (AddRbutton.IsChecked == true )
                 {
+                    //ADD CASE (Some input test are in the BL layer)
                     if (idTextBox.Text.Length < 8)
                         throw new Exception("Id Must contin at least 8 dighits!!");
                     if (brithDateDatePicker.Text == "")
@@ -137,18 +149,24 @@ namespace PLWPF
                         teacherNameTextBox.Text,int.Parse(numberOfLessonsTextBox.Text));
                     if (My_bl.GetAllTrainees().Find(isfound) != null)
                         MessageBox.Show("The Trainee " + idTextBox.Text + "\n added to the data base");
-                    
-                    
+                    /*Defult password 1234"*/
+                    if (passwordBox.Password != null)
+                        My_bl.SetTraineePassword(idTextBox.Text, passwordBox.Password);
+                    else
+                        My_bl.SetTraineePassword(idTextBox.Text, "1234");
+
                 }
                 if (DeleteRButton.IsChecked == true)
                 {
-
+                    //Delete case(input test is in the BL)
                     My_bl.DeleteTrainee(idTextBox.Text);
                     if (My_bl.GetAllTrainees().Find(isfound) == null)
                         MessageBox.Show("The Trainee " + idTextBox.Text + " Was removed from the data base");
                 }
                 if(UpdateRButton.IsChecked==true)
                 {
+                    //Update case: same as adding but without the option to change the 
+                    //ID witch our main key
                     if (idTextBox.Text.Length < 8)
                         throw new Exception("Id Must contin at least 8 dighits!!");
                     if (brithDateDatePicker.Text == "")
@@ -184,7 +202,9 @@ namespace PLWPF
                         , (MyEnum.gear)Enum.Parse(typeof(MyEnum.gear), myGearTextBox.Text), schoolTextBox.Text,
                         teacherNameTextBox.Text, int.Parse(numberOfLessonsTextBox.Text)));
                     if (My_bl.GetAllTrainees().Find(isfound) != null)
-                        MessageBox.Show("Update succeeded");
+                        if(passwordBox.Password!=null)
+                        My_bl.SetTraineePassword(idTextBox.Text, passwordBox.Password);
+                    MessageBox.Show("Update succeeded");
                 }
                 clearFileds();
 
@@ -325,7 +345,7 @@ namespace PLWPF
         }
 
         #endregion
-
+        #region search tools events
         private void PreButton_Click(object sender, RoutedEventArgs e)
         {
             if (ListIndex > 0)
@@ -436,6 +456,6 @@ namespace PLWPF
             }
         }
 
-       
+#endregion 
     }
 }
