@@ -176,23 +176,20 @@ namespace PLWPF
             
             myGenderComboBox.ItemsSource= Enum.GetValues(typeof(BE.MyEnum.gender));
         }
-        public string getPhoneprefix()
+        public void getPhoneprefix()
         {
-            string prefix = " ";
-            foreach(char ch in bL.GetAllTesters()[ListIndex].PhoneNumber)
-            {
-                prefix += ch;
-                if (ch == '-')
-                    break;
-            }
-            return prefix;
+
+            string prefix = bL.GetAllTesters()[ListIndex].PhoneNumber;
+            
+            
         }
         public void getPhonesuffix()
         {
             string suffix=bL.GetAllTesters()[ListIndex].PhoneNumber;
-  
+            phoneNumberTextBox.Text = null;
             if (suffix[3] == '-')
             {
+                
                 for (int i = 4; i < suffix.Length; i++)
                     phoneNumberTextBox.Text += suffix[i];
             }
@@ -230,7 +227,7 @@ namespace PLWPF
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
                 HoustNumTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.houseNumber.ToString();
                 StreetNameTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.streetName;
-                phoneNumerCombobox.Text = getPhoneprefix();
+                 getPhoneprefix();
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text= bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
