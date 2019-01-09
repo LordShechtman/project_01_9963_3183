@@ -19,9 +19,14 @@ namespace PLWPF
     /// </summary>
     public partial class TraineeViweWindow : Window
     {
+        public IBL my_bl;
         public TraineeViweWindow()
         {
             InitializeComponent();
+            my_bl = BL.Factory_BL.getBL();
+            traineeListView.DataContext = my_bl.GetAllTrainees();
+          
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

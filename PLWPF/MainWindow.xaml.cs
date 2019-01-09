@@ -99,5 +99,12 @@ namespace PLWPF
             testerViweWindow.ShowDialog();
 
         }
+
+        private void showTraineesButton_Click(object sender, RoutedEventArgs e)
+        {
+            TraineeViweWindow traineeViwe = new TraineeViweWindow();
+            traineeViwe.ShowDialog();
+            
+        }
     }
 }
