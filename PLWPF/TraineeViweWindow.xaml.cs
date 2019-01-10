@@ -82,5 +82,10 @@ namespace PLWPF
                 MessageBox.Show(ex.Message, "ERROR 404");
             }
             }
+
+        private void traineeListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
     }
 }

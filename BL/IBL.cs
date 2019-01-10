@@ -40,6 +40,7 @@ using BE;
     List<Test> Testbydate(DateTime date);
     List<Tester> liveFrom(int x, Address address);
     IEnumerable<Trainee> ALLTraineeByParameter(Predicate<Trainee> myParameter);
+    IEnumerable<Tester> AllTestersByCondiion(Predicate<Tester> myPredicate);
     
     #endregion
     //--------------geting Functions

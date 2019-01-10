@@ -52,7 +52,7 @@
             <TextBox x:Name="schoolTextBox" Width="120" VerticalAlignment="Center" Text="{Binding School, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="10" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Teacher Name:"/>
             <TextBox x:Name="teacherNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding TeacherName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="10" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <ComboBox x:Name="PhoneNumberPrirtyComboBox" HorizontalAlignment="Left" Margin="123,4.2,0,0" Grid.Row="8" VerticalAlignment="Top" Width="60" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="PhoneNumberPrirtyComboBox" HorizontalAlignment="Left" Margin="123,0,0,6" Grid.Row="8" VerticalAlignment="Bottom" Width="60" Grid.ColumnSpan="2" Text="{Binding PhonePrefix, Mode=OneWay}"/>
         </Grid>
         <GroupBox Header="please make your choice" HorizontalAlignment="Left" Height="100" Margin="33,70,0,0" VerticalAlignment="Top" Width="149">
             <RadioButton x:Name="AddRbutton" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="AddRbutton_Checked"/>
