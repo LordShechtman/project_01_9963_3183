@@ -35,20 +35,22 @@ using BE;
     IEnumerable<IGrouping<int, Trainee>> AllTraineesByNumberOfTests();
     IEnumerable<IGrouping<string, Trainee>> TraineeByTeacher(bool flag);
     IEnumerable<Tester> TestersByOrder();
-    List<Test> allTestBy(Predicate<Test> codition);
+    List<Test> AllTestBy(Predicate<Test> codition);
 
     List<Test> Testbydate(DateTime date);
     List<Tester> liveFrom(int x, Address address);
+    IEnumerable<Trainee> ALLTraineeByParameter(Predicate<Trainee> myParameter);
     
     #endregion
     //--------------geting Functions
     List<Tester> GetAllTesters();
     List<Trainee> GetAllTrainees();
     List<Test> GetAllTests();
+    #region Updated due the second part
     /*New: I added password filed for the system*/
     void SetTesterpassword(string id, string password);
     void SetTraineePassword(string id, string password);
-
+    #endregion
 }
 namespace BL
 { 

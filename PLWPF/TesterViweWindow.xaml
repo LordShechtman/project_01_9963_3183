@@ -14,6 +14,7 @@
 
         <DataGrid x:Name="testerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,265,662,10" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Id}"/>
                 <DataGridTemplateColumn x:Name="birthDateColumn" Width="SizeToHeader" Header="Birth Date">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -31,7 +32,6 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="familyNameColumn" Width="SizeToHeader" Header="Family Name" Binding="{Binding FamilyName}"/>
-                <DataGridTextColumn x:Name="idColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="maxDistanceColumn" Width="SizeToHeader" Header="Max Distance" Binding="{Binding MaxDistance}"/>
                 <DataGridTextColumn x:Name="maxTestsPerWeekColumn" Width="SizeToHeader" Header="Max Tests Per Week" Binding="{Binding MaxTestsPerWeek}"/>
                 <DataGridTextColumn x:Name="myAddressColumn" Width="SizeToHeader" Header="My Address" Binding="{Binding MyAddress}"/>

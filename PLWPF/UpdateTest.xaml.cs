@@ -18,24 +18,46 @@ namespace PLWPF
     /// <summary>
     /// Interaction logic for UpdateTest.xaml
     /// </summary>
+    
+       
     public partial class UpdateTest : Window
     {
+        public void LockFiled()
+        {
+            GenralParmetersGrid.IsEnabled = false;
+            PasswordGrid.IsEnabled = false;
+            AddNoteGrid.IsEnabled = false;
+            studentDetails.Content = null;
+            StudentIDTB.Text = null;
+            TestDateDP.Text = null;
+            
+
+        }
         public int ListIndex = 0;
 
         IBL My_bl;
        public List<string> myTestNotes = new List<string>();
        public List<bool> allMyParameters = new List<bool>();
+        /// <summary>
+        /// We loced and ulocked the filed by tester login and log out
+        /// </summary>
         public UpdateTest()
         {
             InitializeComponent();
             My_bl = Factory_BL.getBL();
-            foreach (var v in My_bl.GetAllTesters())
-                TesterIDCombobox.Items.Add(v.Id + " " + v.Name + " " + v.FamilyName);
-            for(int i = 0; i < 6; i++) { allMyParameters.Add(false); }
-            PasswordBox.IsEnabled = false;
-            OkButton.IsEnabled = false;
-            
+            StudentIDTB.IsEnabled = false;
+            HourDispalyLabel.Content = "Hour:";
+            LockFiled();
+
         }
+
+        public void ActiveFildes()
+        {
+            GenralParmetersGrid.IsEnabled = true;
+            PasswordGrid.IsEnabled = true;
+            AddNoteGrid.IsEnabled = true;
+        }
+            
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +83,11 @@ namespace PLWPF
                     allMyParameters.Insert((int)MyEnum.testsParameters.signals, true);
                 if (KeepDistanceUC.PassedCB.IsChecked == true)
                     allMyParameters.Insert((int)MyEnum.testsParameters.keepDistance, true);
+                DateTime my_date = My_bl.GetAllTests()[ListIndex].TestDate;
                
+                
+                Test finalGradeTest = new Test(TesterIDTextBox.Text, StudentIDTB.Text,my_date, My_bl.GetAllTests()[ListIndex].TestAddress,allMyParameters,myTestNotes);
+                My_bl.UpdateTest(finalGradeTest);
 
 
             }
@@ -71,23 +97,26 @@ namespace PLWPF
             }
         }
 
-        private void TesterIDCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            PasswordBox.IsEnabled = true;
-            OkButton.IsEnabled = true;
-        }
+        
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                BE.Tester tester = My_bl.GetAllTesters().Find(x=>x.Id==TesterIDCombobox.Text);
-                if (tester.Password == PasswordBox.Password)
+                BE.Tester tester = My_bl.GetAllTesters().Find(x=>x.Id==TesterIDTextBox.Text);
+                if (tester == null)
+                    throw new Exception("Tester " + TesterIDTextBox.Text + "not found!!");
+                if (tester.Password == YourPasswordBox.Password)
                 {
-                    List<Test> myTests = My_bl.GetAllTests().FindAll(x => x.TesterId == TesterIDCombobox.Text);
+                    List<Test> myTests = My_bl.GetAllTests().FindAll(x => x.TesterId == TesterIDTextBox.Text && x.TestDate <= DateTime.Now);
+                    if (myTests.Any() == false)
+                        throw new Exception("You don't have any tests to update");
+                    ListIndex = 0;
                     StudentIDTB.Text = myTests[0].TraineeId;
                     Trainee trainee = My_bl.GetAllTrainees().Find(x => x.Id == StudentIDTB.Text);
                     studentDetails.Content = trainee.Name + " " + trainee.FamilyName;
+                    TestDateDP.SelectedDate = myTests[ListIndex].TestDate;
+                    HourDispalyLabel.Content = "Hour:" + myTests[ListIndex].TestDate.Hour;
                 }
                 else
                     throw new Exception("Worng password!!");
@@ -107,6 +136,16 @@ namespace PLWPF
             SingleNoteTB.Text = null;
 
 
+        }
+
+        private void TesterIDTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+             || (e.Key >= Key.D0 && e.Key <= Key.D9));
+            if(TesterIDTextBox.Text.Count()==9)
+            {
+                PasswordGrid.IsEnabled = true;
+            }
         }
     }
 }

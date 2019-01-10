@@ -111,7 +111,7 @@ namespace BL
         {
             //Returns all Testersgroup by the test they have made
             IEnumerable<IGrouping<int, Tester>> num = from x in dal.GetAllTesters()
-                                                      let toatalTests = allTestBy(y => y.TesterId == x.Id).Count()
+                                                      let toatalTests = AllTestBy(y => y.TesterId == x.Id).Count()
                                                       group x by toatalTests;
 
 
@@ -170,7 +170,7 @@ namespace BL
 
             return live_from.ToList();
         }
-        public List<Test> allTestBy(Predicate<Test> codition)
+        public List<Test> AllTestBy(Predicate<Test> codition)
         {
 
             return dal.GetAllTests().FindAll(codition);
@@ -178,7 +178,10 @@ namespace BL
 
 
         }
-
+        public IEnumerable<Trainee> ALLTraineeByParameter(Predicate<Trainee> myParameter)
+        {
+            return dal.GetAllTrainees().FindAll(myParameter);
+        }
         public List<Test> Testbydate(DateTime date)
         {
 
@@ -513,6 +516,7 @@ namespace BL
 
         #endregion
         #region setPassword
+        // After we add  a new version we added the password filed  
         public void SetTesterpassword(string id, string password)
         {
             Tester x = dal.GetAllTesters().Find(y => y.Id == id);
