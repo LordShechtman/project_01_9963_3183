@@ -125,7 +125,7 @@
         <RadioButton x:Name="AllTraineesOfGenderx" Content="Trainees by gender" HorizontalAlignment="Left" Margin="53,150,0,0" VerticalAlignment="Top" Checked="AllTraineesOfGenderx_Checked" Unchecked="AllTraineesOfGenderx_Unchecked"/>
         <ComboBox x:Name="GenderComboBox" HorizontalAlignment="Left" Margin="189,150,0,0" VerticalAlignment="Top" Width="84" Height="24" SelectionChanged="GenderComboBox_SelectionChanged"/>
         <local:SearchUserConstrol x:Name="SearchUC" HorizontalAlignment="Left" Height="221" Margin="705,0,0,0" VerticalAlignment="Top" Width="287"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="714,201,0,0" VerticalAlignment="Top" Width="224" Click="SearchButton_Click"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="714,201,0,0" VerticalAlignment="Top" Width="236" Click="SearchButton_Click"/>
 
 
     </Grid>

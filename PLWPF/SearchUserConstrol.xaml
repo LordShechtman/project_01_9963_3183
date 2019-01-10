@@ -9,7 +9,7 @@
     <Grid>
         <Grid x:Name="MainGrid" HorizontalAlignment="Left" Height="190" Margin="10,10,0,0" VerticalAlignment="Top" Width="238" Background="#FF419BBD">
             <Label x:Name="IDlabel" Content="ID" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.655,-1.049" FontFamily="Segoe UI Emoji" Foreground="White" Height="27" Width="37" FontSize="14"/>
-            <TextBox x:Name="IDSearchTB" HorizontalAlignment="Left" Height="23" Margin="90,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="IDSearchTB" MaxLength="9" HorizontalAlignment="Left" Height="23" Margin="90,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label x:Name="NameLabel" Content="Name" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Foreground="White"/>
             <TextBox x:Name="NameSearchTextbox" HorizontalAlignment="Left" Height="23" Margin="90,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label x:Name="FamilyNameLabel" Content="Family   Name" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Foreground="White"/>

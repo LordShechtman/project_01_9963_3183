@@ -69,10 +69,18 @@ namespace PLWPF
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            if(SearchUC.IDSearchTB.Text!=null)
+            try
             {
-                
+                if (SearchUC.IDSearchTB.Text !="")
+                    traineeListView.DataContext = my_bl.ALLTraineeByParameter(x => x.Id == SearchUC.IDSearchTB.Text);
+                else
+                    traineeListView.DataContext = my_bl.ALLTraineeByParameter(x =>x.Name==SearchUC.NameSearchTextbox.Text ||x.FamilyName== SearchUC.FamilyNameSearchTB.Text
+                    || x.PhoneNumber==SearchUC.PhoneNumberSearchTextBox.Text);
             }
-        }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR 404");
+            }
+            }
     }
 }
