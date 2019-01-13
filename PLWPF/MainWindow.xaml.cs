@@ -88,8 +88,23 @@ namespace PLWPF
                     item.Password = "1234";
                 }
             }
+            DemoModeButton.IsEnabled = false;
             //-----------------------------------------------
             //---------------------------------------------------
+        }
+
+        private void ShowTestersButton_Click(object sender, RoutedEventArgs e)
+        {
+            TesterViweWindow testerViweWindow = new TesterViweWindow();
+            testerViweWindow.ShowDialog();
+
+        }
+
+        private void showTraineesButton_Click(object sender, RoutedEventArgs e)
+        {
+            TraineeViweWindow traineeViwe = new TraineeViweWindow();
+            traineeViwe.ShowDialog();
+            
         }
     }
 }

@@ -14,13 +14,12 @@ namespace BE
         public string streetName;
         public int houseNumber;
        public string city;
-        
-        
+        public override string ToString()
+        {
+            return streetName + " " + houseNumber + " " + city;
+        }
+
     }
     
-    public class Class1
-    {
-      
-       
-    }
+    
 }

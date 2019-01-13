@@ -19,26 +19,36 @@ namespace PLWPF
     /// </summary>
     public partial class AddTestWindow : Window
     {
-        public IBL MyBL;
-        public AddTestWindow()
+        public void clearFileds()
         {
-            InitializeComponent();
-            MyBL = BL.Factory_BL.getBL();
-            if (MyBL.GetAllTrainees().Any())
-            {
-                foreach (var v in MyBL.GetAllTrainees())
-                    traineeIdCB.Items.Add(v.Id);
-            }
+            traineeIdTB.Text = null;
+            CityTextBox.Text = "City";
+            StreetNameTextBox.Text = "Street";
+            HouseNumberTextBox.Text = null;
+            traineeIdTB.IsEnabled = true;
+            CityTextBox.IsEnabled = false;
+            StreetNameTextBox.IsEnabled = false;
+            HouseNumberTextBox.IsEnabled = false;
+
+            Singup.Content = "New  trainee ? ";
+            SingUpWindow.Visibility = Visibility.Visible;
             YourPasswordBox.Visibility = Visibility.Hidden;
             testDateDatePicker.DisplayDateEnd = DateTime.Now.AddDays(31);
             testDateDatePicker.DisplayDateStart = DateTime.Now;
             testDateDatePicker.IsEnabled = false;
             CityTextBox.IsEnabled = false;
             HourCB.IsEnabled = false;
-            for(int i=9;i<15;i++)
-            {
-                HourCB.Items.Add(i);
-            }
+        }
+        public IBL MyBL;
+        public AddTestWindow()
+        {
+
+            InitializeComponent();
+            MyBL = BL.Factory_BL.getBL();
+            clearFileds();
+            for (int i = 9; i < 15; i++)
+                HourCB.Items.Add(i.ToString());
+
 
         }
 
@@ -57,11 +67,7 @@ namespace PLWPF
                 || (e.Key >= Key.D0 && e.Key <= Key.D9));
         }
 
-        private void traineeIdTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-              || (e.Key >= Key.D0 && e.Key <= Key.D9));
-        }
+       
 
         private void CityTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -81,29 +87,36 @@ namespace PLWPF
                 my_address.city = CityTextBox.Text;
                 my_address.streetName = StreetNameTextBox.Text;
                 my_address.houseNumber = int.Parse(HouseNumberTextBox.Text);
-                if (traineeIdCB.Text=="")
+                if (traineeIdTB.Text=="")
                     throw new Exception("Please select trainee ID");
                 if(testDateDatePicker.Text=="")
                     throw new Exception("Please select Date for the test");
-                DateTime testDay = new DateTime(testDateDatePicker.DisplayDate.Year,
-                   testDateDatePicker.DisplayDate.Month, testDateDatePicker.DisplayDate.Day,
-                   int.Parse(HourCB.Text), 0, 0);
-                MyBL.AddTest(traineeIdCB.Text, my_address,testDay);
+                DateTime testDay = (DateTime)testDateDatePicker.SelectedDate;
+                testDay = testDay.AddHours(double.Parse(HourCB.Text));
+
+
+
+                MyBL.AddTest(traineeIdTB.Text, my_address,testDay);
+                BE.Test isfound = MyBL.GetAllTests().Find(x => x.TraineeId == traineeIdTB.Text && x.TestDate == testDay);
+                if(isfound!=null)
+                {
+                    BE.Tester myTester = MyBL.GetAllTesters().Find(x => x.Id == isfound.TesterId);
+                    MessageBox.Show("Good Luck: your tester  phone is: " + myTester.PhoneNumber + " " + myTester.Name + " " + myTester.FamilyName,"Test number: "+isfound.TestNumber);
+                }
+                clearFileds();
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR");
+                clearFileds();
+                
             }
         }
 
-        private void traineeIdCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void traineeIdTB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            YourPasswordBox.Visibility = Visibility.Visible;
-            SingUpWindow.Visibility = Visibility.Hidden;
-            var UserName = MyBL.GetAllTrainees().Find(x => x.Id == traineeIdCB.SelectedItem.ToString());
-            Singup.Content = UserName.Name + " " + UserName.FamilyName;
-
+          
 
         }
 
@@ -115,24 +128,56 @@ namespace PLWPF
 
         private void CheckPasswordB_Click(object sender, RoutedEventArgs e)
         {
-            BE.Trainee trinne = MyBL.GetAllTrainees().Find(x => x.Id == traineeIdCB.Text);
-            if(trinne.Password==YourPasswordBox.Password)
+            try
             {
-                testDateDatePicker.IsEnabled = true;
-                CityTextBox.IsEnabled = true;
-                HourCB.IsEnabled = true;
-                YourPasswordBox.Visibility = Visibility.Hidden;
-                CheckPasswordB.Visibility = Visibility.Hidden;
+                BE.Trainee trinne = MyBL.GetAllTrainees().Find(x => x.Id == traineeIdTB.Text);
+                if (trinne == null)
+                    throw new Exception("Trinne NOT FOUND!!!");
+                if (trinne.Password == YourPasswordBox.Password)
+                {
+                    SingUpWindow.Visibility = Visibility.Hidden;
+                    Singup.Visibility = Visibility.Visible;
+                    Singup.Content = trinne.Name + " " + trinne.FamilyName;
+                    testDateDatePicker.IsEnabled = true;
+                    CityTextBox.IsEnabled = true;
+                    StreetNameTextBox.IsEnabled = true;
+                    HouseNumberTextBox.IsEnabled = true;
+                    HourCB.IsEnabled = true;
+                    YourPasswordBox.Visibility = Visibility.Hidden;
+                    CheckPasswordB.Visibility = Visibility.Hidden;
+                    PasswordLB.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    throw new Exception("Wrong password");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            if (MyBL.GetAllTrainees().Any())
+            
+        }
+
+        private void traineeIdTB_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !((e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+              || (e.Key >= Key.D0 && e.Key <= Key.D9));
+            if (traineeIdTB.Text.Length == 9)
             {
-                foreach (var v in MyBL.GetAllTrainees())
-                    traineeIdCB.Items.Add(v.Id);
+                Singup.Visibility = Visibility.Hidden;
+                YourPasswordBox.Visibility = Visibility.Visible;
+                YourPasswordBox.IsEnabled = true;
+                CheckPasswordB.Visibility = Visibility.Visible;
+                SingUpWindow.Visibility = Visibility.Hidden;
+
+                
             }
         }
     }

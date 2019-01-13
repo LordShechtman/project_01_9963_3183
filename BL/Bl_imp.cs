@@ -37,7 +37,7 @@ namespace BL
         {
             Random r = new Random();
             ///Meanwhile we wait for permission from Google Maps we will return random distance;
-            return r.Next(0, 151);
+            return 50;
         }
         public void ValidAddress(Address address)
         {
@@ -271,22 +271,27 @@ namespace BL
             if ((int)date.DayOfWeek > 4)
                 throw new Exception("Tests can only be happened between Sunday to Thursday");
             Tester validTester = null;
-
+            //All TESTERS WHO WORK IN DAY X OF THE WEEK AND HOUR Y IN THAT DAY
             var valid_testers = all_my_testers.FindAll(item => item.WorkHours[(int)date.DayOfWeek, (int)date.Hour - 9] == true);
-            List<Test> thisDay = all_my_test.FindAll(x => x.TestDate == date);
+            //All Testers who Work in that day in the same Hour(so they not aviable to the test)
+            List<Test> thisDay = all_my_test.FindAll(x => x.TestDate == date && x.TestDate.Hour==date.Hour);
+            //All Tests in that week
             List<Test> thisWeek = all_my_test.FindAll(x => InTheSameWeek(date, x.TestDate));
+            //Find aviable tester
             foreach (var tester in valid_testers)
             {
+                //Find if the tester is not have test in that day and that hour
                 var freeTester = from x in thisDay
                                  where x.TesterId == tester.Id
                                  select x;
+                //Count All the test in that Week
                 var testThisWeek = from y in thisWeek
                                    where y.TesterId == tester.Id
                                    select y;
 
                 if (freeTester.Any() == false
                     && testThisWeek.Count() <= tester.MaxTestsPerWeek
-                    && tester.MaxDistance <= distance(tester.MyAddress, address)
+                    && tester.MaxDistance >= distance(tester.MyAddress, address)
                     && IsSameCarType(tester.Id, trainee_id) == true)
                 {
                     validTester = tester;

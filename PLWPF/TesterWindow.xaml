@@ -66,7 +66,7 @@
             <TextBox x:Name="yearsOfExperienceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="10" Text="{Binding YearsOfExperience, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="yearsOfExperienceTextBox_KeyDown"/>
         </Grid>
         <RadioButton x:Name="DeleteBoutton" Content="Delete" HorizontalAlignment="Left" Margin="16,62,0,0" VerticalAlignment="Top" Checked="DeleteBoutton_Checked"/>
-        <ComboBox x:Name="phoneNumerCombobox" HorizontalAlignment="Left" Margin="325,153,0,0" VerticalAlignment="Top" Width="51" SelectionChanged="phoneNumerCombobox_SelectionChanged"/>
+        <ComboBox x:Name="phoneNumerCombobox" HorizontalAlignment="Left" Margin="325,153,0,0" VerticalAlignment="Top" Width="51" />
         <Button x:Name="FinishButton" Content="Finsh" HorizontalAlignment="Left" Height="43" Margin="10,132,0,0" VerticalAlignment="Top" Width="109" Click="FinishButton_Click"/>
         <RadioButton x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="16,81,0,0" VerticalAlignment="Top" Checked="UpdateButton_Checked"/>
         <local:TesterWorkHoursUserControl x:Name="WorkHoursUC" HorizontalAlignment="Left" Height="129" Margin="487,202,0,0" VerticalAlignment="Top" Width="295"/>

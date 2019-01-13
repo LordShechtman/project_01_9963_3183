@@ -58,6 +58,9 @@
     <Compile Include="AddTestWindow.xaml.cs">
       <DependentUpon>AddTestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TesterViweWindow.xaml.cs">
+      <DependentUpon>TesterViweWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TesterWindow.xaml.cs">
       <DependentUpon>TesterWindow.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,9 @@
     </Compile>
     <Compile Include="TestParmeterUC.xaml.cs">
       <DependentUpon>TestParmeterUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraineeViweWindow.xaml.cs">
+      <DependentUpon>TraineeViweWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TraineeWindow.xaml.cs">
       <DependentUpon>TraineeWindow.xaml</DependentUpon>
@@ -92,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TesterViweWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TesterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestParmeterUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TraineeViweWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

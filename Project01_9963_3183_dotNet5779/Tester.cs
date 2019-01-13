@@ -41,6 +41,27 @@ namespace BE
                                               /*13*/
         public int MaxDistance { get; set; }
         public Tester() { }
+        public string PhonePrefix
+        {
+            get
+            {
+
+
+                //SEE SUMMRY ABOVE
+                string Prefix = "";
+                foreach (char ch in PhoneNumber)
+                {
+                    if (ch == '-')
+                    {
+                        Prefix += ch;
+                        break;
+                    }
+
+                    Prefix += ch;
+                }
+                return Prefix;
+            }
+        }
         public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, int max_distance, bool[,] mat)
         {
             Id = id;
