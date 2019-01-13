@@ -13,7 +13,7 @@
         <Button Content="Add Note" HorizontalAlignment="Left" Margin="579,218,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Grid x:Name="AddNoteGrid" HorizontalAlignment="Left" Height="131" Margin="574,106,0,0" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="EnterNoteslabel" Content="Enter a note" HorizontalAlignment="Left" Margin="579,106,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="SaveButton" Content="SAVE" HorizontalAlignment="Left" Margin="271,286,0,0" VerticalAlignment="Top" Width="151" Height="59" FontFamily="Segoe UI Black" Foreground="#FF2281C3" Click="SaveButton_Click"/>
+        <Button x:Name="SaveButton" Content="SAVE" HorizontalAlignment="Left" Margin="256,286,0,0" VerticalAlignment="Top" Width="151" Height="59" FontFamily="Segoe UI Black" Foreground="#FF2281C3" Click="SaveButton_Click"/>
         <local:TestParmeterUC x:Name="KeepDistanceUC" HorizontalAlignment="Left" Height="95" Margin="330,91,0,0" VerticalAlignment="Top" Width="212"/>
         <local:TestParmeterUC x:Name="ReverseParkUC" HorizontalAlignment="Left" Height="95" Margin="330,117,0,0" VerticalAlignment="Top" Width="212"/>
         <local:TestParmeterUC x:Name="MirorsUC" HorizontalAlignment="Left" Height="95" Margin="330,150,0,0" VerticalAlignment="Top" Width="212"/>
@@ -33,7 +33,7 @@
         <TextBox x:Name="StudentIDTB" HorizontalAlignment="Left" Height="23" Margin="287,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label Content="Trainee ID" HorizontalAlignment="Left" Margin="219,46,0,0" VerticalAlignment="Top"/>
         <Label x:Name="studentDetails" Content="Trainee details" HorizontalAlignment="Left" Margin="425,46,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="TestDateDP" HorizontalAlignment="Left" Margin="566,48,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="TestDateDP" HorizontalAlignment="Left" Margin="595,46,0,0" VerticalAlignment="Top"/>
         <Label x:Name="MainLabel" Content="Update Test" HorizontalAlignment="Left" Margin="20,9,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="20" Background="{x:Null}" BorderBrush="#FFBC3535">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
