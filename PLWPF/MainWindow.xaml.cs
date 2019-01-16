@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BE;
 using BL;
+using DAL;
 namespace PLWPF
 {
     /// <summary>
@@ -87,10 +88,17 @@ namespace PLWPF
                 {
                     item.Password = "1234";
                 }
+                foreach (var item in bl.GetAllTesters())
+                {
+                    item.Password = "1234";
+                }
             }
             DemoModeButton.IsEnabled = false;
             //-----------------------------------------------
-            //---------------------------------------------------
+            //------------For the Demo We made "Fake TESTS SHOW YOU SOME CHANGES"----------
+            Test test1 = new Test(bl.GetAllTesters().First().Id, bl.GetAllTrainees().First().Id, new DateTime(2019, 01, 10, 9, 0, 0), (bl.GetAllTesters().First().MyAddress));
+            Idal fake_dal = Factory_dal.getDal();
+            fake_dal.AddTest(test1);
         }
 
         private void ShowTestersButton_Click(object sender, RoutedEventArgs e)

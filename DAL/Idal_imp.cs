@@ -29,7 +29,8 @@ namespace DAL
         static Dal_imp() { }
 
         #endregion
-        
+        //Tester funtions
+        #region Tester
         public void AddTester(Tester t)
         {
             //Add new tester to the testers list (After the object approval  by the BL)
@@ -85,8 +86,10 @@ namespace DAL
         }
         //----------------------------------
         // Trinnee functions
+        #endregion
 
-       public void AddTrainee(Trainee t)
+        #region Trainee
+        public void AddTrainee(Trainee t)
         {
             if (DS.DataSource.trainees.Any()==false)
             {
@@ -135,10 +138,12 @@ namespace DAL
                 throw new Exception("Trainee" + t.Id + "is not exist");
 
         }
+        #endregion
         //--------------------------------
+        #region test
         /// TEST Function
         /// 
-       public void AddTest(Test t)
+        public void AddTest(Test t)
         {
             
             // Genrate tests number
@@ -163,13 +168,30 @@ namespace DAL
             DataSource.tests.Add(t);
                 
         }
-
+        #endregion
+        #region Data Acsses
         //--------------geting Functions
-      public  List<Tester> GetAllTesters() { return DS.DataSource.testers; }
-      public  List<Trainee> GetAllTrainees() { return DS.DataSource.trainees; }
-      public  List<Test> GetAllTests() { return DS.DataSource.tests; }
-    
-
+        public List<Tester> GetAllTesters()
+        {
+            /* Return the testers List from the data base
+               ordered by name and family name*/
+            //return DS.DataSource.testers;(The old version)
+            var OrderList= from item in DS.DataSource.testers
+                   orderby item.FamilyName , item.Name, item.Id
+                   select item;
+            return OrderList.ToList();
         }
+      public  List<Trainee> GetAllTrainees()
+        {
+            //return DS.DataSource.trainees;(The old un sorted verion)
+            var OrderList = from item in DS.DataSource.trainees
+                            orderby item.FamilyName, item.Name, item.Id
+                            select item;
+            return OrderList.ToList();
+        }
+      public  List<Test> GetAllTests() { return DS.DataSource.tests; }
+
+        #endregion
     }
+}
 

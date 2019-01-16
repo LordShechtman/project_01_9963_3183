@@ -10,24 +10,22 @@
     <Window.Resources>
         <CollectionViewSource x:Key="traineeViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Trainee}, CreateList=True}"/>
     </Window.Resources>
-    <Grid >
+    <Grid DataContext="" >
 
-        <ListView x:Name="traineeListView" SelectionMode="Single" Margin="10,209,10,10" ItemsSource="{Binding}">
+        <ListView x:Name="traineeListView" SelectionMode="Single" Margin="0,236,20,10" ItemsSource="{Binding}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn x:Name="brithDateColumn" Width="80" Header="Brith Date">
+                    <GridViewColumn x:Name="idColumn" Width="90" Header="Id">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <DatePicker Margin="6,-1,-6,-1" SelectedDate="{Binding BrithDate, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                <TextBox Margin="-6,-1" Text="{Binding Id, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="carColumn" Width="80" Header="Car">
+                    <GridViewColumn x:Name="nameColumn" Width="80" Header="Name">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox Margin="-6,-1">
-                                    <ComboBoxItem Content="{Binding Car}"/>
-                                </ComboBox>
+                                <TextBox Margin="-6,-1" Text="{Binding Name, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -38,10 +36,28 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="idColumn" Width="80" Header="Id">
+                    <GridViewColumn x:Name="brithDateColumn" Width="90" Header="Brith Date">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding Id, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                <DatePicker Margin="6,-1,-6,-1" SelectedDate="{Binding BrithDate, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="phoneNumberColumn" Width="90" Header="Phone Number">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding PhoneNumber, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn x:Name="carColumn" Width="95" Header="Liscece Request">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox x:Name="LiscenceRequstCombobox" Margin="-6,-1" SelectedIndex="0" >
+                                    <ComboBoxItem Content="{Binding Car}"/>
+                                </ComboBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -55,7 +71,7 @@
                     <GridViewColumn x:Name="myGearColumn" Width="80" Header="Gear">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox Margin="-6,-1">
+                                <ComboBox Margin="-6,-1" SelectedIndex="0">
                                     <ComboBoxItem Content="{Binding MyGear}"/>
                                 </ComboBox>
                             </DataTemplate>
@@ -64,16 +80,9 @@
                     <GridViewColumn x:Name="myGenderColumn" Width="80" Header="Gender">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox Margin="-6,-1">
+                                <ComboBox Margin="-6,-1" SelectedIndex="0">
                                     <ComboBoxItem Content="{Binding MyGender}"/>
                                 </ComboBox>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="nameColumn" Width="80" Header="Name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding Name, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -84,22 +93,8 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="passwordColumn" Width="80" Header="Password">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding Password, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="phoneNumberColumn" Width="90" Header="Phone Number">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding PhoneNumber, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    
-                            
+
+
                     <GridViewColumn x:Name="schoolColumn" Width="80" Header="School">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -123,6 +118,15 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        <Label Content="Trainees viwe " HorizontalAlignment="Left" Margin="53,24,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="24" Foreground="#FF4270D3"/>
+        <RadioButton x:Name="AllStudentsBySchool" Content="Trinees per school" HorizontalAlignment="Left" Margin="53,90,0,0" VerticalAlignment="Top" Checked="AllStudentsBySchool_Checked"/>
+        <RadioButton x:Name="AllTraineesByNumberOfTestsRadioButton" Content=" Trainees By Number Of Tests" HorizontalAlignment="Left" Margin="53,110,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="TraineesByTeacherRadioButton" Content="Trainees By Teacher" HorizontalAlignment="Left" Margin="53,130,0,0" VerticalAlignment="Top" Checked="TraineesByTeacherRadioButton_Checked"/>
+        <RadioButton x:Name="AllTraineesOfGenderx" Content="Trainees by gender" HorizontalAlignment="Left" Margin="53,150,0,0" VerticalAlignment="Top" Checked="AllTraineesOfGenderx_Checked" Unchecked="AllTraineesOfGenderx_Unchecked"/>
+        <ComboBox x:Name="GenderComboBox" HorizontalAlignment="Left" Margin="189,150,0,0" VerticalAlignment="Top" Width="84" Height="24" SelectionChanged="GenderComboBox_SelectionChanged"/>
+        <local:SearchUserConstrol x:Name="SearchUC" HorizontalAlignment="Left" Height="221" Margin="705,0,0,0" VerticalAlignment="Top" Width="287"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="714,201,0,0" VerticalAlignment="Top" Width="236" Click="SearchButton_Click"/>
+
 
     </Grid>
 </Window>
