@@ -35,7 +35,7 @@
             <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Lisence Type:"/>
             <ComboBox x:Name="carTextBox" ItemsSource="{Binding}" SelectedValue="{Binding car_type}" Width="120" VerticalAlignment="Center" Text="{Binding Car, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Family Name:"/>
-            <TextBox x:Name="familyNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding FamilyName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBox x:Name="familyNameTextBox" Width="120" TextChanged="NAMES" VerticalAlignment="Center" Text="{Binding FamilyName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Id:"/>
             <TextBox x:Name="idTextBox" MaxLength="9" Width="120" VerticalAlignment="Center" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" KeyDown="idTextBox_KeyDown"/>
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Gear:"/>
@@ -43,15 +43,15 @@
             <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Gender:"/>
             <ComboBox x:Name="myGenderTextBox" SelectedValue="{Binding gender}" Width="120" VerticalAlignment="Center"  Grid.Row="5" ItemsSource="{Binding}" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="1" Margin="3,0,0,2.8" HorizontalAlignment="Left" Content="Name:"/>
-            <TextBox x:Name="nameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBox x:Name="nameTextBox" Width="120" VerticalAlignment="Center" TextChanged="NAMES" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Number Of Lessons:"/>
             <TextBox x:Name="numberOfLessonsTextBox" MaxLength="3" Width="120" VerticalAlignment="Center" Text="{Binding NumberOfLessons, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" KeyDown="numberOfLessonsTextBox_KeyDown"/>
             <Label VerticalAlignment="Center" Grid.Row="8" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Phone Number:"/>
             <TextBox x:Name="phoneNumberTextBox" MaxLength="7" Width="120" VerticalAlignment="Center" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Margin="64.8,3.2,-58.4,5.8" Height="23" HorizontalAlignment="Left" Grid.Column="1" KeyDown="phoneNumberTextBox_KeyDown"/>
             <Label VerticalAlignment="Center" Grid.Row="9" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="School:"/>
-            <TextBox x:Name="schoolTextBox" Width="120" VerticalAlignment="Center" Text="{Binding School, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBox x:Name="schoolTextBox" Width="120" TextChanged="NAMES" VerticalAlignment="Center" Text="{Binding School, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="10" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Teacher Name:"/>
-            <TextBox x:Name="teacherNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding TeacherName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="10" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBox x:Name="teacherNameTextBox" Width="120" VerticalAlignment="Center" TextChanged="NAMES" Text="{Binding TeacherName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="10" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <ComboBox x:Name="PhoneNumberPrirtyComboBox" HorizontalAlignment="Left" Margin="123,4.2,0,0" Grid.Row="8" VerticalAlignment="Top" Width="60" Grid.ColumnSpan="2"/>
         </Grid>
         <GroupBox Header="please make your choice" HorizontalAlignment="Left" Height="100" Margin="33,70,0,0" VerticalAlignment="Top" Width="149">
@@ -71,9 +71,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="StreetNameTB" Text="Street" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="107,38,0,-22" Grid.Row="0" VerticalAlignment="Top" Width="79" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="HouseNumberTB"  Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="107,66,0,-50" Grid.Row="0" Text="number" VerticalAlignment="Center" Width="48" KeyDown="HouseNumberTB_KeyDown" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="CityTB" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="107,104,0,-88" Grid.Row="0" Text="city" VerticalAlignment="Center" Width="79" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="StreetNameTB" Text="Street" Grid.Column="1" TextChanged="NAMES" HorizontalAlignment="Left" Height="24" Margin="107,38,0,-22" Grid.Row="0" VerticalAlignment="Top" Width="79" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="HouseNumberTB"  Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="107,66,0,-50" Grid.Row="0" Text="Number" VerticalAlignment="Center" Width="48" KeyDown="HouseNumberTB_KeyDown" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="CityTB" Grid.Column="1" TextChanged="NAMES" HorizontalAlignment="Left" Height="24" Margin="107,104,0,-88" Grid.Row="0" Text="city" VerticalAlignment="Center" Width="79" Grid.ColumnSpan="2"/>
             <Label x:Name="AddressLabel" Content="Address" HorizontalAlignment="Left" Margin="74,10,0,0" VerticalAlignment="Top" Width="60" FontWeight="Bold" Grid.Column="1"/>
             <Label Content="City" Grid.Column="1" HorizontalAlignment="Left" Margin="55,117,0,-76.6" VerticalAlignment="Top"/>
             <Label Content="Number" Grid.Column="1" HorizontalAlignment="Left" Margin="48,76,0,-34" VerticalAlignment="Top"/>

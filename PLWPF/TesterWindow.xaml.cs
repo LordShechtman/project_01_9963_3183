@@ -508,9 +508,26 @@ namespace PLWPF
             }
         }
 
-        #endregion
 
-        
+        #endregion
+        // to Convert the first character
+        private void NAMES(object sender, TextChangedEventArgs e)
+        {
+            TextBox temp = (TextBox)sender;
+            if(temp.Text.Length > 1)
+            {
+                temp.Text = temp.Text[0].ToString().ToUpper() + temp.Text.Substring(1);
+
+            }
+
+            if (temp.Text.Length == 1)
+            {
+                temp.Text = temp.Text.ToUpper();
+            }
+
+            ((TextBox)sender).Text = temp.Text;
+            ((TextBox)sender).SelectionStart = ((TextBox)sender).Text.Length;
+        }
     }
 
 }
