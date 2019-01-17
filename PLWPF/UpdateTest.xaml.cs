@@ -117,6 +117,7 @@ namespace PLWPF
                     studentDetails.Content = trainee.Name + " " + trainee.FamilyName;
                     TestDateDP.SelectedDate = myTests[ListIndex].TestDate;
                     HourDispalyLabel.Content = "Hour:" + myTests[ListIndex].TestDate.Hour;
+                    ActiveFildes();
                 }
                 else
                     throw new Exception("Worng password!!");

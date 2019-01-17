@@ -33,6 +33,44 @@ namespace BL
 
         #endregion
         #region Valid input Logic
+        public void CheckID(string id)
+        {
+           /*We added the check for valid id to our system*/
+    #region Calculation of the audit digit
+            int ID = int.Parse(id);
+            //If we have 9 dights we check the last dight
+            int dight, sumd = 0, number, numd = 8;//numd=number of digits,sumd=sum of digits
+            number = (ID % 10);//numbr saves the ID digit by digit
+            while (numd >= 1)//cuculte sum of doublles
+            {
+                if (numd % 2 == 1)//for odd index
+                {
+                    sumd += number;
+                }
+                else
+                {
+                    
+                    number *= 2;//for double index
+                    sumd += (number / 10) + (number % 10);
+                }
+                numd--;
+                ID /= 10;//moving for the next digit
+                number = (ID % 10);
+            }
+            dight = 10 - (sumd % 10);
+            #endregion
+            if (id.Length == 8)
+            {
+                id = id + dight;
+                return;
+            }
+            //For 9 DIGHT ID
+            if ((int)id[id.Length - 1] != dight)
+                throw new Exception("Your ID is invalid id !!!");
+          
+        }
+
+
         int distance(Address address1, Address address2)
         {
             Random r = new Random();

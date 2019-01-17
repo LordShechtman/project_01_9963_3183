@@ -31,6 +31,7 @@ namespace PLWPF
             GenderComboBox.ItemsSource =Enum.GetNames(typeof( BE.MyEnum.gender));
             traineeListView.DataContext = my_bl.GetAllTrainees();
             GenderComboBox.Visibility = Visibility.Hidden;
+            TeacherComboBox.Visibility = Visibility.Hidden;
             setComboBoxes();
             
         }
@@ -48,7 +49,14 @@ namespace PLWPF
 
         private void TraineesByTeacherRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            traineeListView.DataContext = my_bl.TraineeByTeacher(true);
+            TeacherComboBox.Visibility = Visibility.Visible;
+            traineeListView.DataContext = null;
+            foreach(var item in my_bl.TraineeByTeacher(true))
+            {
+                TeacherComboBox.Items.Add(item.Key);
+                
+
+            }
         }
 
         private void AllTraineesOfGenderx_Checked(object sender, RoutedEventArgs e)
@@ -82,5 +90,25 @@ namespace PLWPF
                 MessageBox.Show(ex.Message, "ERROR 404");
             }
             }
+
+        private void TraineesByTeacherRadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TeacherComboBox.Visibility = Visibility.Hidden;
+        }
+
+        private void TeacherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            List<BE.Trainee> MyStudents = new List<BE.Trainee>(); 
+              foreach( IGrouping<string,BE.Trainee> keys in my_bl.TraineeByTeacher(true))   
+                if(keys.Key==(string)TeacherComboBox.SelectedValue)
+                {
+                    foreach (var item in keys)
+                        MyStudents.Add(item);
+                }
+            traineeListView.DataContext = MyStudents;
+
+
+        }
     }
 }

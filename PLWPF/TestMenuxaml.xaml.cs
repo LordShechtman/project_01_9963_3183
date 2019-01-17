@@ -35,5 +35,11 @@ namespace PLWPF
             UpdateTest updateTest = new UpdateTest();
             updateTest.ShowDialog();
         }
+
+        private void ShowTestsBoutton_Click(object sender, RoutedEventArgs e)
+        {
+            TestViwe testViwe = new TestViwe();
+            testViwe.ShowDialog();
+        }
     }
 }
