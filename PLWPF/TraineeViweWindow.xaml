@@ -12,7 +12,7 @@
     </Window.Resources>
     <Grid DataContext="" >
 
-        <ListView x:Name="traineeListView" SelectionMode="Single" Margin="0,236,20,10" ItemsSource="{Binding}">
+        <ListView x:Name="traineeListView" SelectionMode="Single" Margin="0,236,20,10" ItemsSource="{Binding}" SelectionChanged="traineeListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn x:Name="idColumn" Width="90" Header="Id">

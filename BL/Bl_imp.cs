@@ -291,6 +291,10 @@ namespace BL
                                      group item by item.TeacherName;
             return DrvingSchoolOrderd;
         }
+       public IEnumerable<Tester> AllTestersByCondiion(Predicate<Tester> myPredicate)
+        {
+            return dal.GetAllTesters().FindAll(myPredicate);
+        }
         //public void ValidId(string my_id)
         #endregion
         #region Adding Metods
@@ -561,7 +565,7 @@ namespace BL
             if (x == null)
                 throw new Exception("Tester" + id + " not found");
             x.Password = password;
-            dal.UpdateTester(x);
+           
         }
         public void SetTraineePassword(string id, string password)
         {
@@ -569,7 +573,7 @@ namespace BL
             if (x == null)
                 throw new Exception("Tester" + id + " not found");
             x.Password = password;
-            dal.UpdateTrainee(x);
+            
         }
 
         #endregion

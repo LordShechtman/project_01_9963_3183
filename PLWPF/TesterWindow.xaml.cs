@@ -246,6 +246,7 @@ namespace PLWPF
         }
         private void UpdateButton_Checked(object sender, RoutedEventArgs e)
         {
+            ListIndex = 0;
             grid1.IsEnabled = true;
             WorkHoursUC.IsEnabled = true;
             AddressGrid.IsEnabled = true;
@@ -447,10 +448,7 @@ namespace PLWPF
         }
         
 
-        private void phoneNumerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
 
         
 

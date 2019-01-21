@@ -6,16 +6,12 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=Project01_9963_3183_dotNet5779" x:Class="PLWPF.TesterViweWindow"
         mc:Ignorable="d"
-        Title="TesterViweWindow" Height="450" Width="1800" Loaded="Window_Loaded">
+        Title="TesterViweWindow" Height="800" Width="1200" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1205*"/>
-            <ColumnDefinition Width="588*"/>
-        </Grid.ColumnDefinitions>
-        <ListView x:Name="testerListView" ItemsSource="{Binding}" Margin="73,201,427.6,19" SelectionMode="Single" SelectionChanged="testerListView_SelectionChanged" Grid.ColumnSpan="2">
+    <Grid x:Name="SearchUC" DataContext="{}" Margin="0,0,-118,0">
+        <ListView x:Name="testerListView" ItemsSource="{Binding}" Margin="10,219,129,203" SelectionMode="Single" SelectionChanged="testerListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -24,10 +20,10 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn x:Name="idColumn" Header="Id" Width="80">
+                    <GridViewColumn x:Name="idColumn" Header="Id" Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                <TextBox Margin="-6,-1" Text="{Binding Id, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -52,30 +48,37 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="expiranceCarColumn" Header="סוג רשיון" Width="80">
+                    <GridViewColumn x:Name="phoneNumberColumn" Header="טלפון" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding PhoneNumber, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="expiranceCarColumn"   Header="סוג רשיון" Width="80" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox Margin="-6,-1" SelectedIndex="0">
-                                    <ComboBoxItem  Content="{Binding ExpiranceCar}"/>
+                                    <ComboBoxItem Content="{Binding ExpiranceCar}" />
                                 </ComboBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="maxDistanceColumn" Header="מרחק מקסימלי לטסט" Width="80">
+                    <GridViewColumn x:Name="maxDistanceColumn" Header="Max Distance" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Margin="-6,-1" Text="{Binding MaxDistance, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="maxTestsPerWeekColumn" Header="מספר טקסטים מקסימסלי לשבוע" Width="120">
+                    <GridViewColumn x:Name="maxTestsPerWeekColumn" Header="מספר טסטים לשבוע" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding MaxTestsPerWeek, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                <TextBox Margin="-6,-1" Text="{Binding MaxTestsPerWeek, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="myAddressColumn" Header="Address" Width="120">
+                    <GridViewColumn x:Name="myAddressColumn" Header=" Address" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Margin="-6,-1" Text="{Binding MyAddress, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
@@ -91,34 +94,22 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="phoneNumberColumn" Header="Phone Number" Width="100">
+                    <GridViewColumn x:Name="yearsOfExperienceColumn" Header="שנות נסיון" Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="yearsOfExperienceColumn" Header="שנות  נסיון" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding YearsOfExperience, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                <TextBox Margin="-6,-1" Text="{Binding YearsOfExperience, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Grid x:Name="SearchGrid" Margin="1102,-47,414.6,223" Grid.ColumnSpan="2">
-            <local:SearchUserConstrol x:Name="SearchUC" HorizontalAlignment="Left" Height="231" VerticalAlignment="Top" Width="277" Margin="0,30,0,-17"/>
-            <Button x:Name="SearchButtons" Content="Search" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Width="237" Height="27" Click="SearchButtons_Click"/>
-        </Grid>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="157,39,0,0" VerticalAlignment="Top"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="157,74,0,0" VerticalAlignment="Top"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="157,108,0,0" VerticalAlignment="Top"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="157,143,0,0" VerticalAlignment="Top"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="394,42,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="260,74,0,0" VerticalAlignment="Top" Width="100"/>
-        <ComboBox HorizontalAlignment="Left" Margin="260,108,0,0" VerticalAlignment="Top" Width="100"/>
-        <ComboBox HorizontalAlignment="Left" Margin="260,143,0,0" VerticalAlignment="Top" Width="100"/>
+        <local:TesterWorkHoursUserControl x:Name="WorkHoursUC" HorizontalAlignment="Left" Height="126" Margin="10,88,0,0" VerticalAlignment="Top" Width="310"/>
+        <Label x:Name="WorkHoursLabel" Content="work hours" HorizontalAlignment="Left" Margin="21,57,0,0" VerticalAlignment="Top"/>
+        <local:SearchUserConstrol x:Name="SearchUC1" HorizontalAlignment="Left" Height="198" Margin="340,0,0,0" VerticalAlignment="Top" Width="231"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="350,194,0,0" VerticalAlignment="Top" Width="220" Click="SearchButton_Click"/>
+        <Button x:Name="AllTestersByHourButton" Content="All Testers who work in hour x" HorizontalAlignment="Left" Margin="591,42,0,0" VerticalAlignment="Top" Width="268"/>
+        <ComboBox x:Name="DayOfWeekCB" HorizontalAlignment="Left" Margin="688,88,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="HourCB" HorizontalAlignment="Left" Margin="688,115,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

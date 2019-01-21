@@ -24,7 +24,11 @@ namespace PLWPF
         {
             InitializeComponent();
         }
-
+        public void clear()
+        {
+            PassedCB.IsChecked = false;
+            FailCB.IsChecked = false;
+        }
         private void PassedCB_Checked(object sender, RoutedEventArgs e)
         {
             FailCB.IsChecked = false;

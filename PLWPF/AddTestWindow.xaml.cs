@@ -21,6 +21,12 @@ namespace PLWPF
     {
         public void clearFileds()
         {
+            ///<summary>
+            /// Clear the fileds of the Window
+            /// </summary>
+            ///
+
+
             traineeIdTB.Text = null;
             CityTextBox.Text = "City";
             StreetNameTextBox.Text = "Street";
@@ -104,11 +110,13 @@ namespace PLWPF
                     MessageBox.Show("Good Luck: your tester  phone is: " + myTester.PhoneNumber + " " + myTester.Name + " " + myTester.FamilyName,"Test number: "+isfound.TestNumber);
                 }
                 clearFileds();
+                this.Close();
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR");
                 clearFileds();
+                this.Close();
                 
             }
         }

@@ -90,25 +90,5 @@ namespace PLWPF
                 MessageBox.Show(ex.Message, "ERROR 404");
             }
             }
-
-        private void TraineesByTeacherRadioButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TeacherComboBox.Visibility = Visibility.Hidden;
-        }
-
-        private void TeacherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            List<BE.Trainee> MyStudents = new List<BE.Trainee>(); 
-              foreach( IGrouping<string,BE.Trainee> keys in my_bl.TraineeByTeacher(true))   
-                if(keys.Key==(string)TeacherComboBox.SelectedValue)
-                {
-                    foreach (var item in keys)
-                        MyStudents.Add(item);
-                }
-            traineeListView.DataContext = MyStudents;
-
-
-        }
     }
 }

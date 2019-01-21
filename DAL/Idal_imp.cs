@@ -76,6 +76,7 @@ namespace DAL
                 {
                    
                     DS.DataSource.testers.Insert(DataSource.testers.IndexOf(tmp), t);
+                    DS.DataSource.testers.Remove(tmp);
                    
                     flag = true;
                     break;
