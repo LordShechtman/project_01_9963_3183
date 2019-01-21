@@ -43,7 +43,7 @@
                 </ComboBox.ItemsPanel>
             </ComboBox>
             <Label Content="Family Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="familyNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding FamilyName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="familyNameTextBox" Grid.Column="1" TextChanged="NAMES" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding FamilyName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="0" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" MaxLength="9" InputScope="000000000" VerticalAlignment="Center" Width="120" KeyDown="idTextBox_KeyDown"/>
             <Label Content="Max Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
@@ -59,7 +59,7 @@
                 </ComboBox.ItemsPanel>
             </ComboBox>
             <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" TextChanged="NAMES" Height="23" Margin="3" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Phone Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="phoneNumberTextBox" MaxLength="7" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="47.8,7.2,0,1.8" Grid.Row="4" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="75" KeyDown="phoneNumberTextBox_KeyDown"/>
             <Label Content="Years Of Experience:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
@@ -80,9 +80,9 @@
         <Button x:Name="NextButton" Content="Next>" HorizontalAlignment="Left" Margin="361,378,0,0" VerticalAlignment="Top" Width="75" Click="NextButton_Click"/>
         <Button x:Name="PreButton" Content="&lt;Back" HorizontalAlignment="Left" Margin="281,378,0,0" VerticalAlignment="Top" Width="75" Click="PreButton_Click"/>
         <Grid x:Name="AddressGrid" Margin="0,247,589.6,82">
-            <TextBox x:Name="StreetNameTB" HorizontalAlignment="Left" Height="23" Margin="77,4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
+            <TextBox x:Name="StreetNameTB" HorizontalAlignment="Left" TextChanged="NAMES" Height="23" Margin="77,4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
             <TextBox x:Name="HoustNumTB" HorizontalAlignment="Left" Height="23" Margin="77,32,0,0" TextWrapping="Wrap" Text="" MaxLength="3" VerticalAlignment="Top" Width="38" KeyDown="HoustNumTB_KeyDown"/>
-            <TextBox x:Name="CityTB" HorizontalAlignment="Left" Height="23" Margin="77,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
+            <TextBox x:Name="CityTB" HorizontalAlignment="Left" TextChanged="NAMES" Height="23" Margin="77,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
             <Label x:Name="addreSTLB" Content="Street name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="addreHNLB" Content="number" HorizontalAlignment="Left" Margin="19,29,0,0" VerticalAlignment="Top"/>
             <Label x:Name="addreCTLB" Content="City" HorizontalAlignment="Left" Margin="19,56,0,0" VerticalAlignment="Top" Height="27"/>
