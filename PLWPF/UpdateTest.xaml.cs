@@ -71,7 +71,7 @@ namespace PLWPF
                         ( PriortyRulesUC.PassedCB.IsChecked == false && PriortyRulesUC.FailCB.IsChecked == false))
                     throw new Exception("One or more test parmeters was not marked ");
                 if (WheelHandleUC.PassedCB.IsChecked == true)
-                    allMyParameters.Insert((int)MyEnum.testsParameters.wheelhandling, true);
+                    allMyParameters[(int)MyEnum.testsParameters.wheelhandling]= true;
                 
                 if (ReverseParkUC.PassedCB.IsChecked == true)
                     allMyParameters.Insert((int)MyEnum.testsParameters.reverseParking, true);

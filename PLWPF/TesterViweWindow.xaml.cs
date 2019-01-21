@@ -25,7 +25,7 @@ namespace PLWPF
         {
             InitializeComponent();
             my_bl = Factory_BL.getBL();
-            testerDataGrid.DataContext = my_bl.GetAllTesters();
+            testerListView.DataContext = my_bl.GetAllTesters();
             
         }
 
@@ -35,6 +35,32 @@ namespace PLWPF
             System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // testerViewSource.Source = [generic data source]
+        }
+
+        private void testerListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int Index = my_bl.GetAllTesters().IndexOf(((Tester)testerListView.SelectedItem));
+            if(Index!=-1)
+                {
+                Tester selectedTester = my_bl.GetAllTesters()[Index];
+               
+                
+            }
+            
+        }
+
+        private void SearchButtons_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<Tester> searchResults;
+            if (SearchUC.IDSearchTB.Text != "")
+                searchResults = my_bl.GetAllTesters().FindAll(x => x.Id == SearchUC.IDSearchTB.Text);
+            else
+                searchResults = my_bl.GetAllTesters().FindAll(
+                   x=>x.Name==SearchUC.NameSearchTextbox.Text ||
+                   x.FamilyName==SearchUC.FamilyNameSearchTB.Text
+                   || x.PhoneNumber==SearchUC.PhoneNumberSearchTextBox.Text);
+            testerListView.DataContext = searchResults;
+
         }
     }
 }
