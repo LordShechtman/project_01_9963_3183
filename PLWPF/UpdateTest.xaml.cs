@@ -62,7 +62,7 @@ namespace PLWPF
             StudentIDTB.IsEnabled = false;
             HourDispalyLabel.Content = "Hour:";
             LockFiled();
-
+            
         }
 
         public void ActiveFildes()

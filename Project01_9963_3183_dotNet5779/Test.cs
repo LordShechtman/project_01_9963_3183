@@ -41,13 +41,17 @@ namespace BE
         public Test(string tester_id, string trainee_id, DateTime date_test, Address address,List<bool> parameters,List<string>notes)
         {
             //Update test
+            TestParameters = new List<bool>();
+            TesterNotes = new List<string>();
             TesterId = tester_id;
             TraineeId = trainee_id;
             TestDate = date_test;
             TestAddress = address;
             IsPass = false;
-            TestParameters = parameters;
-            TesterNotes = notes;
+            foreach(bool b in parameters)
+            TestParameters .Add(b);
+            foreach(string note in notes)
+            TesterNotes .Add( note);
         }
         public string showParmeters(List< bool> par)
         {

@@ -39,18 +39,19 @@ namespace PLWPF
         private void testListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Gives the testparmeter results and the tester Notes from the test
-            int Index = MyBl.GetAllTests().IndexOf((BE.Test)testListView.SelectedItem);
+           int Index = MyBl.GetAllTests().IndexOf((BE.Test)testListView.SelectedItem);
+            MessageBox.Show(MyBl.GetAllTests()[Index].ToString());
             if(Index!=-1)
             {
-                List <bool> result= MyBl.GetAllTests()[Index].TestParameters;
-                if (result.Any() == true)
+               
+                if (MyBl.GetAllTests()[Index].TestParameters.Any()==true)
                 {
-                    ParmterResultsUC.keepDistanceCB.IsChecked = result[0];
-                    ParmterResultsUC.reverseParkingCB.IsChecked = result[1];
-                    ParmterResultsUC.mirorsCB.IsChecked = result[2];
-                    ParmterResultsUC.signalsCB.IsChecked = result[3];
-                    ParmterResultsUC.wheelhandlingCB.IsChecked = result[4];
-                    ParmterResultsUC.wheelhandlingCB.IsChecked = result[5];
+                    ParmterResultsUC.keepDistanceCB.IsChecked =  MyBl.GetAllTests()[Index].TestParameters[0];
+                    ParmterResultsUC.reverseParkingCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[1];
+                    ParmterResultsUC.mirorsCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[2];
+                    ParmterResultsUC.signalsCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[3];
+                    ParmterResultsUC.wheelhandlingCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[4];
+                    ParmterResultsUC.wheelhandlingCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[5];
                 }
                 else
                 {

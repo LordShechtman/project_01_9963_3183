@@ -32,6 +32,7 @@ namespace PLWPF
             traineeListView.DataContext = my_bl.GetAllTrainees();
             GenderComboBox.Visibility = Visibility.Hidden;
             TeacherComboBox.Visibility = Visibility.Hidden;
+            carTypeCB.Visibility = Visibility.Hidden;
             setComboBoxes();
             
         }
@@ -62,6 +63,7 @@ namespace PLWPF
         private void AllTraineesOfGenderx_Checked(object sender, RoutedEventArgs e)
         {
             GenderComboBox.Visibility = Visibility.Visible;
+            GenderComboBox.ItemsSource = Enum.GetNames(typeof(BE.MyEnum.gender)).ToString();
         }
 
         private void GenderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -90,5 +92,58 @@ namespace PLWPF
                 MessageBox.Show(ex.Message, "ERROR 404");
             }
             }
+
+        private void TeacherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<BE.Trainee> results=new List<BE.Trainee>();
+            foreach(var key in my_bl.TraineeByTeacher(true))
+            {
+                if(key.Key==TeacherComboBox.SelectedValue.ToString())
+                {
+                    foreach(BE.Trainee element in key)
+                    {
+                        results.Add(element);
+                    }
+                }
+            }
+            traineeListView.DataContext = results;
+            
+            
+        }
+
+        private void traineeListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Show Trainee number of tests and 
+            int Index = my_bl.GetAllTrainees().IndexOf((BE.Trainee)traineeListView.SelectedItem);
+            if (Index != -1)
+            {
+                BE.Trainee Selected_Trainee = my_bl.GetAllTrainees()[Index];
+                MessageBox.Show("Name: " + Selected_Trainee.Name + " " + Selected_Trainee.FamilyName
+                  +"\n"+"Number of Tests: "+my_bl.numberOfTests(Selected_Trainee));
+            }
+        }
+
+        private void TraineesByTeacherRadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TeacherComboBox.Visibility = Visibility.Hidden;
+        }
+
+        private void AllTraineesbyLicnsceRB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            carTypeCB.Visibility = Visibility.Hidden;
+        }
+
+        private void carTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IEnumerable<BE.Trainee> results = my_bl.ALLTraineeByParameter(x =>
+              x.Car == (BE.MyEnum.carType)carTypeCB.SelectedIndex + 1);
+            traineeListView.DataContext = results;
+        }
+
+        private void AllTraineesbyLicnsceRB_Checked(object sender, RoutedEventArgs e)
+        {
+            carTypeCB.Visibility = Visibility.Visible;
+            carTypeCB.ItemsSource = Enum.GetNames(typeof(BE.MyEnum.carType)).ToList();
+        }
     }
 }

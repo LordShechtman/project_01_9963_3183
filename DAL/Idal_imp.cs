@@ -165,7 +165,7 @@ namespace DAL
             if (tmp == null)
                 throw new Exception("the test doesn't exist!!");
             t.TestNumber = tmp.TestNumber;
-            DS.DataSource.tests.RemoveAll(exist);
+            DS.DataSource.tests.Remove(tmp);
             DataSource.tests.Add(t);
                 
         }

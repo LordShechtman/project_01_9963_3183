@@ -25,14 +25,14 @@
                     <GridViewColumn x:Name="isPassColumn" Header="Is Pass" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsPass, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="6,-1,-6,-1"/>
+                                <CheckBox IsChecked="{Binding IsPass, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="6,-1,-6,-1"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn x:Name="testAddressColumn" Header="Test Address" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding TestAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                <TextBox Margin="-6,-1" Text="{Binding TestAddress, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
