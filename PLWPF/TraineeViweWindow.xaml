@@ -121,11 +121,14 @@
         <Label Content="Trainees viwe " HorizontalAlignment="Left" Margin="53,24,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="24" Foreground="#FF4270D3"/>
         <RadioButton x:Name="AllStudentsBySchool" Content="Trinees per school" HorizontalAlignment="Left" Margin="53,90,0,0" VerticalAlignment="Top" Checked="AllStudentsBySchool_Checked"/>
         <RadioButton x:Name="AllTraineesByNumberOfTestsRadioButton" Content=" Trainees By Number Of Tests" HorizontalAlignment="Left" Margin="53,110,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="TraineesByTeacherRadioButton" Content="Trainees By Teacher" HorizontalAlignment="Left" Margin="53,130,0,0" VerticalAlignment="Top" Checked="TraineesByTeacherRadioButton_Checked"/>
+        <RadioButton x:Name="TraineesByTeacherRadioButton" Content="Trainees By Teacher" HorizontalAlignment="Left" Margin="53,130,0,0" VerticalAlignment="Top" Checked="TraineesByTeacherRadioButton_Checked" Unchecked="TraineesByTeacherRadioButton_Unchecked" />
         <RadioButton x:Name="AllTraineesOfGenderx" Content="Trainees by gender" HorizontalAlignment="Left" Margin="53,150,0,0" VerticalAlignment="Top" Checked="AllTraineesOfGenderx_Checked" Unchecked="AllTraineesOfGenderx_Unchecked"/>
         <ComboBox x:Name="GenderComboBox" HorizontalAlignment="Left" Margin="189,150,0,0" VerticalAlignment="Top" Width="84" Height="24" SelectionChanged="GenderComboBox_SelectionChanged"/>
         <local:SearchUserConstrol x:Name="SearchUC" HorizontalAlignment="Left" Height="221" Margin="705,0,0,0" VerticalAlignment="Top" Width="287"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="714,201,0,0" VerticalAlignment="Top" Width="236" Click="SearchButton_Click"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="714,201,0,0" VerticalAlignment="Top" Width="239" Click="SearchButton_Click"/>
+        <ComboBox x:Name="TeacherComboBox" HorizontalAlignment="Left" Margin="189,128,0,0" VerticalAlignment="Top" Width="84" SelectionChanged="TeacherComboBox_SelectionChanged"/>
+        <RadioButton x:Name="AllTraineesbyLicnsceRB" Content="Trainees by Lisence" HorizontalAlignment="Left" Margin="53,174,0,0" VerticalAlignment="Top"  Unchecked="AllTraineesbyLicnsceRB_Unchecked" Checked="AllTraineesbyLicnsceRB_Checked" />
+        <ComboBox x:Name="carTypeCB" HorizontalAlignment="Left" Margin="189,174,0,0" VerticalAlignment="Top" Width="84" Height="24" SelectionChanged="carTypeCB_SelectionChanged" />
 
 
     </Grid>

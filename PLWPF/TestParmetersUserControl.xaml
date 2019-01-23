@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="PLWPF.TestParmetersUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    <Grid Background="#FF736A6A">
+        <CheckBox x:Name="keepDistanceCB" Content="Keep Distance" HorizontalAlignment="Left" Margin="121,96,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="reverseParkingCB" Content="Reverse Parking" HorizontalAlignment="Left" Margin="121,128,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="mirorsCB" Content="Looking in hte mirors" HorizontalAlignment="Left" Margin="121,162,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="signalsCB" Content="Signals" HorizontalAlignment="Left" Margin="121,194,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="wheelhandlingCB" Content="Wheel handling" HorizontalAlignment="Left" Margin="121,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,2.048"/>
+        <Grid x:Name="ParmetersGRID" Margin="111,37,176,105">
+            <CheckBox x:Name="priorityrulesCB" Content="Priority rules" HorizontalAlignment="Left" Margin="10,34,-10,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,2.048"/>
+            <Label x:Name="MainLB" Content="Test Result:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" FontSize="14" FontWeight="Bold" Background="#FFE4D2D2" Margin="0,0,-14,0"/>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
