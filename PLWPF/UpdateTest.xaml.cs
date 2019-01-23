@@ -114,6 +114,7 @@ namespace PLWPF
                     else
                         ShowResult += "Failed";
                     MessageBox.Show(ShowResult, "Update succsessed");
+                    this.Close();
                     LockFiled();
                     clearFileds();
                 }

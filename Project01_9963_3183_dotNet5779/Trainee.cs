@@ -8,7 +8,7 @@ namespace BE
 {
     /// <summary>
     /// Present Trainee Object in our project
-    /// WE bulid getPhonePrefix Method for "TraineeWindow" in the PL layer
+    /// WE bulid getPhonePrefix Property for "TraineeWindow" in the PL layer
     /// Main key:ID
     /// </summary>
     public class Trainee:ICloneable

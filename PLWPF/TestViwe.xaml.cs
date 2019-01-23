@@ -23,7 +23,8 @@ namespace PLWPF
         public TestViwe()
         {
             InitializeComponent();
-            
+            SelectDateDP.Visibility = Visibility.Hidden;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace PLWPF
         {
             //Gives the testparmeter results and the tester Notes from the test
            int Index = MyBl.GetAllTests().IndexOf((BE.Test)testListView.SelectedItem);
-            MessageBox.Show(MyBl.GetAllTests()[Index].ToString());
+           // MessageBox.Show(MyBl.GetAllTests()[Index].ToString());
             if(Index!=-1)
             {
                
@@ -51,13 +52,52 @@ namespace PLWPF
                     ParmterResultsUC.mirorsCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[2];
                     ParmterResultsUC.signalsCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[3];
                     ParmterResultsUC.wheelhandlingCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[4];
-                    ParmterResultsUC.wheelhandlingCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[5];
+                    ParmterResultsUC.priorityrulesCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[5];
+                    List<string> notes = MyBl.GetAllTests()[Index].TesterNotes;
+                    if(notes.Any()==true)
+                    {
+                        int noteNumber = 1;
+                        foreach(var v in notes)
+                        {
+                            TesterNoteLabel.Content += noteNumber + "." + v;
+                            noteNumber++;
+                        }
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Test didn't updated Yet!!");
                 }
             }
+        }
+
+        private void AllTestsbyDateRB_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectDateDP.Visibility = Visibility.Visible;
+            
+        }
+
+        private void AllTestsbyDateRB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SelectDateDP.Visibility = Visibility.Hidden;
+        }
+
+        private void SelectDateDP_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+           //Returns all tests in the same Date 
+            testListView.DataContext = MyBl.AllTestBy(x => x.TestDate.AddHours((int)-1*x.TestDate.Hour )
+            ==SelectDateDP.SelectedDate);
+        }
+
+        private void PassedSatistic_Click(object sender, RoutedEventArgs e)
+        {
+            //Return the passed precent (passed/alltests)
+            MessageBox.Show("Passed precent: " + (MyBl.PassStatistic()*100)+"%");
+        }
+
+        private void AllTestbyTester_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

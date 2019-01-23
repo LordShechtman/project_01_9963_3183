@@ -38,9 +38,9 @@ namespace BE
         /*12*/
         public String Password { get; set; }
         public bool[,] WorkHours { get; set; }//check when tester works
-                                              /*13*/
-        public int MaxDistance { get; set; }
-        public Tester() { }
+         /*13*/
+        public int MaxDistance { get; set; }//Max disctance to test
+        public Tester() { }//Defult C-TOR
         public string PhonePrefix
         {
             get
@@ -75,6 +75,7 @@ namespace BE
             MaxTestsPerWeek = maxTest;
             ExpiranceCar = type;
             MaxDistance = max_distance;
+            //Deep copy for work hours matrix
             WorkHours = new bool[5, 7];
             for (int i = 0; i < 5; i++)
             {
@@ -112,7 +113,7 @@ namespace BE
                         str += "Thursday: ";
                         break;
                 };
-                for (j = 0; j < 6; j++)
+                for (j = 0; j < 5; j++)
                 {
                     if (mat[i, j] == true)
                         str += (((j) % 10) + ((j) / 10)) + 9 + ":00" + " ";
@@ -123,6 +124,7 @@ namespace BE
         }
         private string showAdress(Address a)
         {
+            //Note we wrote this method before we knew about Tostring for adresss struct
             return a.streetName + " " + a.houseNumber + " " + a.city;
         }
         public override string ToString()

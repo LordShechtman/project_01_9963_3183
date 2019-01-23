@@ -25,8 +25,9 @@ namespace PLWPF
         {
             InitializeComponent();
             my_bl = Factory_BL.getBL();
-            testerListView.DataContext = my_bl.GetAllTesters();
-            WorkHoursUC.IsEnabled = false;
+            testerListView.DataContext = my_bl.GetAllTesters();//Show all the testers in the DB
+            WorkHoursUC.IsEnabled = false;//I disabled the acsses 
+            //To the work hours so the admin can't modfy the tester work hours
             
         }
 
@@ -40,6 +41,7 @@ namespace PLWPF
 
         private void testerListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Show the Work Hours for Slected tester
             int Index = my_bl.GetAllTesters().IndexOf(((Tester)testerListView.SelectedItem));
             if (Index != -1)
             { 
@@ -84,6 +86,12 @@ namespace PLWPF
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+           /// Find a Tester in the data base by prameters
+           /// First we look by the main key(ID)
+           /// If we don't have ID we search by other pramerters
+           /// such as name,family name
+           /// and phonenumber
+
             try
             {
                 if (SearchUC1.IDSearchTB.Text != "")

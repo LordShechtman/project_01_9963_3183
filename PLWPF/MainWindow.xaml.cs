@@ -114,5 +114,21 @@ namespace PLWPF
             traineeViwe.ShowDialog();
             
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource testerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("testerViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // testerViewSource.Source = [generic data source]
+            System.Windows.Data.CollectionViewSource traineeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("traineeViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // traineeViewSource.Source = [generic data source]
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            PassedTodayListView.DataContext = bl.passedToday();
+        }
     }
 }

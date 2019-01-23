@@ -11,7 +11,7 @@ namespace BE
         /// <summary>
         /// Present a test object
         /// the main key is : Tester ID Trainee Id and Test Date(only one per day)
-        /// Test Serial number is given by the DAL layer when he added to rhe data base
+        /// Test Serial number is given by the DAL layer when IT added to the data base
         /// </summary>
         #region FILEDS
         private readonly string[] TestParmtersNames = { "Keep Distance", "Reverse Parking", "Looking in the Mirors ", "Signals", "Wheel handling", "Priority Rules" };
@@ -40,7 +40,7 @@ namespace BE
         }
         public Test(string tester_id, string trainee_id, DateTime date_test, Address address,List<bool> parameters,List<string>notes)
         {
-            //Update test
+            //Update test by the Tester
             TestParameters = new List<bool>();
             TesterNotes = new List<string>();
             TesterId = tester_id;
@@ -48,6 +48,7 @@ namespace BE
             TestDate = date_test;
             TestAddress = address;
             IsPass = false;
+            //Deep copy of the lists
             foreach(bool b in parameters)
             TestParameters .Add(b);
             foreach(string note in notes)
@@ -55,6 +56,7 @@ namespace BE
         }
         public string showParmeters(List< bool> par)
         {
+            //Pints the test paramter results!!
             MyEnum.testsParameters p;
             p = 0;
             string str = "";
@@ -75,6 +77,7 @@ namespace BE
         }
         public string showNotes(List<string> lst)
         {
+            //Prints all the tester notes by parameters
             string str = "";
             if (lst.Count() == 0)
                 return null;

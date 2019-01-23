@@ -63,7 +63,7 @@ namespace PLWPF
         private void AllTraineesOfGenderx_Checked(object sender, RoutedEventArgs e)
         {
             GenderComboBox.Visibility = Visibility.Visible;
-            GenderComboBox.ItemsSource = Enum.GetNames(typeof(BE.MyEnum.gender)).ToString();
+            GenderComboBox.ItemsSource = Enum.GetNames(typeof(BE.MyEnum.gender)).ToList();
         }
 
         private void GenderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
