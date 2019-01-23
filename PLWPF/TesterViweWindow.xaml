@@ -11,7 +11,7 @@
         <CollectionViewSource x:Key="testerViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Tester}, CreateList=True}"/>
     </Window.Resources>
     <Grid x:Name="SearchUC" DataContext="{}" Margin="0,0,-118,0">
-        <ListView x:Name="testerListView" ItemsSource="{Binding}" Margin="10,219,129,203" SelectionMode="Single" SelectionChanged="testerListView_SelectionChanged">
+        <ListView x:Name="testerListView" ItemsSource="{Binding}" Margin="10,412,129,10" SelectionMode="Single" SelectionChanged="testerListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -108,8 +108,15 @@
         <Label x:Name="WorkHoursLabel" Content="work hours" HorizontalAlignment="Left" Margin="21,57,0,0" VerticalAlignment="Top"/>
         <local:SearchUserConstrol x:Name="SearchUC1" HorizontalAlignment="Left" Height="198" Margin="340,0,0,0" VerticalAlignment="Top" Width="231"/>
         <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="350,194,0,0" VerticalAlignment="Top" Width="220" Click="SearchButton_Click"/>
-        <Button x:Name="AllTestersByHourButton" Content="All Testers who work in hour x" HorizontalAlignment="Left" Margin="591,42,0,0" VerticalAlignment="Top" Width="268"/>
+        <RadioButton x:Name="AllTestersByHourButton" Content="All Testers who work by day and hour" HorizontalAlignment="Left" Margin="688,60,0,0" VerticalAlignment="Top" Width="239" Checked="AllTestersByHourButton_Checked" Unchecked="AllTestersByHourButton_Unchecked"/>
         <ComboBox x:Name="DayOfWeekCB" HorizontalAlignment="Left" Margin="688,88,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="HourCB" HorizontalAlignment="Left" Margin="688,115,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="HourCB" HorizontalAlignment="Left" Margin="688,115,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="HourCB_SelectionChanged"/>
+        <Label x:Name="DayLB" Content="Day" HorizontalAlignment="Left" Margin="640,83,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="HourLB" Content="Hour" HorizontalAlignment="Left" Margin="640,111,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="DayAndHourBU" Content="GO" HorizontalAlignment="Left" Margin="688,142,0,0" VerticalAlignment="Top" Width="75" Click="DayAndHourBU_Click"/>
+        <RadioButton Content="All Tseters by License" HorizontalAlignment="Left" Margin="41,240,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked" Unchecked="RadioButton_Unchecked"/>
+        <RadioButton x:Name="AllTestersByNUMtESTSRB"  Content="All Tester by number of tests" HorizontalAlignment="Left" Margin="41,265,0,0" VerticalAlignment="Top" Checked="AllTestersByNUMtESTSRB_Checked"/>
+        <ComboBox x:Name="LicenceTypeCB" HorizontalAlignment="Left" Margin="176,238,0,0" VerticalAlignment="Top" Width="93" SelectionChanged="LicenceTypeCB_SelectionChanged"/>
+        <ComboBox x:Name="NumberOfTestsComboBox"  HorizontalAlignment="Left" Margin="216,265,0,0" VerticalAlignment="Top" Width="41"/>
     </Grid>
 </Window>
