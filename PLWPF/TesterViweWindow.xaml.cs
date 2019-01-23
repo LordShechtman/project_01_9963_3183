@@ -27,7 +27,18 @@ namespace PLWPF
             my_bl = Factory_BL.getBL();
             testerListView.DataContext = my_bl.GetAllTesters();
             WorkHoursUC.IsEnabled = false;
-            
+            DayAndHourBU.Visibility = Visibility.Hidden;
+            DayOfWeekCB.IsEnabled = false;
+            HourCB.IsEnabled = false;
+            for (int i = 9; i < 15; i++)
+            { HourCB.Items.Add(i.ToString()); }
+            for (int i=0;i<5;i++)
+            {
+                DayOfWeekCB.Items.Add((DayOfWeek)i);
+            }
+            LicenceTypeCB.Visibility = Visibility.Hidden;
+            NumberOfTestsComboBox.Visibility = Visibility.Hidden;
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -98,5 +109,59 @@ namespace PLWPF
             }
         
     }
+
+        private void AllTestersByHourButton_Checked(object sender, RoutedEventArgs e)
+        {
+            DayOfWeekCB.IsEnabled = true;
+            HourCB.IsEnabled = true;
+             
+           
+        }
+
+        private void AllTestersByHourButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DayOfWeekCB.IsEnabled = false;
+            HourCB.IsEnabled = false;
+            DayOfWeekCB.SelectedIndex = -1;
+            HourCB.SelectedIndex = -1;
+            DayAndHourBU.Visibility = Visibility.Hidden;
+        }
+
+        private void HourCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DayAndHourBU.Visibility = Visibility.Visible;
+        }
+
+        private void DayAndHourBU_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<Tester> results = my_bl.AllTestersByCondiion(x => x.WorkHours[
+                 DayOfWeekCB.SelectedIndex, HourCB.SelectedIndex]==true);
+            testerListView.DataContext = results;
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            LicenceTypeCB.Visibility = Visibility.Visible;
+            LicenceTypeCB.ItemsSource= Enum.GetNames(  typeof(BE.MyEnum.carType)).ToList();
+        }
+
+        private void RadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            LicenceTypeCB.Visibility = Visibility.Hidden;
+        }
+
+        private void LicenceTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IEnumerable<Tester> results = my_bl.AllTestersByCondiion(x => x.ExpiranceCar == (BE.MyEnum.carType)LicenceTypeCB.SelectedIndex+1);
+            testerListView.DataContext = results;
+        }
+
+        private void AllTestersByNUMtESTSRB_Checked(object sender, RoutedEventArgs e)
+        {
+            NumberOfTestsComboBox.Visibility = Visibility.Visible;
+           // NumberOfTestsComboBox.ItemsSource=my_bl.tes
+
+        }
     }
-}
+    }
+
