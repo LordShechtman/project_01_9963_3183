@@ -9,7 +9,7 @@ namespace BL
     /// The BL layer
     /// In this layer we chek the input before it go to the DAL Layer
     /// In addtion we pull information from the Dal and gives to the PL 
-    /// the fillter data the the user wants to know.
+    /// the fillter data the user wants to know.
     /// 
     /// </summary>
     public class Bl_imp : IBL
@@ -49,7 +49,6 @@ namespace BL
                 }
                 else
                 {
-                    
                     number *= 2;//for double index
                     sumd += (number / 10) + (number % 10);
                 }
@@ -109,7 +108,7 @@ namespace BL
                 if (ch < '0' || ch > '9')
                     throw new Exception(name + " must contin dighits only!!");
             }
-        }
+        }  
         public bool TestResult(Test test)
         {
             //Detrminate the reuslt of the test
@@ -151,8 +150,7 @@ namespace BL
             IEnumerable<IGrouping<int, Tester>> num = from x in dal.GetAllTesters()
                                                       let toatalTests = AllTestBy(y => y.TesterId == x.Id).Count()
                                                       group x by toatalTests;
-
-
+            
             return num;
         }
 

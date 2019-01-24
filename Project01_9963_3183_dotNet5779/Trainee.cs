@@ -29,6 +29,10 @@ namespace BE
         public String Password { get; set; }
         #endregion
         //C-TOR
+
+
+            public Trainee()
+        { }
         public Trainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear,string school,string teacher_name,int numLessons)
         {
             Id = id;
@@ -48,8 +52,6 @@ namespace BE
         {
             get
             {
-
-
                 //SEE SUMMRY ABOVE
                 string Prefix = "";
                 foreach (char ch in PhoneNumber)

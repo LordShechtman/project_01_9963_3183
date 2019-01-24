@@ -37,16 +37,15 @@ namespace BE
         public MyEnum.carType ExpiranceCar { get; set; }
         /*12*/
         public String Password { get; set; }
+        /*13*/
         public bool[,] WorkHours { get; set; }//check when tester works
-                                              /*13*/
-        public int MaxDistance { get; set; }
+        /*14*/
+        public float MaxDistance { get; set; }
         public Tester() { }
         public string PhonePrefix
         {
             get
             {
-
-
                 //SEE SUMMRY ABOVE
                 string Prefix = "";
                 foreach (char ch in PhoneNumber)
@@ -62,7 +61,7 @@ namespace BE
                 return Prefix;
             }
         }
-        public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, int max_distance, bool[,] mat)
+        public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, float max_distance, bool[,] mat)
         {
             Id = id;
             Name = name;
@@ -121,6 +120,54 @@ namespace BE
             }
             return str;
         }
+        public string get_hours_s()
+        {
+            if (WorkHours == null)
+                return null;
+            string result = "";
+            if (WorkHours != null)
+            {
+                int sizeA = WorkHours.GetLength(0);
+                int sizeB = WorkHours.GetLength(1);
+                result += "" + sizeA + "," + sizeB;
+                for (int i = 0; i < sizeA; i++)
+                    for (int j = 0; j < sizeB; j++)
+                        result += "," + WorkHours[i, j];
+            }
+            return result;
+        }
+
+
+
+
+
+
+
+
+       public string hours_string { set; get; }
+
+
+        public void set_hours_s(string value)
+        {
+            if (value != null && value.Length > 0)
+            {
+                string[] values = value.Split(',');
+                int sizeA = int.Parse(values[0]);
+                int sizeB = int.Parse(values[1]);
+                WorkHours = new bool[sizeA, sizeB];
+                int index = 2;
+                for (int i = 0; i < sizeA; i++)
+                    for (int j = 0; j < sizeB; j++)
+                        WorkHours[i, j] = bool.Parse(values[index++]);
+            }
+        }
+
+
+
+
+
+
+
         private string showAdress(Address a)
         {
             return a.streetName + " " + a.houseNumber + " " + a.city;

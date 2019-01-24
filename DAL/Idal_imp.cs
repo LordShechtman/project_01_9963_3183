@@ -47,6 +47,8 @@ namespace DAL
                     throw new Exception("Tester " + t.Id + " is already exists!");
             }
             DS.DataSource.testers.Add(t);
+
+            (new DAL_XML()).AddTester(t);
             return;
         }
        public  void DeleteTester(string id)
@@ -154,6 +156,12 @@ namespace DAL
             
             //------------------------------------------------------------------------------------------------
             DS.DataSource.tests.Add(t);
+
+
+            // temp for test\
+            // need to delete
+            (new DAL_XML()).AddTest(t);
+
         }
         public void UpdateTest(Test t)
         {
@@ -167,7 +175,7 @@ namespace DAL
             t.TestNumber = tmp.TestNumber;
             DS.DataSource.tests.Remove(tmp);
             DataSource.tests.Add(t);
-                
+            (new DAL_XML()).UpdateTest(t);
         }
         #endregion
         #region Data Acsses

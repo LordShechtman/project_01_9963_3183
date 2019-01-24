@@ -11,8 +11,10 @@ namespace DAL
         
         public static Idal getDal()
         {
-            return DAL.Dal_imp.instance; 
+            return DAL.DAL_XML.instance; 
+
         }
+        
 
     }
 }

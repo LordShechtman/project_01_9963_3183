@@ -18,8 +18,8 @@ namespace BE
         {
             return streetName + " " + houseNumber + " " + city;
         }
-
         
+
 
     }
     
