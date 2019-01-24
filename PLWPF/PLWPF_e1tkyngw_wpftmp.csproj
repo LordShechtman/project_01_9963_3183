@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{191D909E-B105-4A50-BB35-13E028F6868B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PLWPF</RootNamespace>
+    <AssemblyName>PLWPF</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddTestWindow.xaml.cs">
+      <DependentUpon>AddTestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchUserConstrol.xaml.cs">
+      <DependentUpon>SearchUserConstrol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TesterViweWindow.xaml.cs">
+      <DependentUpon>TesterViweWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TesterWindow.xaml.cs">
+      <DependentUpon>TesterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TesterWorkHoursUserControl.xaml.cs">
+      <DependentUpon>TesterWorkHoursUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestMenuxaml.xaml.cs">
+      <DependentUpon>TestMenuxaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestParmetersUserControl.xaml.cs">
+      <DependentUpon>TestParmetersUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestParmeterUC.xaml.cs">
+      <DependentUpon>TestParmeterUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestViwe.xaml.cs">
+      <DependentUpon>TestViwe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraineeViweWindow.xaml.cs">
+      <DependentUpon>TraineeViweWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraineeWindow.xaml.cs">
+      <DependentUpon>TraineeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTest.xaml.cs">
+      <DependentUpon>UpdateTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\BE.Address.datasource" />
+    <None Include="Properties\DataSources\BE.Class1.datasource" />
+    <None Include="Properties\DataSources\BE.Configuration.datasource" />
+    <None Include="Properties\DataSources\BE.Test.datasource" />
+    <None Include="Properties\DataSources\BE.Tester.datasource" />
+    <None Include="Properties\DataSources\BE.Trainee.datasource" />
+    <None Include="Properties\DataSources\WorkHoursUserControl.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{59be6f2e-b982-494b-a5ca-eb15f897171b}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{3a9c127a-930f-436a-a7ac-60f5fb179dff}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project01_9963_3183_dotNet5779\BE.csproj">
+      <Project>{bd953b9b-9401-4921-a80a-0609bf814b9d}</Project>
+      <Name>BE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\BL\bin\Debug\BL.dll" />
+    <ReferencePath Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\DAL\bin\Debug\DAL.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\Project01_9963_3183_dotNet5779\bin\Debug\Project01_9963_3183_dotNet5779.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\AddTestWindow.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\SearchUserConstrol.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TesterViweWindow.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TesterWindow.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TesterWorkHoursUserControl.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TestMenuxaml.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TestParmetersUserControl.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TestParmeterUC.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TestViwe.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TraineeViweWindow.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\TraineeWindow.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\UpdateTest.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Users\user\Desktop\שנה ב\סמסטר א  מדעי המחשב שנה ב מעוז שכטמן\מיני פרוייקט בחלונות\פרוייקט מעוז ואלירן חוגג\חלק ראשון\PLWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

@@ -62,7 +62,7 @@ namespace BE
                 return Prefix;
             }
         }
-        public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, int max_distance, bool[,] mat)
+        public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, int max_distance, bool[,] mat,string password)
         {
             Id = id;
             Name = name;
@@ -83,6 +83,7 @@ namespace BE
                 {
                     WorkHours[i, j] = mat[i, j];
                 }
+                Password = password;
             }
         }
         #endregion
@@ -135,7 +136,7 @@ namespace BE
 
         public object Clone()
         {
-            return new Tester(Id, Name, FamilyName, BirthDate, MyGender, PhoneNumber, MyAddress, YearsOfExperience, MaxTestsPerWeek, ExpiranceCar, MaxDistance, WorkHours);
+            return new Tester(Id, Name, FamilyName, BirthDate, MyGender, PhoneNumber, MyAddress, YearsOfExperience, MaxTestsPerWeek, ExpiranceCar, MaxDistance, WorkHours,Password);
         }
     }
 }

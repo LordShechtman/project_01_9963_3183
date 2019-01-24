@@ -17,6 +17,7 @@ namespace PLWPF
 {
     /// <summary>
     /// Interaction logic for TesterWindow.xaml
+    /// Tester window for Add ,Delete and Update Tester
     /// </summary>
     public partial class TesterWindow : Window
     {
@@ -375,18 +376,21 @@ namespace PLWPF
                     m_address.city = CityTB.Text;
                     m_address.streetName = StreetNameTB.Text;
                     m_address.houseNumber = int.Parse(HoustNumTB.Text);
-                    bL.AddTester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
+                    string my_password;
+                    if (myPasswordBox.Password != null)
+                        my_password = myPasswordBox.Password;
+                    else
+                        my_password = "1234";
+                        bL.AddTester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
                         (DateTime)birthDateDatePicker.SelectedDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
                         ), phoneNumerCombobox.Text + phoneNumberTextBox.Text, m_address
                         , int.Parse(yearsOfExperienceTextBox.Text)
                        , int.Parse(maxTestsPerWeekTextBox.Text)
                        , (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), expiranceCarComboBox.Text), MyworkHours,
-                        int.Parse(maxDistanceTextBox.Text));
+                        int.Parse(maxDistanceTextBox.Text),my_password);
                     MessageBox.Show("THe tester " + idTextBox.Text + " added to the data base");
-                    if(myPasswordBox.Password!=null)
-                    bL.SetTesterpassword(idTextBox.Text, myPasswordBox.Password);
-                    else
-                        bL.SetTesterpassword(idTextBox.Text, "1234");
+                    
+                   
                 }
                 if (DeleteBoutton.IsChecked == true)
                 {
@@ -423,17 +427,18 @@ namespace PLWPF
                         m_address.city = CityTB.Text;
                     m_address.streetName = StreetNameTB.Text;
                         m_address.houseNumber =int.Parse( HoustNumTB.Text);
-                       
+                    string my_password = (myPasswordBox.Password != null ? myPasswordBox.Password : 
+                        bL.GetAllTesters().Find(t=>t.Id==idTextBox.Text).Password);
                         bL.UpdateTester(new Tester(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text,
                            (DateTime)birthDateDatePicker.SelectedDate, (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderComboBox.Text
                             ), phoneNumerCombobox.Text + phoneNumberTextBox.Text, m_address
                             , int.Parse(yearsOfExperienceTextBox.Text)
                            , int.Parse(maxTestsPerWeekTextBox.Text)
                            , (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), expiranceCarComboBox.Text),
-                            int.Parse(maxDistanceTextBox.Text), MyworkHours));
+                            int.Parse(maxDistanceTextBox.Text), MyworkHours, my_password) );
                     MessageBox.Show("Update succeeded");
-                    if (myPasswordBox.Password != null)
-                        bL.SetTesterpassword(idTextBox.Text, myPasswordBox.Password);
+                    
+                       
                 }
                     clearFileds();
                 AddBoutton.IsChecked = true;

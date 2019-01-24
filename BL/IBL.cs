@@ -10,12 +10,12 @@ using BE;
     #region Tester
     //Tester functions;
     void AddTester(Tester tester);
-    void AddTester(string id,string name,string family_name,DateTime birth_date, MyEnum.gender my_gender,string phone,Address t_adress,int years_of_exprience,int number_of_tests, MyEnum.carType exp,bool[,] work_hours,int max_distance);
+    void AddTester(string id,string name,string family_name,DateTime birth_date, MyEnum.gender my_gender,string phone,Address t_adress,int years_of_exprience,int number_of_tests, MyEnum.carType exp,bool[,] work_hours,int max_distance, string passWord);
     void DeleteTester(string id);
     void UpdateTester(Tester t);
     #endregion
     #region Trainee
-    void AddTrainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear, string school, string teacher_name, int numLessons);
+    void AddTrainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear, string school, string teacher_name, int numLessons,string password);
     void AddTrainee(Trainee trainee);
     void DeleteTrainee(string id);
     void UpdateTrainee(Trainee t);
@@ -49,8 +49,8 @@ using BE;
     List<Test> GetAllTests();
     #region Updated due the second part
     /*New: I added password filed for the system*/
-    void SetTesterpassword(string id, string password);
-    void SetTraineePassword(string id, string password);
+   // void SetTesterpassword(string id, string password);
+    //void SetTraineePassword(string id, string password);
     #endregion
 }
 namespace BL

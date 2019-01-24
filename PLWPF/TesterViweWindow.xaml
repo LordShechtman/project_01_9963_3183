@@ -115,8 +115,9 @@
         <Label x:Name="HourLB" Content="Hour" HorizontalAlignment="Left" Margin="640,111,0,0" VerticalAlignment="Top"/>
         <Button x:Name="DayAndHourBU" Content="GO" HorizontalAlignment="Left" Margin="688,142,0,0" VerticalAlignment="Top" Width="75" Click="DayAndHourBU_Click"/>
         <RadioButton Content="All Tseters by License" HorizontalAlignment="Left" Margin="41,240,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked" Unchecked="RadioButton_Unchecked"/>
-        <RadioButton x:Name="AllTestersByNUMtESTSRB"  Content="All Tester by number of tests" HorizontalAlignment="Left" Margin="41,265,0,0" VerticalAlignment="Top" Checked="AllTestersByNUMtESTSRB_Checked"/>
+        <RadioButton x:Name="AllTestersByNUMtESTSRB"  Content="All Tester by number of tests" HorizontalAlignment="Left" Margin="41,265,0,0" VerticalAlignment="Top" Checked="AllTestersByNUMtESTSRB_Checked" Unchecked="AllTestersByNUMtESTSRB_Unchecked"/>
         <ComboBox x:Name="LicenceTypeCB" HorizontalAlignment="Left" Margin="176,238,0,0" VerticalAlignment="Top" Width="93" SelectionChanged="LicenceTypeCB_SelectionChanged"/>
-        <ComboBox x:Name="NumberOfTestsComboBox"  HorizontalAlignment="Left" Margin="216,265,0,0" VerticalAlignment="Top" Width="41"/>
+        <ComboBox x:Name="NumberOfTestsComboBox"  HorizontalAlignment="Left" Margin="216,265,0,0" VerticalAlignment="Top" Width="41" SelectionChanged="NumberOfTestsComboBox_SelectionChanged"/>
+        <Label x:Name="MainLabel"  Content="Tester view" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Black" Foreground="#FF424FDF"/>
     </Grid>
 </Window>

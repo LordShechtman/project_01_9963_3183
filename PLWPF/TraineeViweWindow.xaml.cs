@@ -16,13 +16,13 @@ namespace PLWPF
 {
     /// <summary>
     /// Interaction logic for TraineeViweWindow.xaml
+    /// View detials of Trinnes 
+    /// Filterd date (by driving school and so on)
+    /// is accessable with radio butoons
     /// </summary>
     public partial class TraineeViweWindow : Window
     {
-        public void setComboBoxes()
-        {
-            
-        }
+        
         public IBL my_bl;
         public TraineeViweWindow()
         {
@@ -33,7 +33,7 @@ namespace PLWPF
             GenderComboBox.Visibility = Visibility.Hidden;
             TeacherComboBox.Visibility = Visibility.Hidden;
             carTypeCB.Visibility = Visibility.Hidden;
-            setComboBoxes();
+           
             
         }
 
@@ -44,7 +44,9 @@ namespace PLWPF
 
         private void AllStudentsBySchool_Checked(object sender, RoutedEventArgs e)
         {
-            traineeListView.DataContext = my_bl.TraineeBySchool(true);
+            DrivingSchoolCB.Visibility = Visibility.Visible;
+            foreach (var key in my_bl.TraineeBySchool(true))
+                DrivingSchoolCB.Items.Add(key.Key);
             
         }
 
@@ -59,26 +61,31 @@ namespace PLWPF
 
             }
         }
-
+        #region AllTrianieesbyGender un/check events
         private void AllTraineesOfGenderx_Checked(object sender, RoutedEventArgs e)
         {
             GenderComboBox.Visibility = Visibility.Visible;
             GenderComboBox.ItemsSource = Enum.GetNames(typeof(BE.MyEnum.gender)).ToList();
         }
-
-        private void GenderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            traineeListView.DataContext = my_bl.ALLTraineeByParameter(X => 
-            X.MyGender ==(BE.MyEnum.gender) Enum.Parse(typeof(BE.MyEnum.gender), GenderComboBox.SelectedValue.ToString()));
-        }
-
         private void AllTraineesOfGenderx_Unchecked(object sender, RoutedEventArgs e)
         {
             GenderComboBox.Visibility = Visibility.Hidden;
         }
+        #endregion
+        private void GenderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ///Gives the all the trniees by the selected gender
+            traineeListView.DataContext = my_bl.ALLTraineeByParameter(X => 
+            X.MyGender ==(BE.MyEnum.gender) Enum.Parse(typeof(BE.MyEnum.gender), GenderComboBox.SelectedValue.ToString()));
+        }
+
+        
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            ///Find trinee/s by prmeters of the serch user controll
+            ///first we look by the Main key(ID) 
+            ///  and then by others paramters
             try
             {
                 if (SearchUC.IDSearchTB.Text !="")
@@ -113,7 +120,7 @@ namespace PLWPF
 
         private void traineeListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Show Trainee number of tests and 
+            //Show Trainee number of tests by clicking the selected trniee
             int Index = my_bl.GetAllTrainees().IndexOf((BE.Trainee)traineeListView.SelectedItem);
             if (Index != -1)
             {
@@ -122,7 +129,7 @@ namespace PLWPF
                   +"\n"+"Number of Tests: "+my_bl.numberOfTests(Selected_Trainee));
             }
         }
-
+        #region TraineesByTeacherRadioButton un/checked events
         private void TraineesByTeacherRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
             TeacherComboBox.Visibility = Visibility.Hidden;
@@ -131,19 +138,51 @@ namespace PLWPF
         private void AllTraineesbyLicnsceRB_Unchecked(object sender, RoutedEventArgs e)
         {
             carTypeCB.Visibility = Visibility.Hidden;
+           
         }
-
+        #endregion
         private void carTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             IEnumerable<BE.Trainee> results = my_bl.ALLTraineeByParameter(x =>
               x.Car == (BE.MyEnum.carType)carTypeCB.SelectedIndex + 1);
             traineeListView.DataContext = results;
         }
-
+        #region AllTraineesbyLicnsceRB un/checked events
         private void AllTraineesbyLicnsceRB_Checked(object sender, RoutedEventArgs e)
         {
             carTypeCB.Visibility = Visibility.Visible;
             carTypeCB.ItemsSource = Enum.GetNames(typeof(BE.MyEnum.carType)).ToList();
         }
+        private void AllStudentsBySchool_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DrivingSchoolCB.Visibility = Visibility.Hidden;
+
+        }
+        #endregion
+        private void AllTraineesByNumberOfTestsRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+           ///Removed in the final project
+        }
+
+        private void DrivingSchoolCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ///Driving school combo box keeps all the schools names 
+            ///the list view will give us all the trinnes of the selcted school
+            ///
+            List<BE.Trainee> results = new List<BE.Trainee>();
+            foreach(var group in my_bl.TraineeBySchool(true))
+            {
+               if(group.Key== DrivingSchoolCB.SelectedValue.ToString())
+                {
+                    foreach (var item in group)
+                        results.Add(item);
+                }
+            }
+            traineeListView.DataContext = results;
+        }
+
+        
+
+       
     }
 }

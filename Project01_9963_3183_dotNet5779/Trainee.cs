@@ -29,7 +29,7 @@ namespace BE
         public String Password { get; set; }
         #endregion
         //C-TOR
-        public Trainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear,string school,string teacher_name,int numLessons)
+        public Trainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear,string school,string teacher_name,int numLessons,string password)
         {
             Id = id;
             Name = name;
@@ -43,6 +43,7 @@ namespace BE
             School = school;
             TeacherName = teacher_name;
             NumberOfLessons = numLessons;
+            Password = password;
         }
         public string PhonePrefix
         {
@@ -78,7 +79,7 @@ namespace BE
 
         public object Clone()
         {
-            return new Trainee(Id, Name, FamilyName, BrithDate, MyGender, PhoneNumber, MyAddress, Car, MyGear, School, TeacherName, NumberOfLessons);
+            return new Trainee(Id, Name, FamilyName, BrithDate, MyGender, PhoneNumber, MyAddress, Car, MyGear, School, TeacherName, NumberOfLessons,Password);
         }
     }
 }

@@ -77,13 +77,13 @@ namespace PLWPF
                 bl.AddTrainee(i.ToString("312589900"), names[r.Next(0, 11)], f_names[r.Next(0, 9)]
                     , new DateTime(1998, 01, 21), (MyEnum.gender)r.Next(0, 2), i.ToString("054-2345701"), temp_address,
                     (MyEnum.carType)r.Next(1, 5), (MyEnum.gear)r.Next(0, 2), "Hermon", names[r.Next(0, 11)]
-                    , r.Next(10, 80));
+                    , r.Next(10, 80),"1234");
                 temp_address.city = cities[r.Next(0, 6)];
                 temp_address.houseNumber = r.Next(1, 120);
                 temp_address.streetName = streets[r.Next(0, 6)];
                 bl.AddTester(i.ToString("112581900"), names[r.Next(0, 11)], f_names[r.Next(0, 9)],
                     new DateTime(1975, 01, 21), (MyEnum.gender)r.Next(0, 2), i.ToString("053-2345701")
-                    ,temp_address,10,30, (MyEnum.carType)r.Next(1, 5),work_all_time,70);
+                    ,temp_address,10,30, (MyEnum.carType)r.Next(1, 5),work_all_time,70,"1234");
                 foreach (var item in bl.GetAllTrainees())
                 {
                     item.Password = "1234";

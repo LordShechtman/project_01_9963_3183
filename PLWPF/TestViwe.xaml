@@ -70,11 +70,12 @@
         <Label Content="Tester notes" HorizontalAlignment="Left" Margin="450,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="TesterNoteLabel" Content="" HorizontalAlignment="Left" Margin="441,41,0,0" VerticalAlignment="Top" Height="171" Width="327"/>
         <RadioButton x:Name="AllTestsbyDateRB" Content="All Tests  by  Date" HorizontalAlignment="Left" Margin="54,289,0,0" VerticalAlignment="Top" Checked="AllTestsbyDateRB_Checked" Unchecked="AllTestsbyDateRB_Unchecked"/>
-        <RadioButton x:Name="AllTestbyTester" Content="All Tests by Tester" HorizontalAlignment="Left" Margin="54,309,0,0" VerticalAlignment="Top" Checked="AllTestbyTester_Checked"/>
-        <RadioButton x:Name="AllTestsByTrianee" Content="All Tests By Trianee" HorizontalAlignment="Left" Margin="54,328,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="AllTestbyTester" Content="All Tests by Tester" HorizontalAlignment="Left" Margin="54,309,0,0" VerticalAlignment="Top" Checked="AllTestbyTester_Checked" Unchecked="AllTestbyTester_Unchecked"/>
+        <RadioButton x:Name="AllTestsByTrianee" Content="All Tests By Trianee" HorizontalAlignment="Left" Margin="54,328,0,0" VerticalAlignment="Top" Checked="AllTestsByTrianee_Checked" Unchecked="AllTestsByTrianee_Unchecked"/>
         <DatePicker x:Name="SelectDateDP" HorizontalAlignment="Left" Margin="182,284,0,0" VerticalAlignment="Top" CalendarClosed="SelectDateDP_CalendarClosed"/>
         <Button x:Name="PassedSatistic" Content="Passed precent" HorizontalAlignment="Left" Margin="331,282,0,0" VerticalAlignment="Top" Width="83" Click="PassedSatistic_Click" Height="27"/>
-        <ComboBox x:Name="TesterCB" HorizontalAlignment="Left" Margin="182,309,0,0" VerticalAlignment="Top" Width="102"/>
+        <ComboBox x:Name="TesterCB" HorizontalAlignment="Left" Margin="182,309,0,0" VerticalAlignment="Top" Width="102" SelectionChanged="TesterCB_SelectionChanged" Visibility="Hidden" />
+        <ComboBox x:Name="TrineeIDComboBox"  HorizontalAlignment="Left" Margin="182,326,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="TrineeIDComboBox_SelectionChanged" Visibility="Hidden"/>
 
     </Grid>
 </Window>

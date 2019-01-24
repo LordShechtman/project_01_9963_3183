@@ -386,7 +386,7 @@ namespace BL
             dal.AddTester(tester);
 
         }
-        void IBL.AddTester(string id, string name, string family_name, DateTime birth_date, MyEnum.gender my_gender, string phone, Address t_adress, int years_of_exprience, int number_of_tests, MyEnum.carType exp, bool[,] work_hours, int max_distance)
+        void IBL.AddTester(string id, string name, string family_name, DateTime birth_date, MyEnum.gender my_gender, string phone, Address t_adress, int years_of_exprience, int number_of_tests, MyEnum.carType exp, bool[,] work_hours, int max_distance,string passWord)
         {
 
 
@@ -416,7 +416,7 @@ namespace BL
             if (numberTestrHours > number_of_tests)
                 /* Tester can't work more the maximum tests per week*/
                 throw new Exception("Tester can't work more then " + number_of_tests + "per week!!");
-            temp = new Tester(id, name, family_name, birth_date, my_gender, phone, t_adress, years_of_exprience, number_of_tests, exp, max_distance, work_hours);
+            temp = new Tester(id, name, family_name, birth_date, my_gender, phone, t_adress, years_of_exprience, number_of_tests, exp, max_distance, work_hours, passWord);
             dal.AddTester(temp);
 
 
@@ -437,7 +437,7 @@ namespace BL
                 throw new Exception("Number of lessons must be bigger then 0 ");
             dal.AddTrainee(trainee);
         }
-        void IBL.AddTrainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear, string school, string teacher_name, int numLessons)
+        void IBL.AddTrainee(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, MyEnum.carType type, MyEnum.gear my_gear, string school, string teacher_name, int numLessons,string password)
         {
             Trainee temp;
 
@@ -451,7 +451,7 @@ namespace BL
             if (numLessons <= 0)
                 throw new Exception("Number of lessons must br bigger then 0 ");
 
-            temp = new Trainee(id, name, familyName, birthD, g, phoneNum, address, type, my_gear, school, teacher_name, numLessons);
+            temp = new Trainee(id, name, familyName, birthD, g, phoneNum, address, type, my_gear, school, teacher_name, numLessons,password);
 
             dal.AddTrainee(temp);
 
@@ -559,25 +559,6 @@ namespace BL
 
 
         #endregion
-        #region setPassword
-        // After we add  a new version we added the password filed  
-        public void SetTesterpassword(string id, string password)
-        {
-            Tester x = dal.GetAllTesters().Find(y => y.Id == id);
-            if (x == null)
-                throw new Exception("Tester" + id + " not found");
-            x.Password = password;
-           
-        }
-        public void SetTraineePassword(string id, string password)
-        {
-            Trainee x = dal.GetAllTrainees().Find(y => y.Id == id);
-            if (x == null)
-                throw new Exception("Tester" + id + " not found");
-            x.Password = password;
-            
-        }
-
-        #endregion
+        
     }
     }

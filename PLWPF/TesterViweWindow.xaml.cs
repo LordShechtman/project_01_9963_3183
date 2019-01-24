@@ -159,8 +159,30 @@ namespace PLWPF
         private void AllTestersByNUMtESTSRB_Checked(object sender, RoutedEventArgs e)
         {
             NumberOfTestsComboBox.Visibility = Visibility.Visible;
-           // NumberOfTestsComboBox.ItemsSource=my_bl.tes
+            foreach (var key in my_bl.TotalTestsByTester())
+                NumberOfTestsComboBox.Items.Add(key.Key);
 
+        }
+
+        private void NumberOfTestsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Tester> results = new List<Tester>();
+            foreach (var key in my_bl.TotalTestsByTester())
+            {
+                if (key.Key == (int)NumberOfTestsComboBox.SelectedValue)
+                {
+                    foreach (var element in key)
+                    {
+                        results.Add(element);
+                    }
+                }
+            }
+            testerListView.DataContext = results;
+        }
+
+        private void AllTestersByNUMtESTSRB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            NumberOfTestsComboBox.Visibility = Visibility.Hidden;
         }
     }
     }

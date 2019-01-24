@@ -140,20 +140,19 @@ namespace PLWPF
                     Myaddress.city = CityTB.Text;
                     Myaddress.houseNumber = int.Parse(HouseNumberTB.Text);
                     Myaddress.streetName = StreetNameTB.Text;
+                    /*Defult password 1234"*/
+                    string my_password = passwordBox.Password != null ? passwordBox.Password:"1234";
                     My_bl.AddTrainee(idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text
                         , (DateTime)brithDateDatePicker.SelectedDate,
                         (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderTextBox.Text), 
                         (PhoneNumberPrirtyComboBox.Text + phoneNumberTextBox.Text)
                         ,Myaddress,(MyEnum.carType)Enum.Parse (typeof(MyEnum.carType),carTextBox.Text)
                         ,(MyEnum.gear)Enum.Parse(typeof(MyEnum.gear) ,myGearTextBox.Text), schoolTextBox.Text,
-                        teacherNameTextBox.Text,int.Parse(numberOfLessonsTextBox.Text));
+                        teacherNameTextBox.Text,int.Parse(numberOfLessonsTextBox.Text),my_password);
                     if (My_bl.GetAllTrainees().Find(isfound) != null)
                         MessageBox.Show("The Trainee " + idTextBox.Text + "\n added to the data base");
-                    /*Defult password 1234"*/
-                    if (passwordBox.Password != null)
-                        My_bl.SetTraineePassword(idTextBox.Text, passwordBox.Password);
-                    else
-                        My_bl.SetTraineePassword(idTextBox.Text, "1234");
+                    
+                   
 
                 }
                 if (DeleteRButton.IsChecked == true)
@@ -194,16 +193,16 @@ namespace PLWPF
                     Myaddress.city = CityTB.Text;
                     Myaddress.houseNumber = int.Parse(HouseNumberTB.Text);
                     Myaddress.streetName = StreetNameTB.Text;
+                    string my_password = passwordBox.Password != null ? passwordBox.Password : 
+                        My_bl.GetAllTrainees().Find(t=>t.Id== idTextBox.Text).Password;
                     My_bl.UpdateTrainee(new Trainee (idTextBox.Text, nameTextBox.Text, familyNameTextBox.Text
                         , (DateTime)brithDateDatePicker.SelectedDate,
                         (MyEnum.gender)Enum.Parse(typeof(MyEnum.gender), myGenderTextBox.Text),
                         (PhoneNumberPrirtyComboBox.Text + phoneNumberTextBox.Text)
                         , Myaddress, (MyEnum.carType)Enum.Parse(typeof(MyEnum.carType), carTextBox.Text)
                         , (MyEnum.gear)Enum.Parse(typeof(MyEnum.gear), myGearTextBox.Text), schoolTextBox.Text,
-                        teacherNameTextBox.Text, int.Parse(numberOfLessonsTextBox.Text)));
-                    if (My_bl.GetAllTrainees().Find(isfound) != null)
-                        if(passwordBox.Password!=null)
-                        My_bl.SetTraineePassword(idTextBox.Text, passwordBox.Password);
+                        teacherNameTextBox.Text, int.Parse(numberOfLessonsTextBox.Text), my_password));
+                   
                     MessageBox.Show("Update succeeded");
                 }
                 clearFileds();

@@ -70,34 +70,80 @@ namespace PLWPF
                 }
             }
         }
-
+        #region AllTestsbyDateRB Events
         private void AllTestsbyDateRB_Checked(object sender, RoutedEventArgs e)
         {
             SelectDateDP.Visibility = Visibility.Visible;
             
         }
-
+      
         private void AllTestsbyDateRB_Unchecked(object sender, RoutedEventArgs e)
         {
             SelectDateDP.Visibility = Visibility.Hidden;
         }
-
+        #endregion
         private void SelectDateDP_CalendarClosed(object sender, RoutedEventArgs e)
         {
-           //Returns all tests in the same Date 
+           ///Returns all tests in the same Date 
+           ///We removed the hour so we can compare by day/month/year prametrs
             testListView.DataContext = MyBl.AllTestBy(x => x.TestDate.AddHours((int)-1*x.TestDate.Hour )
             ==SelectDateDP.SelectedDate);
         }
-
+       
         private void PassedSatistic_Click(object sender, RoutedEventArgs e)
         {
             //Return the passed precent (passed/alltests)
             MessageBox.Show("Passed precent: " + (MyBl.PassStatistic()*100)+"%");
         }
-
+        #region AllTestbyTester Radio button EVENTS
         private void AllTestbyTester_Checked(object sender, RoutedEventArgs e)
         {
+            TesterCB.Visibility = Visibility.Visible;
+            foreach( var item in MyBl.GetAllTesters())
+            {
+                TesterCB.Items.Add(item.Id + " " + item.Name + " " + item.FamilyName);
+            }
+        }
 
+        private void AllTestbyTester_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TesterCB.Visibility = Visibility.Hidden;
+        }
+        #endregion
+        private void TesterCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string my_id = "";
+            //Get the TESTER ID
+            foreach (var v in TesterCB.SelectedValue.ToString())
+            {
+                if (v >= '0' && v <= '9')
+                    my_id += v;
+            }
+            testListView.DataContext = MyBl.AllTestBy(x => x.TesterId == my_id);
+        }
+
+        private void AllTestsByTrianee_Checked(object sender, RoutedEventArgs e)
+        {
+            TrineeIDComboBox.Visibility = Visibility.Visible;
+        }
+
+        private void AllTestsByTrianee_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TrineeIDComboBox.Visibility = Visibility.Hidden;
+            foreach(var item in MyBl.GetAllTrainees())
+                TrineeIDComboBox.Items.Add(item.Id + " " + item.Name + " " + item.FamilyName);
+        }
+
+        private void TrineeIDComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string my_id = "";
+            //Get the TESTER ID
+            foreach (var v in TrineeIDComboBox.SelectedValue.ToString())
+            {
+                if (v >= '0' && v <= '9')
+                    my_id += v;
+            }
+            testListView.DataContext = MyBl.AllTestBy(x => x.TraineeId == my_id);
         }
     }
 }
