@@ -15,7 +15,12 @@ namespace BE
         /// </summary>
         #region FILEDS
         private readonly string[] TestParmtersNames = { "Keep Distance", "Reverse Parking", "Looking in the Mirors ", "Signals", "Wheel handling", "Priority Rules" };
+        public string [] Get_test_parm()
+        {
+            return TestParmtersNames;
+        }
         public string TestNumber { get; set; }
+
         public string TesterId { get; set; }
         public string TraineeId { get; set; }
         public DateTime TestDate { get; set; }
@@ -25,6 +30,7 @@ namespace BE
         public bool IsPass { get; set; }
         public List <string> TesterNotes { get; set; }
         #endregion
+        public Test() { }
         public Test(string tester_id, string trainee_id,DateTime date_test,Address address )
         {
             //When we Bulid a test we only ceate the test itslef and we update the test after it

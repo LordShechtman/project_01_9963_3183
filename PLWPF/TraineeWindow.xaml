@@ -41,7 +41,7 @@
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Gear:"/>
             <ComboBox x:Name="myGearTextBox" SelectedItem="{Binding gear}" ItemsSource="{Binding}" Width="120" VerticalAlignment="Center" Text="{Binding MyGear, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Gender:"/>
-            <ComboBox x:Name="myGenderTextBox" SelectedValue="{Binding gender}" Width="120" VerticalAlignment="Center"  Grid.Row="5" ItemsSource="{Binding}" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <ComboBox x:Name="myGenderTextBox" SelectedValue="{Binding gender}" Width="120" VerticalAlignment="Center"  Grid.Row="5" ItemsSource="{Binding}" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" />
             <Label VerticalAlignment="Center" Grid.Row="1" Margin="3,0,0,2.8" HorizontalAlignment="Left" Content="Name:"/>
             <TextBox x:Name="nameTextBox" Width="120" VerticalAlignment="Center" TextChanged="NAMES" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Number Of Lessons:"/>

@@ -41,6 +41,7 @@ namespace PLWPF
             myGenderTextBox.Text = null;
             schoolTextBox.Text = null;
             teacherNameTextBox.Text = null;
+
             numberOfLessonsTextBox.Text = null;
             carTextBox.Text = null;
             passwordBox.Password = null;
