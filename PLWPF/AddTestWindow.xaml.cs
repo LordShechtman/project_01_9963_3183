@@ -41,6 +41,8 @@ namespace PLWPF
             YourPasswordBox.Visibility = Visibility.Hidden;
             testDateDatePicker.DisplayDateEnd = DateTime.Now.AddDays(31);
             testDateDatePicker.DisplayDateStart = DateTime.Now;
+            if(DateTime.Now.Hour>14)
+            testDateDatePicker.DisplayDateStart = DateTime.Now.AddDays(1);
             testDateDatePicker.IsEnabled = false;
             CityTextBox.IsEnabled = false;
             HourCB.IsEnabled = false;

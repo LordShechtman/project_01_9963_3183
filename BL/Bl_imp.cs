@@ -9,7 +9,7 @@ namespace BL
     /// The BL layer
     /// In this layer we chek the input before it go to the DAL Layer
     /// In addtion we pull information from the Dal and gives to the PL 
-    /// the fillter data the user wants to know.
+    /// the filltered data the  user wants to know.
     /// 
     /// </summary>
     public class Bl_imp : IBL
@@ -40,7 +40,7 @@ namespace BL
             int ID = int.Parse(id);
             //If we have 9 dights we check the last dight
             int dight, sumd = 0, number, numd = 8;//numd=number of digits,sumd=sum of digits
-            number = (ID % 10);//numbr saves the ID digit by digit
+            number = (ID % 10);//number saves the ID digit by digit
             while (numd >= 1)//cuculte sum of doublles
             {
                 if (numd % 2 == 1)//for odd index
@@ -49,6 +49,7 @@ namespace BL
                 }
                 else
                 {
+                    
                     number *= 2;//for double index
                     sumd += (number / 10) + (number % 10);
                 }
@@ -73,12 +74,13 @@ namespace BL
         int distance(Address address1, Address address2)
         {
             Random r = new Random();
+            //TODO: wAIT THAT Eliran will finsh th eard
             ///Meanwhile we wait for permission from Google Maps we will return random distance;
             return 50;
         }
         public void ValidAddress(Address address)
         {
-            //address must contin all it filed
+            //address must contin all it fileds
             if (address.city == null)
                 throw new Exception("Address must contain city name");
             if (address.streetName == null)
@@ -108,7 +110,7 @@ namespace BL
                 if (ch < '0' || ch > '9')
                     throw new Exception(name + " must contin dighits only!!");
             }
-        }  
+        }
         public bool TestResult(Test test)
         {
             //Detrminate the reuslt of the test
@@ -120,6 +122,7 @@ namespace BL
         }
         private bool InTheSameWeek(DateTime date1, DateTime date2)
         {
+            //Check if two dates are in the same week
             var d1 = date1.AddDays(-1 * (int)date1.DayOfWeek);
             var d2 = date2.AddDays(-1 * (int)date2.DayOfWeek);
             return d1 == d2;
@@ -150,7 +153,8 @@ namespace BL
             IEnumerable<IGrouping<int, Tester>> num = from x in dal.GetAllTesters()
                                                       let toatalTests = AllTestBy(y => y.TesterId == x.Id).Count()
                                                       group x by toatalTests;
-            
+
+
             return num;
         }
 
