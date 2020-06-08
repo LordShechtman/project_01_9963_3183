@@ -40,12 +40,14 @@ namespace PLWPF
         private void testListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Gives the testparmeter results and the tester Notes from the test
-           int Index = MyBl.GetAllTests().IndexOf((BE.Test)testListView.SelectedItem);
+            List<BE.Test> tests = MyBl.GetAllTests();
+            int Index = tests.IndexOf(
+                tests.Find(x => x.ToString() == testListView.SelectedItem.ToString()));
            // MessageBox.Show(MyBl.GetAllTests()[Index].ToString());
             if(Index!=-1)
             {
-               
-                if (MyBl.GetAllTests()[Index].TestParameters.Any()==true)
+               //BUild a new bool "Is Updated"
+                if (MyBl.GetAllTests()[Index].ISUpdated==true)
                 {
                     ParmterResultsUC.keepDistanceCB.IsChecked =  MyBl.GetAllTests()[Index].TestParameters[0];
                     ParmterResultsUC.reverseParkingCB.IsChecked = MyBl.GetAllTests()[Index].TestParameters[1];

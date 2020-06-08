@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tests>
+  <test>
+    <id>00000002</id>
+    <ID_TESTER>312589963</ID_TESTER>
+    <ID_TRAINEE>000000001</ID_TRAINEE>
+    <DATE>2019-01-27T13:00:00</DATE>
+    <Address>
+      <City>חיפה</City>
+      <Street>תל אביב</Street>
+      <Number>1</Number>
+    </Address>
+    <Pass>True</Pass>
+    <NOTE>.נהג טוב</NOTE>
+    <parameters>
+      <Keep_Distance>True</Keep_Distance>
+      <Reverse_Parking>True</Reverse_Parking>
+      <Looking_in_the_Mirors>True</Looking_in_the_Mirors>
+      <Signals>True</Signals>
+      <Wheel_handling>True</Wheel_handling>
+      <Priority_Rules>True</Priority_Rules>
+    </parameters>
+    <IsUpdate>True</IsUpdate>
+  </test>
+</Tests>

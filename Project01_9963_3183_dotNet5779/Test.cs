@@ -29,6 +29,7 @@ namespace BE
        public  List<bool> TestParameters { get; set; }
         public bool IsPass { get; set; }
         public List <string> TesterNotes { get; set; }
+        public bool ISUpdated { get; set; }
         #endregion
         public Test() { }
         public Test(string tester_id, string trainee_id,DateTime date_test,Address address )
@@ -40,13 +41,16 @@ namespace BE
             TestAddress = address;
             IsPass = false;
             TestParameters = new List<bool>();
+            for(int i = 0; i < 6; i++) { TestParameters.Add(false); }
             TesterNotes = new List<string>();
-
+            ISUpdated = false;
+            
 
         }
         public Test(string tester_id, string trainee_id, DateTime date_test, Address address,List<bool> parameters,List<string>notes)
         {
             //Update test by the Tester
+            ISUpdated = true;
             TestParameters = new List<bool>();
             TesterNotes = new List<string>();
             TesterId = tester_id;

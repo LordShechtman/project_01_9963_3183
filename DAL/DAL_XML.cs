@@ -6,42 +6,39 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using BE;
 using System.IO;
-
+using DS;
 namespace DAL
 {
     class DAL_XML : Idal
     {
-        static string tests_numPath = @"tests_num.xml";
-        static XElement tests_num_root;
-        static XElement Trainess_Root;
-        static string traineesPath = @"TraineesXml.xml";
-        static XElement Tests_Root;
-        static string testsPath = @"TestsXml.xml";
-        static XElement Testers_Root;
-        static string testersPath = @"TestersXml.xml";
+        
+        public static readonly DAL_XML instance = new DAL_XML();
+        public static DAL_XML Instance
+        {
+            get { return instance; }
+        }
+        public  DAL_XML()
+        {
+            
+
+
+        }
+       
         public void AddTest(Test t)
         {
            t.TestNumber = get_num_test().ToString("00000000");
-            try
-            {
-                if (!File.Exists(testsPath))
-                {
-                    Tests_Root = new XElement("Tests");
-                    Tests_Root.Save(testsPath);
-                }
-                Tests_Root = XElement.Load(testsPath);
+            
+              
+               //Build a new test Eelement file
                 XElement id = new XElement("id", t.TestNumber);
                 XElement ID_TESTER = new XElement("ID_TESTER", t.TesterId);
                 XElement ID_TRAINEE = new XElement("ID_TRAINEE", t.TraineeId);
-
-          
                 XElement DATE = new XElement("DATE", t.TestDate);
-             
                 XElement City = new XElement("City", t.TestAddress.city);
                 XElement Street = new XElement("Street", t.TestAddress.streetName);
                 XElement Number = new XElement("Number", t.TestAddress.houseNumber);
                 XElement Address = new XElement("Address", City, Street, Number);
-
+                 XElement IsUpdate = new XElement("IsUpdate", t.ISUpdated);
 
                 XElement Keep_Distance = new XElement("Keep_Distance", false.ToString());
                 XElement Reverse_Parking = new XElement("Reverse_Parking", false.ToString());
@@ -55,14 +52,10 @@ namespace DAL
 
                 XElement NOTE = new XElement("NOTE", t.TesterNotes);
 
-                Tests_Root.Add(new XElement("test", id, ID_TESTER, ID_TRAINEE, DATE, Address,  Pass, NOTE, parameters));
-                Tests_Root.Save(testsPath);
-            }
-            catch(Exception Ex)
-            {
-
-                 //throw new Exception("File upload problem");
-            }
+                XMLDS.DrivingTests.Add(new XElement("test", id, ID_TESTER, ID_TRAINEE, DATE, Address,  Pass, NOTE, parameters, IsUpdate));
+                XMLDS.SaveDrivingtests();
+            
+            
 
         } 
 
@@ -75,20 +68,15 @@ namespace DAL
                 throw new Exception("Tester "+t.Id+" is Already exist!!");
                
             
-              flag=  Trainee_by_id(t.Id); // need edit
+              flag=  Trainee_by_id(t.Id); 
             if(flag==true)
                 throw new Exception("There is a trinee with id: " + t.Id + " is Already exist!!");
             
             try
             {
-                if (!File.Exists(testersPath))
-                {
-
-
-                    Testers_Root = new XElement("Testers");
-                    Testers_Root.Save(testersPath);
-                }
-                Testers_Root = XElement.Load(testersPath);
+              
+               
+                //Create new    Tester XElement file
                 XElement id = new XElement("id", t.Id);
                 XElement firstName = new XElement("firstName", t.Name);
                 XElement lastName = new XElement("lastName", t.FamilyName);
@@ -107,12 +95,12 @@ namespace DAL
                 XElement PhoneNumber = new XElement("PhoneNumber", t.PhoneNumber );
                 XElement hours = new XElement("hours", t.get_hours_s());
                 XElement Password = new XElement("Password", t.Password);
-                Testers_Root.Add(new XElement("tester", id, name, BIRTH_DAY, Address, Gender, Type_car, seniority, MaxTestsPerWeek, MaxDistance, MaxDistance, PhoneNumber, hours,Password));
-                Testers_Root.Save(testersPath);
+              XMLDS.Testers.Add(new XElement("tester", id, name, BIRTH_DAY, Address, Gender, Type_car, seniority, MaxTestsPerWeek, MaxDistance, PhoneNumber, hours,Password));
+                XMLDS.SaveTesters();
             }
             catch
             {
-                // throw new Exception("File upload problem");
+                 throw new Exception("File upload problem");
             }
         }
 
@@ -126,18 +114,14 @@ namespace DAL
                 throw new Exception("Tester " + t.Id + " is Already exist!!");
 
 
-            flag = Trainee_by_id(t.Id); // need edit
+            flag = Trainee_by_id(t.Id); 
             if (flag == true)
                 throw new Exception("There is a trinee with id: " + t.Id + " is Already exist!!");
 
             try
             {
-                if (!File.Exists(traineesPath))
-                {
-                    Trainess_Root = new XElement("Trainees");
-                    Trainess_Root.Save(traineesPath);
-                }
-                Trainess_Root = XElement.Load(traineesPath);
+                
+                //Create a new trinee path
                 XElement id = new XElement("id", t.Id);
                 XElement firstName = new XElement("firstName", t.Name);
                 XElement lastName = new XElement("lastName", t.FamilyName);
@@ -157,12 +141,12 @@ namespace DAL
               //  XElement PhonePrefix = new XElement("phone_number", t.PhonePrefix);
                 XElement phone_number = new XElement("phone_number", t.PhoneNumber);
                 XElement Password = new XElement("Password", t.Password);
-                Trainess_Root.Add(new XElement("student", id, name, BIRTH_DAY, Address,Gear, Gender, Type_car, Teacher, LESSONS, SCHOOL, phone_number , Password));
-                Trainess_Root.Save(traineesPath);
+                XMLDS.Trainees.Add(new XElement("student", id, name, BIRTH_DAY, Address,Gear, Gender, Type_car, Teacher, LESSONS, SCHOOL, phone_number , Password));
+                XMLDS.SaveTrainees();
             }
             catch
             {
-                // throw new Exception("File upload problem");
+                 throw new Exception("Can't open trinees file");
             }
         }
 
@@ -171,24 +155,17 @@ namespace DAL
 
             if (Tester_by_id(id) == false)
                 throw new Exception("Tester " + id + " not exist!"); 
-            if (!File.Exists(testersPath))
-            {
-
-
-                Testers_Root = new XElement("Testers");
-                Testers_Root.Save(testersPath);
-                throw new Exception("The list is emapty");
-            }
-            Testers_Root = XElement.Load(testersPath);
+            
+            
 
             XElement tester_XElement;
             try
             {
-                tester_XElement = (from stu in Testers_Root.Elements()
+                tester_XElement = (from stu in XMLDS.Testers.Elements()
                                    where stu.Element("id").Value == id
                                    select stu).FirstOrDefault();
                 tester_XElement.Remove();
-                Testers_Root.Save(testersPath);
+                XMLDS.SaveTesters();
 
             }
             catch
@@ -204,24 +181,16 @@ namespace DAL
                 throw new Exception("Trainee " + id + " not exist");
 
 
-            if (!File.Exists(traineesPath))
-            {
-
-
-                Trainess_Root = new XElement("Trainees");
-                Trainess_Root.Save(traineesPath);
-                throw new Exception("The list is emapty");
-            }
-            Trainess_Root = XElement.Load(traineesPath);
+            
 
             XElement trainee_XElement;
             try
             {
-                trainee_XElement = (from stu in Trainess_Root.Elements()
+                trainee_XElement = (from stu in XMLDS.Trainees.Elements()
                                     where stu.Element("id").Value == id
                                     select stu).FirstOrDefault();
                 trainee_XElement.Remove();
-                Trainess_Root.Save(traineesPath);
+                XMLDS.SaveTrainees();
 
             }
             catch
@@ -232,67 +201,49 @@ namespace DAL
 
         public List<Tester> GetAllTesters()
         {
-            try
-            {
-                Testers_Root = XElement.Load(testersPath);
-            }
-            catch (Exception)
-            {
-                
-            }
+           
 
-            List<Tester> testers;
-            try
-            {
-                testers = (from stu in Testers_Root.Elements()
-                           select new Tester()
-                           {
-                               Id = stu.Element("id").Value,
+            List<Tester> testers =new List<Tester>();
+
+            testers = (from stu in XMLDS.Testers.Elements()
+                       select stu.ToTester()).ToList()
+                       ;
+            
+                           
+                              /* Id = stu.Element("id").Value,
                                Name = stu.Element("name").Element("firstName").Value,
                                FamilyName = stu.Element("name").Element("lastName").Value,
                                BirthDate = DateTime.Parse(stu.Element("BIRTH_DAY").Value),
-                               MyAddress = Configuration.MAKE_adress(stu.Element("Address").Element("City").Value, stu.Element("Address").Element("Street").Value, int.Parse(stu.Element("Address").Element("Number").Value)),
+                               MyAddress = Configuration.MAKE_Address(stu.Element("Address").Element("City").Value, stu.Element("Address").Element("Street").Value, int.Parse(stu.Element("Address").Element("Number").Value)),
 
                                MyGender = Configuration.make_gender(stu.Element("Gender").Value),
                                ExpiranceCar = Configuration.MAKE_TYPE_CAR(stu.Element("Type_car").Value),
                                YearsOfExperience = int.Parse(stu.Element("seniority").Value),
                                MaxTestsPerWeek = int.Parse(stu.Element("MaxTestsPerWeek").Value),
-                               MaxDistance = float.Parse(stu.Element("MaxDistance").Value),
+                               MaxDistance = int.Parse(stu.Element("MaxDistance").Value),
                                PhoneNumber = stu.Element("phone_number").Value,
                                hours_string = stu.Element("hours").Value,
-                               Password = stu.Element("Password").Value,
+                               Password = stu.Element("Password").Value,*/
 
-                           }).ToList();
-            }
-            catch (Exception Ex)
-            {
-                string st = Ex.ToString();
-                testers = null;
-            }
-            foreach (var item in testers)
+                           
+            
+
+           /*foreach (var item in testers)
             {
                 item.set_hours_s(item.hours_string);
                 item.hours_string = "";
-            }
+            }*/
             return testers;
         }
 
         public List<Test> GetAllTests()
         {
-            try
-            {
-                Tests_Root = XElement.Load(testsPath);
-            }
-            catch (Exception)
-            {
-
-
-            }
+            
 
             List<Test> tests = new List<Test>();
             try
             {
-                tests = (from stu in Tests_Root.Elements()
+                tests = (from stu in XMLDS.DrivingTests.Elements()
                          select new Test()
                          {
 
@@ -303,14 +254,14 @@ namespace DAL
 
                              TestDate = DateTime.Parse(stu.Element("DATE").Value),
                              
-                             TestAddress = Configuration.MAKE_adress(stu.Element("Address").Element("City").Value, stu.Element("Address").Element("Street").Value, int.Parse(stu.Element("Address").Element("Number").Value)),
+                             TestAddress = Configuration.MAKE_Address(stu.Element("Address").Element("City").Value, stu.Element("Address").Element("Street").Value, int.Parse(stu.Element("Address").Element("Number").Value)),
                              
                              TestParameters = Configuration.SetBoolLIST(stu.Element("parameters").Element("Keep_Distance").Value, stu.Element("parameters").Element("Reverse_Parking").Value, stu.Element("parameters").Element("Looking_in_the_Mirors").Value, stu.Element("parameters").Element("Signals").Value, stu.Element("parameters").Element("Wheel_handling").Value, stu.Element("parameters").Element("Priority_Rules").Value),
                              
                              TesterNotes = Configuration.MakeNoteList(stu.Element("NOTE").Value),
 
                              IsPass =Boolean.Parse(stu.Element("Pass").Value),
-
+                             ISUpdated=Boolean.Parse(stu.Element("IsUpdate").Value)
 
 
 
@@ -322,25 +273,17 @@ namespace DAL
             {
 
             }
-            return tests;
+            return tests.ToList();
 
         }
         public List<Trainee> GetAllTrainees()
         {
-            try
-            {
-                Trainess_Root = XElement.Load(traineesPath);
-            }
-            catch (Exception)
-            {
-
-
-            }
+           
 
             List<Trainee> trainees;
             try
             {
-                trainees = (from stu in Trainess_Root.Elements()
+                trainees = (from stu in XMLDS.Trainees.Elements()
                             select new Trainee()
                             {
                                 Id = stu.Element("id").Value,
@@ -350,7 +293,7 @@ namespace DAL
                                 MyGender = Configuration.make_gender(stu.Element("Gender").Value),
                                 PhoneNumber = stu.Element("phone_number").Value,
 
-                                MyAddress = Configuration.MAKE_adress(stu.Element("Address").Element("City").Value, stu.Element("Address").Element("Street").Value, int.Parse(stu.Element("Address").Element("Number").Value)),
+                                MyAddress = Configuration.MAKE_Address(stu.Element("Address").Element("City").Value, stu.Element("Address").Element("Street").Value, int.Parse(stu.Element("Address").Element("Number").Value)),
 
                                 Car = Configuration.MAKE_TYPE_CAR(stu.Element("Type_car").Value),
 
@@ -366,24 +309,16 @@ namespace DAL
             {
                 trainees = null;
             }
-            return trainees;
+            return trainees.ToList();
         }
 
         public void UpdateTest(Test t)
         {
-            try
-            {
-                Tests_Root = XElement.Load(testsPath);
-            }
-            catch (Exception)
-            {
-
-
-            }
+            
             Test test_t = new Test();
             try
             {
-                XElement testElement = (from stu in Tests_Root.Elements()
+                XElement testElement = (from stu in XMLDS.DrivingTests.Elements()
                                         where(stu.Element("id").Value) == t.TestNumber
                                         select stu).FirstOrDefault();
 
@@ -405,69 +340,46 @@ namespace DAL
 
 
 
-                Tests_Root.Save(testsPath);
+                XMLDS.SaveDrivingtests();
 
 
             }
             catch
             {
-                throw new Exception("Not exist this test");
+                throw new Exception("  test Not exist");
             }
         }
         public int get_num_test()
         {
-            try
+            if(XMLDS.TestNumber.Elements().Any()==false)
             {
-
-                if (!File.Exists(tests_numPath))
-                {
-
-
-                    tests_num_root = new XElement("Configuration");
-                    tests_num_root.Add(new XElement("num_test", 1));
-                    tests_num_root.Save(tests_numPath);
-                    return 1;
-
-                }
-                else
-                {
-                    try
-                    {
-                        tests_num_root = XElement.Load(tests_numPath);
-                    }
-                    catch (Exception)
-                    {
-
-
-                    }
-
-                    XElement num_t = (from stu in tests_num_root.Elements()
+                XElement TestNumber = new XElement("testNumber", 1);
+                XMLDS.TestNumber.Add(TestNumber);
+                XMLDS.SaveConfiguration();
+                return 1;
+            }
+            
+                    XElement num_t = (from stu in XMLDS.TestNumber.Elements()
 
                                       select stu).FirstOrDefault();
                     int num = int.Parse(num_t.Value);
                     num++;
-                    num_t.Value = num + "";
-                    //  num_t.Value = num + "";
+            XMLDS.TestNumber.Element("testNumber").Value = num.ToString();
+            //  num_t.Value = num + "";
 
 
-                    tests_num_root.Save(tests_numPath);
+            XMLDS.SaveConfiguration(); 
 
                     return num;
                 }
 
-            }
-            catch (Exception)
-            {
-
-
-            }
-            return 0;
-        }
+            
+       
         public void UpdateTester(Tester t)
         {
             try
             {
-                Testers_Root = XElement.Load(testersPath);
+               // Testers_Root = XElement.Load(testersPath);
             }
             catch (Exception)
             {
@@ -477,7 +389,7 @@ namespace DAL
             Tester tester_t = new Tester();
             try
             {
-                XElement testerElement = (from stu in Testers_Root.Elements()
+                XElement testerElement = (from stu in XMLDS.Testers.Elements()
                                           where stu.Element("id").Value == t.Id
                                           select stu).FirstOrDefault();
                 testerElement.Element("Gender").Value = t.MyGender.ToString();
@@ -495,7 +407,7 @@ namespace DAL
                 testerElement.Element("Address").Element("Street").Value = t.MyAddress.streetName;
                 testerElement.Element("Address").Element("Number").Value = t.MyAddress.houseNumber.ToString();
                 testerElement.Element("Password").Value = t.Password;
-                Testers_Root.Save(testersPath);
+                XMLDS.SaveTesters();
 
 
             }
@@ -509,7 +421,7 @@ namespace DAL
         {
             try
             {
-                Trainess_Root = XElement.Load(traineesPath);
+                //Trainess_Root = XMLDS.Trainees;
             }
             catch (Exception)
             {
@@ -519,7 +431,7 @@ namespace DAL
             Trainee trainee_t = new Trainee();
             try
             {
-                XElement traineeElement = (from stu in Trainess_Root.Elements()
+                XElement traineeElement = (from stu in XMLDS.Trainees.Elements()
                                            where (stu.Element("id").Value) == t.Id
                                            select stu).FirstOrDefault();
                 traineeElement.Element("BIRTH_DAY").Value = t.BrithDate.ToString();
@@ -536,7 +448,7 @@ namespace DAL
                 traineeElement.Element("Address").Element("City").Value = t.MyAddress.city;
                 traineeElement.Element("Address").Element("Street").Value = t.MyAddress.streetName;
                 traineeElement.Element("Address").Element("Number").Value = t.MyAddress.houseNumber.ToString();
-                Trainess_Root.Save(traineesPath);
+               XMLDS.SaveTrainees();
 
 
             }
@@ -549,14 +461,14 @@ namespace DAL
         {
             try
             {
-                Trainess_Root = XElement.Load(traineesPath);
+               // Trainess_Root = XElement.Load(traineesPath);
             }
             catch (Exception)
             {
             }
             Trainee trainee  =null;
             
-                trainee = (from stu in Trainess_Root.Elements()
+                trainee = (from stu in XMLDS.Trainees.Elements()
                            where (stu.Element("id").Value) == id
                            select new Trainee()
                            {
@@ -578,7 +490,7 @@ namespace DAL
 
             try
             {
-                Testers_Root = XElement.Load(testersPath);
+              //  Testers_Root = XMLDS.Testers;
             }
             catch (Exception)
             {
@@ -586,8 +498,8 @@ namespace DAL
 
             }
             Tester tester = null;
-           
-                tester = (from stu in Testers_Root.Elements()
+          
+                tester = (from stu in XMLDS.Testers.Elements()
                           where stu.Element("id").Value == id
                           select new Tester()
                           {
@@ -596,14 +508,14 @@ namespace DAL
 
 
                           }).FirstOrDefault();
-                tester.set_hours_s(tester.hours_string);
-                tester.hours_string = "";
+                //tester.set_hours_s(tester.hours_string);
+                //tester.hours_string = "";
                 return  (tester != null) ;
                 
             }
-            
 
         
+
 
 
 

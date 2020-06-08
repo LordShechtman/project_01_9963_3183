@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Net;
+using System.Runtime.InteropServices;
+using System.Xml;
 using DAL;
 using BE;
 namespace BL
@@ -9,14 +13,125 @@ namespace BL
     /// The BL layer
     /// In this layer we chek the input before it go to the DAL Layer
     /// In addtion we pull information from the Dal and gives to the PL 
-    /// the filltered data the  user wants to know.
+    /// the fillterd data the  user wants to know.
     /// 
     /// </summary>
     public class Bl_imp : IBL
     {
+        #region map therd
+       /* [DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int description, int reservedValue);
 
-        #region Singleton
-        public static readonly Bl_imp instance = new Bl_imp();
+        private static bool IsInternetAvailable()
+        {
+            int description;
+            return InternetGetConnectedState(out description, 0);
+        }
+        private static float Distance_KM(string address1, string address2)
+        {
+            string address1_t = address1;
+            string address2_t = address2;
+            //  address1_t = address1.street + " " + address1.number + " st. " + address1.city;
+            //  address2_t = address2.street + " " + address2.number + " st. " + address2.city;
+            bool flag = false;
+
+            string final = "";
+            do
+            {
+                try
+                {
+                    if (IsInternetAvailable() == false)
+                    {
+                        flag = true;
+                        // progress.Visibility = Visibility.Visible;
+                        //  worker.ReportProgress(1);
+                        throw new Exception("No internet");
+
+                    }
+                    if (address1_t == "" || address2_t == "")
+                    {
+                        flag = true;
+                        throw new Exception("is null");
+                    }
+                    string origin = address1_t; //or "תקווה פתח 100 העם אחד "etc.
+                    string destination = address2_t;//or "גן רמת 10 בוטינסקי'ז "etc.
+                    string KEY = @"NeG8clAbdnN08UXHaDsaUeAbjyGr6cb2";
+                    string url = @"https://www.mapquestapi.com/directions/v2/route" +
+                     @"?key=" + KEY +
+                     @"&from=" + origin +
+                     @"&to=" + destination +
+                     @"&outFormat=xml" +
+                     @"&ambiguities=ignore&routeType=fastest&doReverseGeocode=false" +
+                     @"&enhancedNarrative=false&avoidTimedConditions=false";
+                    //request from MapQuest service the distance between the 2 addresses
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                    WebResponse response = request.GetResponse();
+                    Stream dataStream = response.GetResponseStream();
+                    StreamReader sreader = new StreamReader(dataStream);
+                    string responsereader = sreader.ReadToEnd();
+                    response.Close();
+                    //Console.WriteLine(responsereader);
+                    //    the response is given in an XML format
+                    XmlDocument xmldoc = new XmlDocument();
+                    xmldoc.LoadXml(responsereader);
+                    if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "0")
+                    //we have the expected answer
+                    {
+                        //display the returned distance
+                        XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
+                        double distInMiles = Convert.ToDouble(distance[0].ChildNodes[0].InnerText);
+                        final = "" + distInMiles * 1.609344;
+                        //display the returned driving time
+                        XmlNodeList formattedTime = xmldoc.GetElementsByTagName("formattedTime");
+                        string fTime = formattedTime[0].ChildNodes[0].InnerText;
+                        //  Console.WriteLine("Driving Time: " + fTime);
+                    }
+                    else if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "402")
+                    //we have an answer that an error occurred, one of the addresses is not found
+                    {
+                        final = "";
+                        flag = true;
+                        throw new Exception("one of the addresses is not found");
+                        // Console.WriteLine("an error occurred, one of the addresses is not found. try again.");
+                    }
+                    else //busy network or other error...
+                    {
+                        final = "";
+
+                        // flag = true;
+                        //  throw new Exception("We have'nt got an answer, maybe the net is busy...");
+                        //  Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
+                    }
+
+                    if (final != "")
+                    {
+                        flag = true;
+
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    //MessageBox.Show(Ex.Message);
+
+                }
+            } while (!flag);
+            if (final == "")
+            {
+                return -1;
+
+            }
+            else
+            {
+                return float.Parse(final);
+            }
+
+        }
+    }
+}*/
+
+#endregion
+#region Singleton
+public static readonly Bl_imp instance = new Bl_imp();
 
         public static Bl_imp Instance { get { return instance; } }
 
@@ -179,6 +294,7 @@ namespace BL
             }
             return passed;
         }
+
         public IEnumerable<Tester> TestersByOrder()
         {
             IEnumerable<Tester> orderList = from item in dal.GetAllTesters()

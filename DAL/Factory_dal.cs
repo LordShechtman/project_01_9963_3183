@@ -9,9 +9,26 @@ namespace DAL
     public class Factory_dal
     {
         
-        public static Idal getDal()
+            protected static Idal instance = null;
+
+            protected Factory_dal() { }
+
+            public static Idal getInstance()
+            {
+                if (instance == null)
+                {
+                    instance = new DAL_XML();
+                    
+                }
+                return instance;
+            }
+            public static Idal getDal()
         {
-            return DAL.DAL_XML.instance; 
+            
+
+
+
+          return DAL_XML.Instance; ;
 
         }
         

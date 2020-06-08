@@ -30,7 +30,7 @@
         <Button x:Name="ShowTestersButton" Content="Show Testers " Grid.Column="1" HorizontalAlignment="Left" Margin="299.8,191,0,0" VerticalAlignment="Top" Width="217" Height="60" FontSize="24" Click="ShowTestersButton_Click" Grid.ColumnSpan="5"/>
         <Button x:Name="DemoModeButton" Content="Demo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="DemoModeButton_Click" Height="16"/>
         <Button x:Name="showTraineesButton" Content="ShowTriness" Grid.Column="1" HorizontalAlignment="Left" Margin="58.8,191,0,0" VerticalAlignment="Top" Width="202" Height="59" FontSize="24" Click="showTraineesButton_Click"/>
-        <ListView x:Name="PassedTodayListView"  Margin="0,86,5.2,1.2" SelectionMode="Single">
+        <ListView x:Name="PassedTodayListView"  Margin="0,86,5.2,1.2" SelectionMode="Single" GotFocus="PassedTodayListView_GotFocus">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>

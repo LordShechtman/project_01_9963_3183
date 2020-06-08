@@ -48,7 +48,7 @@ namespace DAL
             }
             DS.DataSource.testers.Add(t);
 
-            (new DAL_XML()).AddTester(t);
+           (new DAL_XML()).AddTester(t);
             return;
         }
        public  void DeleteTester(string id)
@@ -175,7 +175,7 @@ namespace DAL
             t.TestNumber = tmp.TestNumber;
             DS.DataSource.tests.Remove(tmp);
             DataSource.tests.Add(t);
-            (new DAL_XML()).UpdateTest(t);
+           (new DAL_XML()).UpdateTest(t);
         }
         #endregion
         #region Data Acsses

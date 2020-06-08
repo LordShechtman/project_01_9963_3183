@@ -121,12 +121,17 @@ namespace PLWPF
         private void traineeListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Show Trainee number of tests by clicking the selected trniee
-            int Index = my_bl.GetAllTrainees().IndexOf((BE.Trainee)traineeListView.SelectedItem);
-            if (Index != -1)
+            if (traineeListView.SelectedIndex != -1)
             {
-                BE.Trainee Selected_Trainee = my_bl.GetAllTrainees()[Index];
-                MessageBox.Show("Name: " + Selected_Trainee.Name + " " + Selected_Trainee.FamilyName
-                  +"\n"+"Number of Tests: "+my_bl.numberOfTests(Selected_Trainee));
+               
+                List<BE.Trainee> trainees = my_bl.GetAllTrainees();
+                int Index = trainees.IndexOf(trainees.Find(X => X.ToString() == traineeListView.SelectedItem.ToString()));
+                if (Index != -1)
+                {
+                    BE.Trainee Selected_Trainee = my_bl.GetAllTrainees()[Index];
+                    MessageBox.Show("Name: " + Selected_Trainee.Name + " " + Selected_Trainee.FamilyName
+                      + "\n" + "Number of Tests: " + my_bl.numberOfTests(Selected_Trainee));
+                }
             }
         }
         #region TraineesByTeacherRadioButton un/checked events

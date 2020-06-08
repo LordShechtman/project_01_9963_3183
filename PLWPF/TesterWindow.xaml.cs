@@ -213,6 +213,7 @@ namespace PLWPF
             ListIndex = 0;
             if (bL.GetAllTesters().Any())
             {
+                
                 grid1.DataContext = bL.GetAllTesters()[0];
                 ShowMatrixbyIndex();
                 CityTB.Text = bL.GetAllTesters()[ListIndex].MyAddress.city;
@@ -222,7 +223,8 @@ namespace PLWPF
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text= bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
-
+                yearsOfExperienceTextBox.Text= bL.GetAllTesters()[ListIndex].YearsOfExperience.ToString();
+                phoneNumerCombobox.SelectedValue = bL.GetAllTesters()[ListIndex].PhonePrefix;
             }
             SearchGrid.Visibility = Visibility.Visible;
             NextButton.Visibility = Visibility.Visible;
@@ -266,6 +268,8 @@ namespace PLWPF
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
+                yearsOfExperienceTextBox.Text = bL.GetAllTesters()[ListIndex].YearsOfExperience.ToString();
+                phoneNumerCombobox.SelectedValue = bL.GetAllTesters()[ListIndex].PhonePrefix;
 
 
             }
@@ -472,6 +476,8 @@ namespace PLWPF
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
+                yearsOfExperienceTextBox.Text = bL.GetAllTesters()[ListIndex].YearsOfExperience.ToString();
+                phoneNumerCombobox.SelectedValue = bL.GetAllTesters()[ListIndex].PhonePrefix;
             }
         }
 
@@ -489,6 +495,8 @@ namespace PLWPF
                 getPhonesuffix();
                 myGenderComboBox.Text = bL.GetAllTesters()[ListIndex].MyGender.ToString();
                 expiranceCarComboBox.Text = bL.GetAllTesters()[ListIndex].ExpiranceCar.ToString();
+                yearsOfExperienceTextBox.Text = bL.GetAllTesters()[ListIndex].YearsOfExperience.ToString();
+                phoneNumerCombobox.SelectedValue = bL.GetAllTesters()[ListIndex].PhonePrefix;
             }
 
         }

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Testers>
+  <tester>
+    <id>312589963</id>
+    <name>
+      <firstName>נעם</firstName>
+      <lastName>אילוז</lastName>
+    </name>
+    <BIRTH_DAY>09/01/1979 00:00:00</BIRTH_DAY>
+    <Address>
+      <City>חיפה</City>
+      <Street>גלבוע</Street>
+      <Number>19</Number>
+    </Address>
+    <Gender>male</Gender>
+    <Type_car>privateCar</Type_car>
+    <seniority>15</seniority>
+    <MaxTestsPerWeek>15</MaxTestsPerWeek>
+    <MaxDistance>50</MaxDistance>
+    <PhoneNumber>03-2222222</PhoneNumber>
+    <hours>5,7,True,True,True,True,True,True,False,False,False,False,False,False,True,False,False,False,False,False,True,False,False,True,False,False,False,False,False,False,True,True,True,True,True,True,False</hours>
+    <Password></Password>
+  </tester>
+  <tester>
+    <id>333333333</id>
+    <name>
+      <firstName>עזעם</firstName>
+      <lastName>עזעם</lastName>
+    </name>
+    <BIRTH_DAY>16/07/1970 00:00:00</BIRTH_DAY>
+    <Address>
+      <City>סגעיה</City>
+      <Street>השפם</Street>
+      <Number>30</Number>
+    </Address>
+    <Gender>female</Gender>
+    <Type_car>trunk</Type_car>
+    <seniority>20</seniority>
+    <MaxTestsPerWeek>25</MaxTestsPerWeek>
+    <MaxDistance>50</MaxDistance>
+    <PhoneNumber>054-8888888</PhoneNumber>
+    <hours>5,7,True,True,True,False,True,False,False,True,True,True,False,True,False,False,True,True,True,True,False,False,False,True,True,True,False,True,False,False,True,True,True,False,True,False,False</hours>
+    <Password></Password>
+  </tester>
+</Testers>

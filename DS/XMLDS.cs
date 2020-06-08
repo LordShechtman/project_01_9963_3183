@@ -12,22 +12,31 @@ namespace DS
     {
       private static string solutionDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
       private static string filePath = System.IO.Path.Combine(solutionDirectory, "DS", "Data XML");
+        private static XElement configurationRoot = null;
         private static XElement traineeRoot = null;
         private static XElement testerRoot = null;
         private static XElement testRoot = null;
+        private static string configurationPath = Path.Combine(filePath, "configXml.xml");
         private static string traineePath = Path.Combine(filePath, "TraineeXml.xml");
         private static string testerPath = Path.Combine(filePath, "TesterXml.xml");
         private static string drivingtestPath = Path.Combine(filePath, "TestXml.xml");
-        static XMLDS()
+       static XMLDS()
         {
             bool exists = Directory.Exists(filePath);
             if (!exists)
             {
+                //Create a file with all the Data source 
                 Directory.CreateDirectory(filePath);
             }
-
+            if (!File.Exists(configurationPath))
+            {
+                // Configuration file
+                CreateFile("Configuration", configurationPath);
+                //First time file
+            }
             if (!File.Exists(traineePath))
             {
+                // Create Trainees File root
                 CreateFile("Trainees", traineePath);
 
             }
@@ -36,6 +45,7 @@ namespace DS
 
             if (!File.Exists(testerPath))
             {
+                //Create file With Testrs root
                 CreateFile("Testers", testerPath);
 
             }
@@ -43,7 +53,8 @@ namespace DS
 
             if (!File.Exists(drivingtestPath))
             {
-                CreateFile("DrivingTests", drivingtestPath);
+                //Create file with Tests root
+                CreateFile("Tests", drivingtestPath);
 
             }
             testRoot = LoadData(drivingtestPath);
@@ -51,10 +62,14 @@ namespace DS
         }
         private static void CreateFile(string typename, string path)
         {
+            //Create a new file 
             XElement root = new XElement(typename);
             root.Save(path);
         }
-
+        public static void SaveConfiguration()
+        {
+            configurationRoot.Save(configurationPath);
+        }
         public static void SaveTrainees()
         {
             traineeRoot.Save(traineePath);
@@ -69,7 +84,14 @@ namespace DS
         {
            testRoot.Save(drivingtestPath);
         }
-
+        public static XElement TestNumber
+        {
+            get
+            {
+                configurationRoot = LoadData(configurationPath);
+                return configurationRoot;
+            }
+        }
         public static XElement Trainees
         {
             get

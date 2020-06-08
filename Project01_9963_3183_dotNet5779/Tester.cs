@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Linq;
 
 namespace BE
 {
@@ -62,6 +64,49 @@ namespace BE
                 return Prefix;
             }
         }
+        #region Eliran add this here
+        public string get_hours_s()
+        {
+            if (WorkHours == null)
+                return null;
+            string result = "";
+            if (WorkHours != null)
+            {
+                int sizeA = WorkHours.GetLength(0);
+                int sizeB = WorkHours.GetLength(1);
+                result += "" + sizeA + "," + sizeB;
+                for (int i = 0; i < sizeA; i++)
+                    for (int j = 0; j < sizeB; j++)
+                        result += "," + WorkHours[i, j];
+            }
+            return result;
+        }
+
+
+
+
+
+
+
+
+        public string hours_string { set; get; }
+
+
+        public void set_hours_s(string value)
+        {
+            if (value != null && value.Length > 0)
+            {
+                string[] values = value.Split(',');
+                int sizeA = int.Parse(values[0]);
+                int sizeB = int.Parse(values[1]);
+                WorkHours = new bool[sizeA, sizeB];
+                int index = 2;
+                for (int i = 0; i < sizeA; i++)
+                    for (int j = 0; j < sizeB; j++)
+                        WorkHours[i, j] = bool.Parse(values[index++]);
+            }
+        }
+        #endregion
         public Tester(string id, string name, string familyName, DateTime birthD, MyEnum.gender g, string phoneNum, Address address, int yearsE, int maxTest, MyEnum.carType type, int max_distance, bool[,] mat,string password)
         {
             Id = id;
@@ -125,7 +170,7 @@ namespace BE
         }
         private string showAdress(Address a)
         {
-            //Note we wrote this method before we knew about Tostring for adresss struct
+            //Note: we wrote this method before we knew about Tostring for adresss struct
             return a.streetName + " " + a.houseNumber + " " + a.city;
         }
         public override string ToString()
@@ -133,7 +178,7 @@ namespace BE
             return "ID:" + Id + "\n" + "Name:" + Name + " " + FamilyName + "\n" + "Address: " + showAdress(MyAddress) + "\n" + "Phone:" + PhoneNumber + " \n Birth date:" + BirthDate + "\n" + "Gender: " + this.MyGender + "\n" + "Years of experience: " + YearsOfExperience + "\n" + "Car tape: " + this.ExpiranceCar + "\n"
                 + "Max tests per week:" + this.MaxTestsPerWeek + "\n" + "Max distance: " + this.MaxDistance + "\n" + ShowTable(this.WorkHours);
         }
-
+        
         public object Clone()
         {
             return new Tester(Id, Name, FamilyName, BirthDate, MyGender, PhoneNumber, MyAddress, YearsOfExperience, MaxTestsPerWeek, ExpiranceCar, MaxDistance, WorkHours,Password);

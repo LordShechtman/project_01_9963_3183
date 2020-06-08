@@ -104,6 +104,7 @@ namespace PLWPF
                
                 
                 Test finalGradeTest = new Test(TesterIDTextBox.Text, StudentIDTB.Text,my_date, My_bl.GetAllTests()[ListIndex].TestAddress,allMyParameters,myTestNotes);
+                finalGradeTest.TestNumber = TestsNumberTB.Text;
                 My_bl.UpdateTest(finalGradeTest);
                 Test t = My_bl.GetAllTests().Find(x=>x.TestNumber==TestsNumberTB.Text);
                 if(t!=null)
@@ -140,7 +141,7 @@ namespace PLWPF
                 if (tester.Password == YourPasswordBox.Password)
                 {
                     List<Test> myTests = My_bl.GetAllTests().FindAll(x => x.TesterId == TesterIDTextBox.Text && x.TestDate <= DateTime.Now && 
-                    x.TestParameters.Any()==false);
+                    x.ISUpdated==false);
                     if (myTests.Any() == false)
                         throw new Exception("You don't have any tests to update");
                     ListIndex = 0;
